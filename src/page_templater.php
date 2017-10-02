@@ -38,8 +38,6 @@ class page_templater {
      */
     private function __construct() {
         $this->templates = array();
-
-
         // Add a filter to the attributes metabox to inject template into the cache.
         if ( version_compare( floatval( get_bloginfo( 'version' ) ), '4.7', '<' ) ) {
 
@@ -50,7 +48,6 @@ class page_templater {
             );
 
         } else {
-
             // Add a filter to the wp 4.7 version attributes metabox
             add_filter(
                 'theme_page_templates', array( $this, 'add_new_template' )
@@ -75,7 +72,8 @@ class page_templater {
 
         // Add your templates to this array.
         $this->templates = array(
-            'page-test-template.php' => 'test',
+            'page-test-template.php' => 'Submission',
+            'page-thankyou.php'      => 'Thank You'
         );
     }
 
@@ -93,7 +91,6 @@ class page_templater {
      * into thinking the template file exists where it doens't really exist.
      */
     public function register_project_templates( $atts ) {
-
         // Create the key used for the themes cache
         $cache_key = 'page_templates-' . md5( get_theme_root() . '/' . get_stylesheet() );
 
@@ -123,7 +120,6 @@ class page_templater {
      * Checks if the template is assigned to the page
      */
     public function view_project_template( $template ) {
-
         // Get global post
         global $post;
 
@@ -139,9 +135,10 @@ class page_templater {
             return $template;
         }
 
-        $file = plugin_dir_path( __FILE__ ). get_post_meta(
+        $file = plugin_dir_path( VENDI_ROTARY_FLYER_FILE ). get_post_meta(
             $post->ID, '_wp_page_template', true
         );
+
 
         // Just to be safe, we check if the file exist first
         if ( file_exists( $file ) ) {
