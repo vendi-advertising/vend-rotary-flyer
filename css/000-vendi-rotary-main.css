@@ -1,0 +1,30 @@
+.card-half{
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.card-half h1{
+     border-bottom: #EEEEEE solid 1px;
+}
+
+.rotary-image-container{
+    width: 150px;
+}
+
+.rotary-image-container{
+    width: 150px;
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.rotary-text{
+    width: calc(99% - 150px);
+    box-sizing: border-box;
+    padding-right: 15px;
+    display: inline-block;
+    vertical-align: top;
+}

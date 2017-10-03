@@ -6,6 +6,7 @@ Version: 0.1
 
 define( 'VENDI_ROTARY_FLYER_FILE', __FILE__ );
 define( 'VENDI_ROTARY_FLYER_DIR', dirname( __FILE__ ) );
+define( 'VENDI_ROTARY_PLUGIN_NAME', 'vendi-rotary-flyer');
 
 require_once VENDI_ROTARY_FLYER_DIR . '/includes/autoload.php';
 

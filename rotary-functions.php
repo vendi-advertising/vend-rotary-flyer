@@ -1,32 +1,4 @@
 <?php
-add_filter('acf/pre_save_post' , 'my_pre_save_post' );
-
-function my_pre_save_post( $post_id ) {
-
-    // bail early if not a new post
-    if( $post_id !== 'new' ) {
-        return $post_id;
-
-    }
-
-
-    // vars
-    $title = $_POST['fields']['field_59cd6a7881b5d'];
-
-    // Create a new post
-    $post = array(
-        'post_status'   => 'draft',
-        'post_type'     => 'vendi-rotary-flyer',
-        'post_title'    => $title,
-    );
-
-    // insert the post
-    $post_id = wp_insert_post( $post );
-
-    // return the new ID
-    return $post_id;
-
-}
 
 add_action('acf/save_post', 'my_save_post');
 
@@ -51,11 +23,6 @@ function my_save_post( $post_id ) {
     $post = get_post( $post_id );
 
 
-    // get custom fields (field group exists for content_form)
-    $header = get_field('flyer_entry_header', $post_id);
-    $content = get_field('flyer_entry_content', $post_id);
-    $image = get_field('flyer_entry_image', $post_id);
-
     //dump($header, $content, $image);
     // email data
     //$to = 'contact@website.com';
@@ -68,3 +35,41 @@ function my_save_post( $post_id ) {
     //wp_mail($to, $subject, $body, $headers );
 
 }
+
+//Load CSS and JavaScript
+ add_action(
+             'wp_enqueue_scripts',
+             function()
+             {
+                 //Kill of Clef which wants to load on every page.
+                 //So far this has been safe because Clef special-cases the login page anyway
+                 wp_dequeue_style( 'wpclef-main' );
+
+                 /*****************
+                  *  Parent Theme *
+                  *****************/
+                 //Load each CSS file that starts with three digits followed by a dash in numerical order
+                 foreach( glob( VENDI_ROTARY_FLYER_DIR . '/css/[0-9][0-9][0-9]-*.css' ) as $t )
+                 {
+                     wp_enqueue_style(
+                                         basename( $t, '.css' ) . '-p-style',
+                                         plugins_url($plugin = VENDI_ROTARY_PLUGIN_NAME ) . '/css/' . basename( $t ),
+                                         null,
+                                         filemtime( VENDI_ROTARY_FLYER_DIR . '/css/' . basename( $t ) ),
+                                         'screen'
+                                     );
+                 }
+
+                 //Load each JS file that starts with three digits followed by a dash in numerical order
+                 foreach( glob( VENDI_ROTARY_FLYER_DIR . '/js/[0-9][0-9][0-9]-*.js' ) as $t )
+                 {
+                     wp_enqueue_script(
+                                         basename( $t, '.js' ) . '-p-style',
+                                         plugins_url($plugin = VENDI_ROTARY_PLUGIN_NAME ) . '/js/' . basename( $t ),
+                                         null,
+                                         filemtime( VENDI_ROTARY_FLYER_DIR . '/js/' . basename( $t ) ),
+                                         true
+                                     );
+                 }
+             }
+         );
