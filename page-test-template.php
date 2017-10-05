@@ -24,32 +24,35 @@ get_header();
             ?>
 
             <div class="card">
-                <div class="card-half">
+                <div class="card-half acf-half">
                 <?php
                 acf_form(array(
                     'post_id'       => 'new_post',
                     'field_groups'  => array( 'group_59d3d71e1ef3e' ),
-                    'submit_value'  => 'Create a new Rotary Flyer Entry',
+                    'submit_value'  => 'Submit Rotary Flyer Entry',
                     'new_post' => array(
                         'post_type' => 'vendi-rotary-flyer',
                         'post_status'   => 'publish',
                         'post_title' => $title
 
                     ),
-                    'return' => home_url('thank-you')
+                    'return' => home_url('thank-you'),
+                    'html_submit_button'    => '<input type="submit" class="acf-button button button-primary button-large" value="%s" />'
                 ));
                 ?>
                 </div>
-                <div class="card-half">
+                <div class="card-half rotary-half">
                     <h1> Preview: </h1>
-                    <div class="rotary-text">
-                        <h2 id="rotary-header-preview"> </h2>
-                        <div id="rotary-body-preview">
+                    <div class="rotary-preview headerbodytextimage">
+                        <div class="rotary-text">
+                            <h2 id="rotary-header-preview"> </h2>
+                            <div id="rotary-body-preview">
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="rotary-image-container">
-                        <img id="rotary-image-preview" data-name="image" src="" alt="">
+                        <div class="rotary-image-container">
+                            <img id="rotary-image-preview" data-name="image" src="" alt="">
+                        </div>
                     </div>
                 </div>
             </div>

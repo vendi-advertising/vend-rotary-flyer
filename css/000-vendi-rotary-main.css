@@ -1,30 +1,140 @@
+
+
 .card-half{
     display: inline-block;
-    width: 48%;
     vertical-align: top;
     padding: 10px;
     box-sizing: border-box;
 }
 
+.acf-half{
+    min-width: 300px;
+    width: calc(99% - 285px);
+}
+
+.rotary-half{
+}
+
+
 .card-half h1{
-     border-bottom: #EEEEEE solid 1px;
+    display: block;
+    font-weight: bold;
+    margin: 12px 0 10px 0;
+    padding: 0;
+    font-size: 18px;
 }
 
-.rotary-image-container{
-    width: 150px;
-}
-
-.rotary-image-container{
-    width: 150px;
-    height: auto;
-    display: inline-block;
-    vertical-align: top;
-}
-
-.rotary-text{
-    width: calc(99% - 150px);
+.rotary-preview{
+    font-family: 'Open Sans Condensed', sans-serif;
     box-sizing: border-box;
-    padding-right: 15px;
+    border: #EEEEEE solid 1px;
+    height: 265px;
+    width: 265px;
+}
+
+.rotary-image-container{
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+#rotary-image-preview{
+    display: block;
+}
+
+.rotary-text h2{
+    margin: 0;
+    word-break: break-all;
+    padding: 0 0 2px 2px;
+    box-sizing: border-box;
+}
+
+#rotary-body-preview{
+    word-break: break-all;
+    padding: 0 0 2px 2px;
+    box-sizing: border-box;
+}
+
+
+/*header body text image layout*/
+.headerbodytextimage #rotary-header-preview{
+
+}
+
+.headerbodytextimage #rotary-body-preview{
+
+}
+
+.headerbodytextimage .rotary-image-container{
+
+}
+
+.headerbodytextimage #rotary-image-preview{
+    width: auto;
+    height: auto;
+    max-width: 150px;
+    max-height: 150px;
+}
+
+/* header body test layout */
+
+.headerbodytext #rotary-body-preview{
+
+}
+
+.headerbodytext #rotary-header-preview{
+
+}
+
+.headerbodytext .rotary-image-container{
+    display: none;
+}
+
+.headerbodytext #rotary-image-preview{
+
+}
+/*Stand alone image layout*/
+
+.standaloneimage #rotary-body-preview{
+    display: none;
+}
+
+.standaloneimage #rotary-header-preview{
+    display: none;
+}
+
+.standaloneimage .rotary-image-container{
+
+}
+
+.standaloneimage #rotary-image-preview{
+    width: auto;
+    height: auto;
+    max-width: 265px;
+    max-height: 265px;
+    margin: auto;
+
+}
+
+
+
+.card-half .acf-button{
+    background:none;
+    background-color: #e51937;
+    border: none;
+    color: white;
+    padding: 7px;
+    text-decoration: none;
+    border-radius: 5px;
+    outline: none;
+    word-break: keep-all;
     display: inline-block;
-    vertical-align: top;
+    width: auto;
+}
+
+.card-half .acf-button:hover{
+    background-color: #ac0001;
+}
+
+.acf-form-submit{
+    padding: 0 0 0 12px;
 }
