@@ -1,4 +1,7 @@
 
+.test-class{
+    color: red;
+}
 
 .card-half{
     display: inline-block;
@@ -10,6 +13,8 @@
 .acf-half{
     min-width: 300px;
     width: calc(99% - 285px);
+    padding: 0 40px 0 0;
+    box-sizing: border-box;
 }
 
 .rotary-half{
@@ -30,6 +35,7 @@
     border: #EEEEEE solid 1px;
     height: 265px;
     width: 265px;
+    background-color: white;
 }
 
 .rotary-image-container{

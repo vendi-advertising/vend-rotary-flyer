@@ -73,7 +73,8 @@ class page_templater {
         // Add your templates to this array.
         $this->templates = array(
             'page-test-template.php' => 'Submission',
-            'page-thankyou.php'      => 'Thank You'
+            'page-thankyou.php'      => 'Thank You',
+            'page-pdf-test.php'      => 'pdf-test'
         );
     }
 
