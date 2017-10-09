@@ -7,10 +7,17 @@
             document.getElementById('rotary-header-preview').innerHTML = this.value;
         }
 
-        var rotary_header = document.getElementById('acf-field_59d3d76730578');
+        var rotary_body = document.getElementById('acf-field_59d3d76730578');
 
-        rotary_header = rotary_header.onkeyup = function(){
-            document.getElementById('rotary-body-preview').innerHTML = this.value;
+        rotary_body = rotary_body.onkeyup = function(e){
+            console.log(e);
+            if(e.keycode == 13){
+                document.getElementById('rotary-body-preview').innerHTML = this.value+'<br/>';
+
+            }
+            else{
+                document.getElementById('rotary-body-preview').innerHTML = this.value;
+            }
         }
 
         var rotary_image = jQuery('.acf-field-59d3d73f30577').find('[data-name="image"]');

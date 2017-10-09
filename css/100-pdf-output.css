@@ -1,0 +1,103 @@
+
+body, #footer, #header {
+    background-color: white;
+    width: 760px;
+        margin: auto;
+
+}
+
+.rotary-text h2 {
+    margin: 0;
+    word-break: break-all;
+    padding: 0 0 2px 2px;
+    box-sizing: border-box;
+}
+
+#main-output{
+
+}
+
+.main-output-region{
+    width: 760px;
+    margin: auto;
+}
+
+.rotary-output{
+    font-family: 'Open Sans Condensed', sans-serif;
+    box-sizing: border-box;
+    border: #EEEEEE solid 1px;
+    height: 250px;
+    width: 250px;
+    background-color: white;
+    display: inline-block;
+    vertical-align: top;
+    margin: 1px;
+}
+
+
+.rotary-body-output{
+    word-break: break-all;
+    padding: 0 0 2px 2px;
+    box-sizing: border-box;
+}
+
+
+/*header body text image layout*/
+.headerbodytextimage .rotary-header-output{
+
+}
+
+.headerbodytextimage .rotary-body-output{
+
+}
+
+.headerbodytextimage .rotary-image-container{
+
+}
+
+.headerbodytextimage .rotary-image-output{
+    width: auto;
+    height: auto;
+    max-width: 150px;
+    max-height: 150px;
+}
+
+/* header body test layout */
+
+.headerbodytext .rotary-body-output{
+
+}
+
+.headerbodytext .rotary-header-output{
+
+}
+
+.headerbodytext .rotary-image-container{
+    display: none;
+}
+
+.headerbodytext .rotary-image-output{
+
+}
+/*Stand alone image layout*/
+
+.standaloneimage .rotary-body-output{
+    display: none;
+}
+
+.standaloneimage .rotary-header-output{
+    display: none;
+}
+
+.standaloneimage .rotary-image-container{
+
+}
+
+.standaloneimage .rotary-image-output{
+    width: auto;
+    height: auto;
+    max-width: 250px;
+    max-height: 250px;
+    margin: auto;
+
+}
