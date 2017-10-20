@@ -32,10 +32,17 @@
 .rotary-preview{
     font-family: 'Open Sans Condensed', sans-serif;
     box-sizing: border-box;
-    border: #EEEEEE solid 1px;
-    height: 250px;
-    width: 250px;
+    border-left: 1px solid black;
+    height: 244px;
+    width: 244px;
     background-color: white;
+}
+
+.rotary-preview-wrapper{
+    height: 100%;
+    width: 100%;
+    margin-left: 5px;
+    background-color: #f1f1f2;
 }
 
 .rotary-image-container{
@@ -116,17 +123,17 @@
 .standaloneimage #rotary-image-preview{
     width: auto;
     height: auto;
-    max-width: 250px;
-    max-height: 250px;
+    max-width: 244px;
+    max-height: 244px;
     margin: auto;
 
 }
 
 
 
-.card-half .acf-button{
+.card-half .acf-button, .steps-button{
     background:none;
-    background-color: #e51937;
+    background-color: #0d4c94;
     border: none;
     color: white;
     padding: 7px;
@@ -138,10 +145,19 @@
     width: auto;
 }
 
-.card-half .acf-button:hover{
-    background-color: #ac0001;
+.card-half .acf-button:hover, .steps-button:hover{
+    background-color: #06264a;
 }
 
 .acf-form-submit{
     padding: 0 0 0 12px;
+}
+
+
+.steps-button+.steps-button{
+    margin-left: 10px;
+}
+
+td.ui-datepicker-unselectable.ui-state-disabled span{
+    background-color: red;
 }

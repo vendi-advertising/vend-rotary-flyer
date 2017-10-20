@@ -74,7 +74,9 @@ class page_templater {
         $this->templates = array(
             'page-test-template.php' => 'Submission',
             'page-thankyou.php'      => 'Thank You',
-            'page-pdf-test.php'      => 'pdf-test'
+            'page-pdf-test.php'      => 'pdf-test',
+            'page-submitfinal.php'   => 'submit-final',
+            'page-user-info.php'     => 'user-info'
         );
     }
 

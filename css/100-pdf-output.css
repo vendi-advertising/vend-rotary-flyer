@@ -1,46 +1,89 @@
 
-body, #footer, #header {
+.page-template-page-pdf-test,.page-template-page-pdf-test #footer,.page-template-page-pdf-test #header {
     background-color: white;
-    width: 760px;
+    width: 800px;
         margin: auto;
 
 }
-
+.page-template-page-pdf-test #footer{
+    display: none;
+}
 .rotary-text h2 {
     margin: 0;
-    word-break: break-all;
+    word-break: break-word;
     padding: 0 0 2px 2px;
     box-sizing: border-box;
+    font-weight: bold;
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-size: 22px;
+}
+
+.rotary-text .rotary-body-output{
+    font-family: "open_sansregular", sans-serif;
 }
 
 #main-output{
 
 }
 
+.pdf-header img{
+    width: 100%;
+    height: auto;
+}
+
 .main-output-region{
-    width: 760px;
+    width: 800px;
     margin: auto;
 }
 
 .rotary-output{
     font-family: 'Open Sans Condensed', sans-serif;
     box-sizing: border-box;
-    border: #EEEEEE solid 1px;
-    height: 250px;
-    width: 250px;
+    border-left: black solid 1px;
+    height: 244px;
+    width: 244px;
     background-color: white;
     display: inline-block;
     vertical-align: top;
-    margin: 1px;
+    margin: 17px;
 }
 
+.rotary-output-wrapper{
+    height: 100%;
+    width: 100%;
+    margin-left: 5px;
+    background-color: #f1f1f2;
+}
+
+.white-bg{
+    background-color: white;
+}
+
+.rotary-output:nth-child(1), .rotary-output:nth-child(4), .rotary-output:nth-child(7){
+    margin-left: 0;
+}
+
+.rotary-output:nth-child(3), .rotary-output:nth-child(6), .rotary-output:nth-child(9){
+    margin-right: 0;
+}
 
 .rotary-body-output{
     word-break: break-all;
-    padding: 0 0 2px 2px;
+    padding: 0 0 2px 5px;
     box-sizing: border-box;
 }
 
+.rotary-body-output p{
+    display: block;
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    margin: 0;
+}
 
 /*header body text image layout*/
 .headerbodytextimage .rotary-header-output{
@@ -94,10 +137,18 @@ body, #footer, #header {
 }
 
 .standaloneimage .rotary-image-output{
-    width: auto;
+    width: 100%;
     height: auto;
-    max-width: 250px;
-    max-height: 250px;
+    max-width: 240px;
+    max-height: 240px;
     margin: auto;
 
+}
+
+.pdf-footer{
+    background-color: #0d4c94;
+    text-align: center;
+    color: white;
+    padding: 10px 0px 10px 0px;
+    margin: 10px 0 0 0;
 }

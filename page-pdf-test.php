@@ -6,7 +6,7 @@
 ?>
 <?php
 require 'rotary-functions.php';
-
+$pdf_output = true;
 get_header();
 
 //Vendi\RotaryFlyer\pdf_generator::generate_from_url();

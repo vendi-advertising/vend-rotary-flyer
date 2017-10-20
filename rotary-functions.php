@@ -1,9 +1,9 @@
 <?php
 
-add_action('acf/save_post', 'my_save_post');
-
 function my_save_post( $post_id ) {
-    // bail early if not a contact_form post
+    // bail early if not a vendi-rotary-flyer post
+    //
+
     if( get_post_type($post_id) !== 'vendi-rotary-flyer' ) {
 
         return;
@@ -21,20 +21,81 @@ function my_save_post( $post_id ) {
 
     // vars
     $post = get_post( $post_id );
+    $title = get_field('organization', $post_id);
 
+    $url_re = '/thank-you/?postid=' . $post_id;
 
-    //dump($header, $content, $image);
-    // email data
-    //$to = 'contact@website.com';
-    //$headers = 'From: ' . $name . ' <' . $email . '>' . "\r\n";
-    //$subject = $post->post_title;
-    //$body = $post->post_content;
+    $my_post = array();
+    $my_post['ID'] = $post_id;
+    $my_post['post_title'] = $title;
 
+    wp_update_post( $my_post );
 
-    // send email
-    //wp_mail($to, $subject, $body, $headers );
+    wp_safe_redirect( $url_re ); exit;
 
 }
+
+add_action('acf/save_post', 'my_save_post', 11);
+
+
+function my_acf_load_value( $value, $post_id, $field )
+{
+    // run the_content filter on all textarea values
+    $value = apply_filters('the_content',$value);
+
+    return $value;
+}
+
+
+function my_acf_input_admin_footer() {
+
+?>
+
+<script type="text/javascript">
+    (function($) {
+
+        acf.add_filter('date_picker_args', function( args, $field ){
+            args['beforeShowDay'] =  onlyThursday;
+            args['showOtherMonths'] =  true;
+            args['selectOtherMonths'] =  true;
+            return args;
+        });
+
+
+
+        function onlyThursday(date){
+          var todays_date = new Date().setHours(0,0,0,0);
+          var day = date.getDay();
+          var return_statement;
+          if((day > 3 && day < 5 && date >= todays_date)){
+            return_statement = [true, ''];
+          }
+          else{
+            return_statement = [false, '', 'This date is not available'];
+          }
+          return return_statement;
+        };
+
+
+    })(jQuery);
+</script>
+<style>
+    td.ui-datepicker-unselectable.ui-state-disabled span{
+        background-color: red !important;
+        color: white !important;
+    }
+
+    .acf-inline-block
+</style>
+
+
+
+<?php
+
+}
+
+add_action('acf/input/admin_footer', 'my_acf_input_admin_footer');
+
 
 //Load CSS and JavaScript
  add_action(

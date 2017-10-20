@@ -12,6 +12,14 @@ acf_form_head();
 get_header();
 
 
+if(isset($_GET['post_id'])){
+    $post_id = $_GET['post_id'];
+}
+else{
+    $post_id = 'new_post';
+}
+
+
 ?>
 
 <div id="main-content">
@@ -27,13 +35,13 @@ get_header();
                 <div class="card-half acf-half">
                 <?php
                 acf_form(array(
-                    'post_id'       => 'new_post',
+                    'post_id'       => $post_id,
                     'field_groups'  => array( 'group_59d3d71e1ef3e' ),
                     'submit_value'  => 'Submit Rotary Flyer Entry',
                     'new_post' => array(
                         'post_type' => 'vendi-rotary-flyer',
-                        'post_status'   => 'publish',
-                        'post_title' => $title
+                        'post_status'   => 'draft',
+                        'post_title' => $_POST['fields']['field_59d3d72a30576']
 
                     ),
                     'return' => home_url('thank-you'),
@@ -41,17 +49,20 @@ get_header();
                 ));
                 ?>
                 </div>
-                <div class="card-half rotary-half">
+                <div id="preview-region" class="card-half rotary-half">
                     <h1> Preview: </h1>
                     <div class="rotary-preview headerbodytextimage">
-                        <div class="rotary-text">
-                            <h2 id="rotary-header-preview"> </h2>
-                            <div id="rotary-body-preview">
+                        <div class="rotary-preview-wrapper">
 
+                            <div class="rotary-text">
+                                <h2 id="rotary-header-preview"> </h2>
+                                <div id="rotary-body-preview">
+
+                                </div>
                             </div>
-                        </div>
-                        <div class="rotary-image-container">
-                            <img id="rotary-image-preview" data-name="image" src="" alt="">
+                            <div class="rotary-image-container">
+                                <img id="rotary-image-preview" data-name="image" src="" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>

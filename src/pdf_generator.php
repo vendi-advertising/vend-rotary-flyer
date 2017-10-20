@@ -30,14 +30,22 @@ class pdf_generator {
         $snappy->setBinary(VENDI_ROTARY_FLYER_DIR . '/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64');
         $snappy->setOption('user-style-sheet', VENDI_ROTARY_FLYER_DIR . '/css/100-pdf-output.css');
 
-        $args = array( 'post_type' => 'vendi-rotary-flyer');
+        $args = array(
+            'post_type' => 'vendi-rotary-flyer',
+            'post_status' => array('publish')
+        );
+
         $loop = new \WP_Query( $args );
 
-        $html_string = '<div id="main-output"><div class="main-output-region">';
+        $html_string = '<div id="main-output">';
+        $html_string .= '<div class="pdf-header">';
+        $html_string .= '<img src="'. VENDI_ROTARY_FLYER_DIR .'/images/RotaryAds_top_graphic.jpg" alt"header-image" />';
+        $html_string .= '</div>';
+        $html_string .= '<div class="main-output-region">';
 
         $post_count = 0;
 
-        while ( $loop->have_posts() && $post_count <= 9 ) : $loop->the_post();
+        while ( $loop->have_posts() && $post_count < 9 ) : $loop->the_post();
 
             $rotary_layout = get_field('rotary_layout');
             $rotary_header = get_field('rotary_header');
@@ -45,6 +53,12 @@ class pdf_generator {
             $rotary_image = get_field('rotary_image');
             //Get the default image SRC
             $rotary_image_src = wp_get_attachment_image_url(    $rotary_image[ 'ID' ], 'home-featured-service' );
+
+            $alt_bg = '';
+
+            if(wp_check_filetype( $rotary_image_src)['ext'] != "png" && wp_check_filetype( $rotary_image_src)['ext'] != false){
+                $alt_bg = ' white-bg ';
+            }
 
             //Get additional srcsets
             $rotary_image_srcset = wp_get_attachment_image_srcset( $rotary_image[ 'ID' ], 'home-featured-service' );
@@ -57,17 +71,22 @@ class pdf_generator {
 
             if($rotary_layout == 'Stand-alone Image'){
                 $html_string .=  '<div class="rotary-output standaloneimage">';
+                $html_string .=  '<div class="rotary-output-wrapper '. $alt_bg .'">';
                 $html_string .=      '<div class="rotary-image-container">';
-                $html_string .=          '<img class="rotary-image-output" ';
-                $html_string .=                 'src="' . $rotary_image_server_path . '"';
-                $html_string .=                 'srcset="' . esc_attr( $rotary_image_srcset ) . '"';
-                $html_string .=                 'sizes="' . esc_attr( $rotary_image_sizes ) .'"';
-                $html_string .=                 'alt="rotary-image" />';
-                $html_string .=      '</div>';
+                if($rotary_image){
+                    $html_string .=          '<img class="rotary-image-output" ';
+                    $html_string .=                 'src="' . $rotary_image_server_path . '"';
+                    $html_string .=                 'srcset="' . esc_attr( $rotary_image_srcset ) . '"';
+                    $html_string .=                 'sizes="' . esc_attr( $rotary_image_sizes ) .'"';
+                    $html_string .=                 'alt="rotary-image" />';
+                    $html_string .=      '</div>';
+                }
+                $html_string .=  '</div>';
                 $html_string .=  '</div>';
             }
             elseif($rotary_layout == 'Header, Body Text'){
                 $html_string .=  '<div class="rotary-output headerbodytext">';
+                $html_string .=  '<div class="rotary-output-wrapper">';
                 $html_string .=      '<div class="rotary-text">';
                 $html_string .=          '<h2 class="rotary-header-output">' . $rotary_header . '</h2>';
                 $html_string .=          '<div class="rotary-body-output">';
@@ -75,31 +94,36 @@ class pdf_generator {
                 $html_string .=          '</div>';
                 $html_string .=      '</div>';
                 $html_string .=  '</div>';
+                $html_string .=  '</div>';
             }
             else{
-                $html_string .=  '<div class="rotary-output headerbodytextimage">';
+                $html_string .=  '<div class="rotary-output headerbodytextimage '. $alt_bg .'">';
+                $html_string .=  '<div class="rotary-output-wrapper '. $alt_bg .'">';
                 $html_string .=      '<div class="rotary-text">';
                 $html_string .=          '<h2 class="rotary-header-output">' . $rotary_header . '</h2>';
                 $html_string .=          '<div class="rotary-body-output">';
                 $html_string .=             $rotary_body;
                 $html_string .=          '</div>';
                 $html_string .=      '</div>';
-                $html_string .=      '<div class="rotary-image-container">';
-                $html_string .=          '<img class="rotary-image-output" ';
-                $html_string .=                 'src="' . $rotary_image_server_path . '"';
-                $html_string .=                 'srcset="' . esc_attr( $rotary_image_srcset ) . '"';
-                $html_string .=                 'sizes="' . esc_attr( $rotary_image_sizes ) .'"';
-                $html_string .=                 'alt="rotary-image" />';
-                $html_string .=      '</div>';
+                if($rotary_image){
+                    $html_string .=      '<div class="rotary-image-container">';
+                    $html_string .=          '<img class="rotary-image-output" ';
+                    $html_string .=                 'src="' . $rotary_image_server_path . '"';
+                    $html_string .=                 'srcset="' . esc_attr( $rotary_image_srcset ) . '"';
+                    $html_string .=                 'sizes="' . esc_attr( $rotary_image_sizes ) .'"';
+                    $html_string .=                 'alt="rotary-image" />';
+                    $html_string .=      '</div>';
+                }
+                $html_string .=  '</div>';
                 $html_string .=  '</div>';
             }
             $post_count++;
         endwhile;
-
+        $html_string .= '    <div class="pdf-footer"> Share an announcement with the Rotary community. Weekly space available at: rotarycluboflacrosse.org </div>';
         $html_string .= '    </div></div>';
 
         echo $html_string;
-        $snappy->generateFromHtml($html_string, VENDI_ROTARY_FLYER_DIR . '/pdfs/bill-1234.pdf');
+        $snappy->generateFromHtml($html_string, VENDI_ROTARY_FLYER_DIR . '/pdfs/bill-1234.pdf', array(), $overwrite = true);
 
     }
 
