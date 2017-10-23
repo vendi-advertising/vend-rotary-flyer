@@ -18,7 +18,7 @@ if(isset($_GET['post_id'])){
 else{
     $post_id = 'new_post';
 }
-
+//test comment
 
 ?>
 
