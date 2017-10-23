@@ -98,10 +98,11 @@ if(isset($_GET['postid'])){
 
         ?>
 
-        <div>
+
+    </div>
+    <div>
             <a class="steps-button" href="<?php echo home_url('test-page?post_id='. $post_id . '');  ?>"> Edit Posting </a><a class="steps-button" href="<?php echo home_url('submit-final?post_id='. $post_id . '');  ?>"> Submit Final </a>
         </div>
-    </div>
 </div>
 </div>
 

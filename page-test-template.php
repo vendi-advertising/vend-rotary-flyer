@@ -37,7 +37,7 @@ else{
                 acf_form(array(
                     'post_id'       => $post_id,
                     'field_groups'  => array( 'group_59d3d71e1ef3e' ),
-                    'submit_value'  => 'Submit Rotary Flyer Entry',
+                    'submit_value'  => 'Finalize Your Posting',
                     'new_post' => array(
                         'post_type' => 'vendi-rotary-flyer',
                         'post_status'   => 'draft',
@@ -61,7 +61,7 @@ else{
                                 </div>
                             </div>
                             <div class="rotary-image-container">
-                                <img id="rotary-image-preview" data-name="image" src="" alt="">
+                                <img id="rotary-image-preview" data-name="image" src="" alt="rotary-image-preview">
                             </div>
                         </div>
                     </div>
