@@ -54,6 +54,38 @@ function my_acf_input_admin_footer() {
 <script type="text/javascript">
     (function($) {
 
+
+    var dateObjectArray = Array();
+
+        //look through all posts and count the number of adds on each date.
+        $.getJSON(`/wp-json/wp/v2/vendi-rotary-flyer`, function () {
+
+        })
+            .done(function (data){
+                console.log('data', data);
+                $.each(data, function(key, value) {
+                    var run_dates = value['acf']['run_dates'];
+                    $.each(run_dates, function(key1, run_date){
+                        console.log(run_dates[key1]['run_date']);
+                        if(dateObjectArray.hasOwnProperty(run_date['run_date'])){
+                            dateObjectArray[run_date['run_date']]['count']++;
+                        }
+                        else{
+                            dateObjectArray[run_date['run_date']] = {
+                                count: 1
+                            }
+                        }
+                    });
+                });
+                console.log(dateObjectArray);
+                return dateObjectArray;
+            })
+            .fail(function (){
+                console.log('fail :(');
+            })
+
+
+        console.log(dateObjectArray, '1');
         acf.add_filter('date_picker_args', function( args, $field ){
             args['beforeShowDay'] =  onlyThursday;
             args['showOtherMonths'] =  true;
@@ -61,27 +93,59 @@ function my_acf_input_admin_footer() {
             return args;
         });
 
-
+        function arrayObjectIndexOf(myArray, searchTerm, property) {
+            for(var i = 0, len = myArray.length; i < len; i++) {
+                if (myArray[i][property] === searchTerm) return i;
+            }
+            return -1;
+        }
 
         function onlyThursday(date){
           var todays_date = new Date().setHours(0,0,0,0);
           var day = date.getDay();
           var return_statement;
-          if((day > 3 && day < 5 && date >= todays_date)){
-            return_statement = [true, ''];
+          var alreadyPicked = Array();
+          var date_compare_string = (date.getMonth()+1)+'/'+date.getDate()+'/'+date.getFullYear();
+          var max_ad_count = 8;
+
+          $('.hasDatepicker').each(function(){
+
+            if($(this).context.value !== ''){
+                var dateString = new Date($(this).context.value);
+                dateString = (dateString.getMonth()+1)+'/'+ dateString.getDate()+'/'+ dateString.getFullYear();
+                alreadyPicked.push(dateString);
+            }
+          });
+
+          if((day > 3 && day < 5 && date >= todays_date && alreadyPicked.indexOf(date_compare_string) == -1)){
+                console.log(dateObjectArray, '119');
+                if(dateObjectArray.hasOwnProperty(date_compare_string) && dateObjectArray[date_compare_string]['count'] >= max_ad_count){
+                    return_statement = [false, '','This slot is filled'];
+                }
+                else{
+                    return_statement = [true, ''];
+                }
+
+
+          }
+          else if(alreadyPicked.indexOf(date_compare_string) > -1){
+            return_statement = [false, 'already-chosen', 'This date has already been selected'];
           }
           else{
-            return_statement = [false, '', 'This date is not available'];
+            return_statement = [false, '', 'Ads do not run on this day'];
           }
           return return_statement;
-        };
-
-
+        }
     })(jQuery);
 </script>
 <style>
     td.ui-datepicker-unselectable.ui-state-disabled span{
         background-color: red !important;
+        color: white !important;
+    }
+
+    td.ui-datepicker-unselectable.ui-state-disabled.already-chosen span{
+        background-color: blue !important;
         color: white !important;
     }
 

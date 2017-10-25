@@ -61,7 +61,7 @@ else{
                                 </div>
                             </div>
                             <div class="rotary-image-container">
-                                <img id="rotary-image-preview" data-name="image" src="" alt="rotary-image-preview">
+                                <img id="rotary-image-preview" data-name="image" src="" >
                             </div>
                         </div>
                     </div>
