@@ -37,7 +37,7 @@ else{
                 acf_form(array(
                     'post_id'       => $post_id,
                     'field_groups'  => array( 'group_59d3d71e1ef3e' ),
-                    'submit_value'  => 'Finalize Your Posting',
+                    'submit_value'  => 'Finalize your posting',
                     'new_post' => array(
                         'post_type' => 'vendi-rotary-flyer',
                         'post_status'   => 'draft',

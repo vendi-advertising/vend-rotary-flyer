@@ -29,6 +29,17 @@ class pdf_generator {
         $snappy = new Pdf();
         $snappy->setBinary(VENDI_ROTARY_FLYER_DIR . '/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64');
         $snappy->setOption('user-style-sheet', VENDI_ROTARY_FLYER_DIR . '/css/100-pdf-output.css');
+        $snappy->setOption('margin-bottom', 5);
+        $snappy->setOption('margin-top', 5);
+        $snappy->setOption('margin-left', 5);
+        $snappy->setOption('margin-right', 5);
+
+        //calculate the date of the immediate next Thursday
+        $thursday = strtotime('next thursday');
+        $thursday = getDate($thursday);
+        $month = $thursday["month"];
+        $year = $thursday["year"];
+        $mday = $thursday["mday"];
 
         $args = array(
             'post_type' => 'vendi-rotary-flyer',
@@ -41,7 +52,10 @@ class pdf_generator {
         $html_string .= '<div class="pdf-header">';
         $html_string .= '<img src="'. VENDI_ROTARY_FLYER_DIR .'/images/RotaryAds_top_graphic.jpg" alt"header-image" />';
         $html_string .= '</div>';
+        $html_string .= '<div class="pdf-date"><p> Week of: ' . $month . ' ' . $mday . ', ' . $year . '</p></div>';
         $html_string .= '<div class="main-output-region">';
+
+
 
         $post_count = 0;
 
@@ -75,10 +89,10 @@ class pdf_generator {
                 $html_string .=      '<div class="rotary-image-container">';
                 if($rotary_image){
                     $html_string .=          '<img class="rotary-image-output" ';
-                    $html_string .=                 'src="' . $rotary_image_server_path . '"';
-                    $html_string .=                 'srcset="' . esc_attr( $rotary_image_srcset ) . '"';
-                    $html_string .=                 'sizes="' . esc_attr( $rotary_image_sizes ) .'"';
-                    $html_string .=                 'alt="rotary-image" />';
+                    $html_string .=                 ' src="' . $rotary_image_server_path . '" ';
+                    $html_string .=                 ' srcset="' . esc_attr( $rotary_image_srcset ) . ' " ';
+                    $html_string .=                 ' sizes="' . esc_attr( $rotary_image_sizes ) .'" ';
+                    $html_string .=                 ' alt="rotary-image" />';
                     $html_string .=      '</div>';
                 }
                 $html_string .=  '</div>';
@@ -106,12 +120,21 @@ class pdf_generator {
                 $html_string .=          '</div>';
                 $html_string .=      '</div>';
                 if($rotary_image){
+
+                    $image_information = json_decode(get_field('image_information', $post_id));
+
                     $html_string .=      '<div class="rotary-image-container">';
                     $html_string .=          '<img class="rotary-image-output" ';
-                    $html_string .=                 'src="' . $rotary_image_server_path . '"';
-                    $html_string .=                 'srcset="' . esc_attr( $rotary_image_srcset ) . '"';
-                    $html_string .=                 'sizes="' . esc_attr( $rotary_image_sizes ) .'"';
-                    $html_string .=                 'alt="rotary-image" />';
+                    $html_string .=                 ' src="' . $rotary_image_server_path . '" ';
+                    $html_string .=                 ' srcset="' . esc_attr( $rotary_image_srcset ) . ' " ';
+
+                    $html_string .=                 ' sizes="' . esc_attr( $rotary_image_sizes ) .'" ';
+
+                    if($image_information){
+                        $html_string .=                 ' height="'. esc_attr( $image_information[0]->height ) .'" ';
+                        $html_string .=                 ' width="'. esc_attr( $image_information[0]->width ) .'" ';
+                    }
+                    $html_string .=                 ' alt="rotary-image" />';
                     $html_string .=      '</div>';
                 }
                 $html_string .=  '</div>';
@@ -119,7 +142,7 @@ class pdf_generator {
             }
             $post_count++;
         endwhile;
-        $html_string .= '    <div class="pdf-footer"> Share an announcement with the Rotary community. Weekly space available at: rotarycluboflacrosse.org </div>';
+        $html_string .= '    <div class="pdf-footer"> Email rotarylax@charter.net for help or questions. Form app by Vendi Advertising. </div>';
         $html_string .= '    </div></div>';
 
         echo $html_string;

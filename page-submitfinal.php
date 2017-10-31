@@ -16,7 +16,7 @@ wp_update_post( $update_post );
 ?>
 <div id="main-content">
     <div class="main-content-region">
-        <p> Thank you! Your posting has been submitted! </p>
+        <p> Thank you! Your posting has been submitted and your account will be billed </p>
     </div>
 </div>
 <?php get_footer(); ?>
