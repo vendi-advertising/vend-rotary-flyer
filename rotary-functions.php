@@ -109,30 +109,35 @@ function my_acf_input_admin_footer() {
             }
 
             function onlyThursday(date){
-              var todays_date = new Date().setHours(0,0,0,0);
+              var todays_date = new Date()
+              var todays_day = todays_date.getDay();
+              todays_date = todays_date.setHours(0,0,0,0);
+              var at_least_seven_days_out = (date - todays_date) > (7*24*60*60*1000);
               var day = date.getDay();
               var return_statement;
               var alreadyPicked = Array();
               var date_compare_string = str_pad((date.getMonth()+1))+'/'+str_pad(date.getDate())+'/'+date.getFullYear();
-              var max_ad_count = 8;
+              var max_ad_count = 9;
 
               $('.hasDatepicker').each(function(){
-
                 if($(this).context.value !== ''){
                     var dateString = new Date($(this).context.value);
-                    dateString = (dateString.getMonth()+1)+'/'+ dateString.getDate()+'/'+ dateString.getFullYear();
+                    dateString = (dateString.getMonth()+1)+'/'+ str_pad(dateString.getDate())+'/'+ dateString.getFullYear();
                     alreadyPicked.push(dateString);
+                    console.log(alreadyPicked);
+
                 }
               });
 
-              if((day > 3 && day < 5 && date >= todays_date && alreadyPicked.indexOf(date_compare_string) == -1)){
+              if((day == 4 && date >= todays_date && alreadyPicked.indexOf(date_compare_string) == -1) && at_least_seven_days_out){
                     console.log(dateObjectArray, '119');
                     console.log(dateObjectArray.hasOwnProperty(date_compare_string), date_compare_string, '120');
-                    if(dateObjectArray.hasOwnProperty(date_compare_string) && dateObjectArray[date_compare_string]['count'] > max_ad_count){
+                    if(dateObjectArray.hasOwnProperty(date_compare_string) && dateObjectArray[date_compare_string]['count'] >= max_ad_count){
                         console.log(dateObjectArray[date_compare_string]['count'], '125');
 
-                        return_statement = [false, '','This slot is filled'];
+                        return_statement = [false, '','There are already '+ max_ad_count +' ad slots filled for this day.'];
                     }
+
                     else{
                         return_statement = [true, ''];
                     }
@@ -140,13 +145,17 @@ function my_acf_input_admin_footer() {
 
               }
               else if(alreadyPicked.indexOf(date_compare_string) > -1){
-                return_statement = [false, 'already-chosen', 'This date has already been selected'];
+                console.log('This date has already been selected');
+                return_statement = [false, 'already-chosen', 'This date has already been selected.'];
               }
               else if(date <= todays_date){
-                return_statement = [false, '', 'This date is in the past'];
+                return_statement = [false, '', 'This date is in the past.'];
+              }
+              else if(!at_least_seven_days_out){
+                return_statement = [false, '', 'You must register for a date at least 7 days in advance.'];
               }
               else{
-                return_statement = [false, '', 'Ads do not run on this day'];
+                return_statement = [false, '', 'Ads do not run on this day.'];
               }
               return return_statement;
             }
@@ -177,7 +186,7 @@ function my_acf_input_admin_footer() {
         color: white !important;
     }
 
-    .acf-inline-block
+
 </style>
 
 

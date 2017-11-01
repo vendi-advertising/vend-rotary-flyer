@@ -53,7 +53,7 @@ if(isset($_GET['postid'])){
                 $html_string .=      '<div class="rotary-image-container">';
                 if($rotary_image){
                     $html_string .=          '<img class="rotary-image-output" ';
-                    $html_string .=                 ' src="' . $rotary_image_server_path . '" ';
+                    $html_string .=                 ' src="' . $rotary_image_src . '" ';
                     $html_string .=                 ' srcset="' . esc_attr( $rotary_image_srcset ) . '" ';
                     $html_string .=                 ' sizes="' . esc_attr( $rotary_image_sizes ) .'" ';
                     $html_string .=                 ' alt="rotary-image" />';
@@ -88,7 +88,7 @@ if(isset($_GET['postid'])){
 
                     $html_string .=      '<div class="rotary-image-container">';
                     $html_string .=          '<img class="rotary-image-output" ';
-                    $html_string .=                 'src="' . $rotary_image_server_path . '"';
+                    $html_string .=                 'src="' . $rotary_image_src . '"';
                     $html_string .=                 'srcset="' . esc_attr( $rotary_image_srcset ) . '"';
                     if($image_information){
                         $html_string .=                 'height="'. esc_attr( $image_information[0]->height ) .'"';

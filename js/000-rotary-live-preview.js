@@ -79,7 +79,10 @@
         });
 
         jQuery(rotary_image_cancel).on('click', function(){
-            jQuery(preview_image).resizable('destroy');
+
+            if(jQuery(preview_image).is(':data(ui-resizable)')){
+                jQuery(preview_image).resizable('destroy');
+            }
             jQuery(preview_image).css('height','auto');
             jQuery(preview_image).css('width','auto');
             jQuery(preview_image).attr('src', '');
@@ -143,6 +146,8 @@
             if(height){
                 jQuery(preview_image).height(height);
             }
+            jQuery(preview_wrapper).addClass('white-bg');
+
         }
 
     });
