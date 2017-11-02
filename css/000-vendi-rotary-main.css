@@ -17,13 +17,13 @@
     box-sizing: border-box;
 }
 
-.acf-half td.acf-row-handle{
+.acf-half td.acf-row-handle.order{
     cursor: pointer !important;
     pointer-events: none;
 
 }
 
-.acf-half .acf-icon.-collapse.small{
+[data-event="collapse-row"]{
     display: none !important;
 }
 
