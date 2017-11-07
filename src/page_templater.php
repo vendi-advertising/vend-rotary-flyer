@@ -76,7 +76,8 @@ class page_templater {
             'page-thankyou.php'      => 'Thank You',
             'page-pdf-test.php'      => 'pdf-test',
             'page-submitfinal.php'   => 'submit-final',
-            'page-user-info.php'     => 'user-info'
+            'page-user-info.php'     => 'user-info',
+            'page-admin-view.php'    => 'admin-view'
         );
     }
 

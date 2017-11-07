@@ -11,4 +11,6 @@ define( 'VENDI_ROTARY_PLUGIN_NAME', 'vendi-rotary-flyer');
 require_once VENDI_ROTARY_FLYER_DIR . '/includes/autoload.php';
 
 Vendi\RotaryFlyer\content_types::init();
+Vendi\RotaryFlyer\user_types::init();
 Vendi\RotaryFlyer\page_templater::init();
+new Vendi\RotaryFlyer\login;

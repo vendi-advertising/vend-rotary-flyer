@@ -54,6 +54,7 @@
     width: calc(100% - 5px);
     margin-left: 5px;
     background-color: #f1f1f2;
+    padding: 10px 0 0 10px;
 }
 
 .rotary-image-container{
@@ -124,6 +125,10 @@
 
 }
 /*Stand alone image layout*/
+
+.standaloneimage .rotary-preview-wrapper{
+    padding: 0;
+}
 
 .standaloneimage #rotary-body-preview{
     display: none;

@@ -21,6 +21,30 @@ class pdf_generator {
         return self::$_instance;
     }
 
+    public static function get_entries_sorted_by_date(){
+        $post_array = array();
+        $args = array(
+            'numberposts' => -1,
+            'orderby' => 'date',
+            'order' => 'DESC',
+            'post_type' => 'vendi-rotary-flyer',
+            'post_status' => array('publish')
+        );
+        $post_array = get_posts($args);
+        $post_dates = array();
+        foreach($post_array as $post){
+            $run_dates = get_field('run_dates', $post->ID);
+            foreach($run_dates as $run_date){
+                if(!array_key_exists ( $run_date['run_date'] , $post_dates )){
+                    $post_dates[$run_date['run_date']] = array();
+                }
+                array_push( $post_dates[$run_date['run_date']], $post->ID);
+            }
+        }
+
+        return $post_dates;
+    }
+
     //In the end, this function should generate html using get_the_field() from ACF and throw the html into one long String. It can
     //include the CSS file using $snappy->setOption('user-style-sheet', VENDI_ROTARY_FLYER_DIR . '/css/000-vendi-rotary-main.css');
     //We should then be able to form a web view using another function

@@ -83,6 +83,7 @@
     margin-left: 5px;
     background-color: #f1f1f2;
     box-sizing: border-box;
+    padding: 10px 0 0 10px;
 }
 
 .white-bg{
@@ -152,6 +153,10 @@
 
 }
 /*Stand alone image layout*/
+
+.standaloneimage .rotary-output-wrapper{
+    padding: 0;
+}
 
 .standaloneimage .rotary-body-output{
     display: none;
