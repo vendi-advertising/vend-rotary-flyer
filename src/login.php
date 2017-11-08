@@ -13,6 +13,7 @@ class login
                         {
                             return $redirect_to;
                         }
+
                         if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
                         {
                             return $redirect_to;
@@ -31,11 +32,17 @@ class login
                         {
                             wp_die( 'Invalid user account found.' );
                         }
+                        if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles ) )
+                        {
+                            wp_redirect( '/admin-view' );
+                            return $redirect_to;
+                        }
                         if( isset( $user->roles ) && is_array( $user->roles ) && ! in_array( 'administrator', $user->roles ) )
                         {
                             wp_redirect( '/test-page' );
                             exit;
                         }
+
                     }
                 );
 

@@ -10,8 +10,10 @@ get_header();
 
 //Vendi\RotaryFlyer\pdf_generator::generate_from_url();
 ?>
-
+<div id="main-content">
+    <div class="main-content-region">
 <?php $date_organized_posts = Vendi\RotaryFlyer\pdf_generator::get_entries_sorted_by_date();
+
 
 foreach($date_organized_posts as $date => $id_arr){
 
@@ -28,7 +30,8 @@ foreach($date_organized_posts as $date => $id_arr){
 
 ?>
 
-
+</div>
+</div>
 
 <?php
 
