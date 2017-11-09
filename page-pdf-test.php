@@ -8,15 +8,18 @@
 require 'rotary-functions.php';
 $pdf_output = true;
 get_header();
-
 //Vendi\RotaryFlyer\pdf_generator::generate_from_url();
+
+vendi_rotary_register_plugin_js( '200-slider-enable.js', array('jquery-ui-slider') );
+$wp_scripts = wp_scripts();
+vendi_rotary_register_outside_css( 'jqueryui-smoothness-theme','https://ajax.googleapis.com/ajax/libs/jqueryui/' . $wp_scripts->registered['jquery-ui-core']->ver . '/themes/smoothness/jquery-ui.css')
 ?>
 
 <?php
 
 if(isset($_GET['date'])){
     $date = $_GET['date'];
-    $date_organized_posts = Vendi\RotaryFlyer\pdf_generator::get_entries_sorted_by_date();
+    $date_organized_posts = Vendi\RotaryFlyer\pdf_generator::get_entries_sorted_by_date(true);
     $date = str_replace( "_", "/", $date);
     Vendi\RotaryFlyer\pdf_generator::generate_for_date($date_organized_posts[$date], $date);
 

@@ -11,6 +11,8 @@ acf_form_head();
 
 get_header();
 
+//vendi_rotary_register_plugin_js( '100-floating-preview.js' );
+vendi_rotary_register_plugin_js( '000-rotary-live-preview.js' );
 
 if(isset($_GET['post_id'])){
     $post_id = $_GET['post_id'];

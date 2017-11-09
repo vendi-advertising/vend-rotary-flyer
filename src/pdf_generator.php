@@ -21,15 +21,26 @@ class pdf_generator {
         return self::$_instance;
     }
 
-    public static function get_entries_sorted_by_date(){
+    public static function get_entries_sorted_by_date($publish){
         $post_array = array();
-        $args = array(
-            'numberposts' => -1,
-            'orderby' => 'date',
-            'order' => 'DESC',
-            'post_type' => 'vendi-rotary-flyer',
-            'post_status' => array('publish')
-        );
+        if($publish){
+            $args = array(
+                'numberposts' => -1,
+                'orderby' => 'date',
+                'order' => 'DESC',
+                'post_type' => 'vendi-rotary-flyer',
+                'post_status' => array('pending', 'publish')
+            );
+        }
+        else{
+            $args = array(
+                'numberposts' => -1,
+                'orderby' => 'date',
+                'order' => 'DESC',
+                'post_type' => 'vendi-rotary-flyer',
+                'post_status' => array('publish')
+            );
+        }
         $post_array = get_posts($args);
         $post_dates = array();
         foreach($post_array as $post){
@@ -48,7 +59,7 @@ class pdf_generator {
     public static function generate_for_date($id_arr, $week){
         $args = array(
             'post_type' => 'vendi-rotary-flyer',
-            'post_status' => array('publish'),
+            'post_status' => array('publish', 'pending'),
             'post__in'      => $id_arr
         );
 
@@ -73,7 +84,7 @@ class pdf_generator {
 
         $post_count = 0;
 
-        while ( $loop->have_posts() && $post_count < 9 ) : $loop->the_post();
+        while ( $loop->have_posts()) : $loop->the_post();
 
             $rotary_layout = get_field('rotary_layout');
             $rotary_header = get_field('rotary_header');
@@ -99,7 +110,12 @@ class pdf_generator {
 
             if($rotary_layout == 'Stand-alone Image'){
                 $html_string .=  '<div class="rotary-output standaloneimage">';
-                $html_string .=  '<div class="rotary-output-wrapper '. $alt_bg .'">';
+                $html_string .=  '<div id="post-'. get_the_ID() .'" class="rotary-output-wrapper '. $alt_bg .'">';
+                $html_string .=  '<div class="approve-container"><div data-name="'. get_the_ID() .'" class="toggle">
+  <div class="toggle-label toggle-label-off">Unapproved</div>
+  <div class="toggle-switch"></div>
+  <div class="toggle-label toggle-label-on">Approved</div>
+</div></div>';
                 $html_string .=      '<div class="rotary-image-container">';
                 if($rotary_image){
                     $html_string .=          '<img class="rotary-image-output" ';
@@ -186,7 +202,7 @@ class pdf_generator {
 
         $args = array(
             'post_type' => 'vendi-rotary-flyer',
-            'post_status' => array('publish')
+            'post_status' => array('publish', 'pending')
         );
 
         $loop = new \WP_Query( $args );
@@ -202,7 +218,7 @@ class pdf_generator {
 
         $post_count = 0;
 
-        while ( $loop->have_posts() && $post_count < 9 ) : $loop->the_post();
+        while ( $loop->have_posts() ) : $loop->the_post();
 
             $rotary_layout = get_field('rotary_layout');
             $rotary_header = get_field('rotary_header');

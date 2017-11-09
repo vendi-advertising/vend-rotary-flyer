@@ -221,9 +221,9 @@ add_action('acf/input/admin_footer', 'my_acf_input_admin_footer');
                                          'screen'
                                      );
                  }
-
+                 wp_enqueue_script("jquery");
                  //Load each JS file that starts with three digits followed by a dash in numerical order
-                 foreach( glob( VENDI_ROTARY_FLYER_DIR . '/js/[0-9][0-9][0-9]-*.js' ) as $t )
+                 /*foreach( glob( VENDI_ROTARY_FLYER_DIR . '/js/[0-9][0-9][0-9]-*.js' ) as $t )
                  {
                      wp_enqueue_script(
                                          basename( $t, '.js' ) . '-p-style',
@@ -232,6 +232,40 @@ add_action('acf/input/admin_footer', 'my_acf_input_admin_footer');
                                          filemtime( VENDI_ROTARY_FLYER_DIR . '/js/' . basename( $t ) ),
                                          true
                                      );
-                 }
+                 }*/
              }
          );
+
+function vendi_rotary_register_plugin_css( $file, $media = 'all' )
+{
+    wp_enqueue_style(
+                        basename( $file, '.css' ),
+                        plugins_url( '/css/' . $file, VENDI_ROTARY_FLYER_FILE ),
+                        null,
+                        filemtime( VENDI_ROTARY_FLYER_DIR . '/css/' . $file ),
+                        $media
+                    );
+}
+
+function vendi_rotary_register_outside_css($name, $file, $media = 'all')
+{
+    wp_enqueue_style(
+                          $name,
+                          $file,
+                          false,
+                          null,
+                          $media
+                      );
+}
+
+function vendi_rotary_register_plugin_js( $file, $dependencies = false, $footer = true )
+{
+
+    wp_enqueue_script(
+                        basename( $file, '.js' ),
+                        plugins_url( '/js/' . $file, VENDI_ROTARY_FLYER_FILE ),
+                        $dependencies,
+                        filemtime( VENDI_ROTARY_FLYER_DIR . '/js/' . $file ),
+                        $footer
+                    );
+}
