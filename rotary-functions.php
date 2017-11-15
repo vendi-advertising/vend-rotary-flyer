@@ -1,5 +1,7 @@
 <?php
 
+
+
 function my_save_post( $post_id ) {
     // bail early if not a vendi-rotary-flyer post
     //
@@ -269,3 +271,21 @@ function vendi_rotary_register_plugin_js( $file, $dependencies = false, $footer 
                         $footer
                     );
 }
+
+function vendi_rotary_register_ajax_js( $file, $dependencies = false, $footer = true )
+{
+    //wp_register_script( basename( $file, '.js' ), plugins_url( '/js/' . $file, VENDI_ROTARY_FLYER_FILE ), $dependencies );
+
+    wp_enqueue_script(
+                        basename( $file, '.js' ),
+                        plugins_url( '/js/' . $file, VENDI_ROTARY_FLYER_FILE ),
+                        $dependencies,
+                        filemtime( VENDI_ROTARY_FLYER_DIR . '/js/' . $file ),
+                        $footer
+                    );
+
+    wp_localize_script( basename( $file, '.js' ), 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));
+}
+
+
+

@@ -21,6 +21,7 @@
 
         rotary_body = rotary_body.onkeyup = function(e){
             console.log(e);
+
             if(e.keycode == 13){
                 document.getElementById('rotary-body-preview').innerHTML = this.value+'<br/>';
 

@@ -10,6 +10,23 @@ define( 'VENDI_ROTARY_PLUGIN_NAME', 'vendi-rotary-flyer');
 
 require_once VENDI_ROTARY_FLYER_DIR . '/includes/autoload.php';
 
+function my_action() {
+    global $wpdb; // this is how you get access to the database
+
+    //$data_back = json_decode(file_get_contents('php://input'));
+    //$id = $data_back['id'];
+    //$status = $data_back['status'];
+
+    $status = $_POST['status'];
+    $id = $_POST['id'];
+    $result = Vendi\RotaryFlyer\post_modifier::set_post_status($id, $status);
+    echo $result;
+
+    wp_die(); // this is required to terminate immediately and return a proper response
+}
+add_action( 'wp_ajax_my_action', 'my_action' );
+
+
 Vendi\RotaryFlyer\content_types::init();
 Vendi\RotaryFlyer\user_types::init();
 Vendi\RotaryFlyer\page_templater::init();

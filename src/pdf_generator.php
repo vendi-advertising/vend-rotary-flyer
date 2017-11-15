@@ -56,7 +56,7 @@ class pdf_generator {
         return $post_dates;
     }
 
-    public static function generate_for_date($id_arr, $week){
+    public static function generate_for_date($id_arr, $week, $pdf=false){
         $args = array(
             'post_type' => 'vendi-rotary-flyer',
             'post_status' => array('publish', 'pending'),
@@ -86,12 +86,32 @@ class pdf_generator {
 
         while ( $loop->have_posts()) : $loop->the_post();
 
+            $post_id       = get_the_ID();
+            $post_status   = get_post_status( $post_id );
+            if($post_status == 'publish'){
+                $toggleString = '<div class="approve-container">
+
+                    <div data-name="'. $post_id .'" class="toggle active">
+                      <div class="toggle-header"><label> Approval Status: </label></div>
+                      <div class="toggle-switch"></div>
+                      <div class="toggle-label toggle-label-on">Approved</div>
+                    </div></div>';
+            }
+            else{
+                $toggleString = '<div class="approve-container">
+
+                    <div data-name="'. $post_id .'" class="toggle">
+                      <div class="toggle-header"><label> Approval Status: </label></div>
+                      <div class="toggle-switch"></div>
+                      <div class="toggle-label toggle-label-on">Unapproved</div>
+                    </div></div>';
+            }
             $rotary_layout = get_field('rotary_layout');
             $rotary_header = get_field('rotary_header');
             $rotary_body = get_field('rotary_body');
             $rotary_image = get_field('rotary_image');
             //Get the default image SRC
-            $rotary_image_src = wp_get_attachment_image_url(    $rotary_image[ 'ID' ], 'home-featured-service' );
+
 
             $alt_bg = '';
 
@@ -101,27 +121,24 @@ class pdf_generator {
 
             //Get additional srcsets
             $rotary_image_srcset = wp_get_attachment_image_srcset( $rotary_image[ 'ID' ], 'home-featured-service' );
-
             //Get the sizes attribute
             $rotary_image_sizes  = wp_get_attachment_image_sizes(  $rotary_image[ 'ID' ], 'home-featured-service' );
 
-            $rotary_image_server_path = get_attached_file($rotary_image[ 'ID' ]);
-
+            if($pdf){
+                $rotary_image_server_path = get_attached_file($rotary_image[ 'ID' ]);
+            }
+            else{
+                $rotary_image_server_path = wp_get_attachment_image_url(    $rotary_image[ 'ID' ], 'home-featured-service' );
+            }
 
             if($rotary_layout == 'Stand-alone Image'){
                 $html_string .=  '<div class="rotary-output standaloneimage">';
-                $html_string .=  '<div id="post-'. get_the_ID() .'" class="rotary-output-wrapper '. $alt_bg .'">';
-                $html_string .=  '<div class="approve-container"><div data-name="'. get_the_ID() .'" class="toggle">
-  <div class="toggle-label toggle-label-off">Unapproved</div>
-  <div class="toggle-switch"></div>
-  <div class="toggle-label toggle-label-on">Approved</div>
-</div></div>';
+                $html_string .=  '<div id="post-'. $post_id .'" class="rotary-output-wrapper '. $alt_bg .'">';
+                $html_string .=  $toggleString;
                 $html_string .=      '<div class="rotary-image-container">';
                 if($rotary_image){
                     $html_string .=          '<img class="rotary-image-output" ';
                     $html_string .=                 ' src="' . $rotary_image_server_path . '" ';
-                    $html_string .=                 ' srcset="' . esc_attr( $rotary_image_srcset ) . ' " ';
-                    $html_string .=                 ' sizes="' . esc_attr( $rotary_image_sizes ) .'" ';
                     $html_string .=                 ' alt="rotary-image" />';
                     $html_string .=      '</div>';
                 }
@@ -130,7 +147,8 @@ class pdf_generator {
             }
             elseif($rotary_layout == 'Header, Body Text'){
                 $html_string .=  '<div class="rotary-output headerbodytext">';
-                $html_string .=  '<div class="rotary-output-wrapper">';
+                $html_string .=  '<div id="post-'. $post_id .'" class="rotary-output-wrapper">';
+                $html_string .=  $toggleString;
                 $html_string .=      '<div class="rotary-text">';
                 $html_string .=          '<h2 class="rotary-header-output">' . $rotary_header . '</h2>';
                 $html_string .=          '<div class="rotary-body-output">';
@@ -142,7 +160,8 @@ class pdf_generator {
             }
             else{
                 $html_string .=  '<div class="rotary-output headerbodytextimage '. $alt_bg .'">';
-                $html_string .=  '<div class="rotary-output-wrapper '. $alt_bg .'">';
+                $html_string .=  '<div id="post-'. $post_id .'" class="rotary-output-wrapper '. $alt_bg .'">';
+                $html_string .=  $toggleString;
                 $html_string .=      '<div class="rotary-text">';
                 $html_string .=          '<h2 class="rotary-header-output">' . $rotary_header . '</h2>';
                 $html_string .=          '<div class="rotary-body-output">';
@@ -156,10 +175,6 @@ class pdf_generator {
                     $html_string .=      '<div class="rotary-image-container">';
                     $html_string .=          '<img class="rotary-image-output" ';
                     $html_string .=                 ' src="' . $rotary_image_server_path . '" ';
-                    $html_string .=                 ' srcset="' . esc_attr( $rotary_image_srcset ) . ' " ';
-
-                    $html_string .=                 ' sizes="' . esc_attr( $rotary_image_sizes ) .'" ';
-
                     if($image_information){
                         $html_string .=                 ' height="'. esc_attr( $image_information[0]->height ) .'" ';
                         $html_string .=                 ' width="'. esc_attr( $image_information[0]->width ) .'" ';

@@ -10,7 +10,7 @@ $pdf_output = true;
 get_header();
 //Vendi\RotaryFlyer\pdf_generator::generate_from_url();
 
-vendi_rotary_register_plugin_js( '200-slider-enable.js', array('jquery-ui-slider') );
+vendi_rotary_register_ajax_js( '200-slider-enable.js', array('jquery'));
 $wp_scripts = wp_scripts();
 vendi_rotary_register_outside_css( 'jqueryui-smoothness-theme','https://ajax.googleapis.com/ajax/libs/jqueryui/' . $wp_scripts->registered['jquery-ui-core']->ver . '/themes/smoothness/jquery-ui.css')
 ?>

@@ -18,17 +18,20 @@ $htmlstring = '';
 foreach($date_organized_posts as $date => $id_arr){
 
     //replace slashes so that it can be used as a get parameter - will need to convert back on the next page
+    $htmlstring .= '<div class="admin-view-box">';
     $htmlstring .= '<h1><a href="/pdf-generate/?date=' . str_replace("/", "_", $date) . '"> Flyer for ' . $date . ' </a></h1>';
-    $htmlstring .= '<p> Contains ' . count($id_arr) . ' entries out of a maximum of 9 </p>';
+    $htmlstring .= '<p> Contains ' . count($id_arr) . ' entries out of a maximum of 9: </p>';
     $htmlstring .= '<ol>';
     foreach ($id_arr as $id) {
         $htmlstring .= '<li> ';
-        $htmlstring .= '<a href=" /test-page/?post_id='. $id . '">';
         $htmlstring .= get_the_title( $id );
+        $htmlstring .= ' <a href=" /test-page/?post_id='. $id . '">';
+        $htmlstring .= ' &#9998;edit';
         $htmlstring .= '</a>';
         $htmlstring .= ' </li>';
     }
     $htmlstring .= '</ol>';
+    $htmlstring .= '</div>';
 }
 
 echo $htmlstring;

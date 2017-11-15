@@ -194,3 +194,29 @@ h1 a:hover{
 td.ui-datepicker-unselectable.ui-state-disabled span{
     background-color: red;
 }
+
+.admin-view-box{
+    border-bottom: #EEEEEE solid 1px
+
+}
+
+.admin-view-box h1{
+    margin: 10px 0px 10px 0px;
+}
+
+.admin-view-box li a{
+    text-decoration: none;
+    color: #0d4c94;
+}
+
+.admin-view-box li a:hover{
+    border-bottom: 1px solid #0d4c94;
+}
+
+.admin-view-box li a::visted{
+    color: #0d4c94;
+}
+
+.pdf-footer a:visted {
+    color: white;
+}
