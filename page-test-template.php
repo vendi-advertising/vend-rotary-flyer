@@ -13,6 +13,7 @@ get_header();
 
 //vendi_rotary_register_plugin_js( '100-floating-preview.js' );
 vendi_rotary_register_plugin_js( '000-rotary-live-preview.js' );
+vendi_rotary_register_plugin_js( '100-floating-preview.js' );
 
 if(isset($_GET['post_id'])){
     $post_id = $_GET['post_id'];
@@ -26,7 +27,9 @@ else{
 
 <div id="main-content">
     <div class="main-content-region">
-        <?php /* The loop */ ?>
+        <?php /* The loop */
+
+        ?>
         <?php while ( have_posts() ) : the_post(); ?>
 
             <?php

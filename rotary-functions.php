@@ -262,7 +262,6 @@ function vendi_rotary_register_outside_css($name, $file, $media = 'all')
 
 function vendi_rotary_register_plugin_js( $file, $dependencies = false, $footer = true )
 {
-
     wp_enqueue_script(
                         basename( $file, '.js' ),
                         plugins_url( '/js/' . $file, VENDI_ROTARY_FLYER_FILE ),

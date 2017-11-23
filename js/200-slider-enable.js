@@ -1,5 +1,4 @@
 (function() {
-
 jQuery( document ).ready(function() {
     jQuery('.slider-toggle').each(function(){
 
@@ -21,6 +20,8 @@ jQuery( document ).ready(function() {
             'status': status,
             'id': $_post_id
         };
+        jQuery('html, body').addClass('wait');
+
         // We can also pass the url value separately from ajaxurl for front end AJAX implementations
         jQuery.post(myAjax.ajaxurl, data, function(response) {
             response = JSON.parse(response);
@@ -33,6 +34,7 @@ jQuery( document ).ready(function() {
                 jQuery(toggle).removeClass('active');
                 jQuery(label).text('Unapproved');
             }
+            jQuery('html, body').removeClass('wait');
         });
 
 

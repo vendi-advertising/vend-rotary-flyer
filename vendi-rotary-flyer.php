@@ -7,9 +7,13 @@ Version: 0.1
 define( 'VENDI_ROTARY_FLYER_FILE', __FILE__ );
 define( 'VENDI_ROTARY_FLYER_DIR', dirname( __FILE__ ) );
 define( 'VENDI_ROTARY_PLUGIN_NAME', 'vendi-rotary-flyer');
+define( 'VENDI_ROTARY_USER_DASHBOARD', '/test-page/');
+define( 'VENDI_ROTARY_ADMIN_DASHBOARD', '/admin-view/');
 
 require_once VENDI_ROTARY_FLYER_DIR . '/includes/autoload.php';
 
+
+//this is the ajax action for updating status on posts from the front end
 function my_action() {
     global $wpdb; // this is how you get access to the database
 
