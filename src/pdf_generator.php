@@ -56,6 +56,17 @@ class pdf_generator {
         return $post_dates;
     }
 
+    public static function generate_placeholders($id_arr){
+        $args = array(
+            'post_type' => 'Rotary Placeholder',
+            'post_status' => array('publish', 'pending'),
+            'post__in'      => $id_arr
+        );
+
+        $loop = new \WP_Query( $args );
+
+        //find a way to duplicate post and insert into new rotary-flyer
+    }
 
     public static function generate_preview_for_date($id_arr, $week){
         $args = array(
@@ -110,6 +121,13 @@ class pdf_generator {
                     </div>
                     </div>';
             }
+
+            $post_date = str_replace( "/", "_", $week);
+            $form = '<form method="post" action="'. VENDI_ROTARY_PDF_GENERATION_PAGE .'">
+                      <input type="hidden" type="text" id="placeholder_id_json" name="placeholder_id_json">
+                      <input type="hidden" type="text" id="pdf_date" name="pdf_date" value="'.$post_date.'">
+                      <input type="submit" value="Generate PDF">
+                    </form>';
 
             $rotary_layout = get_field('rotary_layout');
             $rotary_header = get_field('rotary_header');
@@ -195,14 +213,14 @@ class pdf_generator {
 
         if($post_count < $post_limit ){
             while($post_count < $post_limit){
-                $html_string .= '<div id="placeholder-'.$post_count.'" class="rotary-output place-holder-entry">';
+                $html_string .= '<div data-slot="'.($post_count-1).'" id="placeholder-'.$post_count.'" class="rotary-output place-holder-entry">';
                 $html_string .= '<p> &#43; Insert Placeholder </p>';
                 $html_string .= '</div>';
                 $post_count++;
             }
 
         }
-
+        $html_string .= $form;
         $html_string .= '    <div class="pdf-footer"> Email rotarylax@charter.net for help or questions. Form app by Vendi Advertising. </div>';
         $html_string .= '    </div></div>';
 

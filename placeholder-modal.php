@@ -41,13 +41,15 @@
             $rotary_image_server_path = wp_get_attachment_image_url(    $rotary_image[ 'ID' ], 'home-featured-service' );
 
 
+            $the_id = get_the_ID();
+
             if($rotary_layout == 'Stand-alone Image'){
                 ?>
-                    <div class="modal-preview-output rotary-output standaloneimage">
+                    <div data-id="<?php echo $the_id; ?>" class="modal-preview-output rotary-output standaloneimage">
 
                         <div class="rotary-output-wrapper <?php echo $alt_bg;?>">
                             <div class="approve-container">
-                                <h1> select </h1>
+                                <p> select </p>
                             </div>
                             <div class="rotary-image-container">
                                 <img class="rotary-image-output" src="<?php echo $rotary_image_server_path;?>" alt="rotary-image">
@@ -59,10 +61,10 @@
             }
             elseif($rotary_layout == 'Header, Body Text'){
                 ?>
-                    <div class="modal-preview-output rotary-output headerbodytext">
+                    <div data-id="<?php echo $the_id; ?>" class="modal-preview-output rotary-output headerbodytext">
                         <div class="rotary-output-wrapper">
                             <div class="approve-container">
-                                <h1> select </h1>
+                                <p> select </p>
                             </div>
                             <div class="rotary-text">
                                 <h2 class="rotary-header-output"> <?php echo $rotary_header; ?> </h2>
@@ -77,10 +79,10 @@
             }
             else{
                 ?>
-                    <div class="modal-preview-output rotary-output headerbodytextimage <?php echo $alt_bg; ?> ">
+                    <div data-id="<?php echo $the_id; ?>" class="modal-preview-output rotary-output headerbodytextimage <?php echo $alt_bg; ?> ">
                         <div class="rotary-output-wrapper <?php echo $alt_bg;?>">
                             <div class="approve-container">
-                                <h1> select </h1>
+                                <p> select </p>
                             </div>
                             <div class="rotary-text">
                                 <h2 class="rotary-header-output"> <?php echo $rotary_header; ?> </h2>

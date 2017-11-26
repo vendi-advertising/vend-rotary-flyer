@@ -1,11 +1,15 @@
 (function() {
     jQuery( document ).ready(function() {
+        jQuery('[data-slot]').length;
 
+        var placeholder_arr = [];
         var placeholder_id;
+        var slot;
+
         jQuery('.place-holder-entry').each(function(){
             jQuery(this).click(function(){
                 placeholder_id = jQuery(this);
-
+                slot = jQuery(this).attr('data-slot');
                 jQuery('#placeholderModal').show();
             });
         });
@@ -48,7 +52,8 @@
 
                 jQuery(placeholder_id).find('.approve-container').html(admin_html);
                 modal.style.display = "none";
-
+                placeholder_arr[slot] = jQuery(this).attr('data-id');
+                jQuery('#placeholder_id_json').val(JSON.stringify(placeholder_arr));
             });
         });
 

@@ -248,6 +248,14 @@
     cursor: pointer;
 }
 
+.modal-preview-output{
+  cursor: pointer;
+}
+
+.modal-preview-output .approve-container p{
+  text-align: center;
+}
+
 .place-holder-entry{
     border: 1px dotted black;
     text-align: center;
@@ -260,10 +268,15 @@
     cursor: pointer;
 }
 
+.place-holder-filled{
+  cursor: pointer;l
+}
+
 .place-holder-filled .approve-container{
     text-align: center;
 }
 
+.modal-preview-output .approve-container p,
 .place-holder-filled .approve-container p,
 .place-holder-entry p{
     position: relative;
@@ -272,9 +285,9 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 
-
 }
 
+.modal-preview-output:hover .approve-container p,
 .place-holder-filled:hover .approve-container p,
 .place-holder-entry:hover p{
     color: white;
