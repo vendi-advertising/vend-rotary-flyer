@@ -22,7 +22,6 @@ jQuery( document ).ready(function() {
         };
         jQuery('html, body').addClass('wait');
 
-        // We can also pass the url value separately from ajaxurl for front end AJAX implementations
         jQuery.post(myAjax.ajaxurl, data, function(response) {
             response = JSON.parse(response);
             console.log(response['status']);

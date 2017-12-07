@@ -30,6 +30,22 @@ function my_action() {
 }
 add_action( 'wp_ajax_my_action', 'my_action' );
 
+//this is the ajax action for creating a new post out of a placeholder
+function convert_placeholder() {
+    global $wpdb; // this is how you get access to the database
+
+    $id = $_POST['id'];
+    $date = $_POST['date'];
+    $result = Vendi\RotaryFlyer\post_modifier::create_post_from_placeholder_id($id, $date);
+
+    echo $result;
+
+    wp_die();
+
+}
+add_action('wp_ajax_convert_placeholder', 'convert_placeholder');
+
+
 
 Vendi\RotaryFlyer\content_types::init();
 Vendi\RotaryFlyer\user_types::init();

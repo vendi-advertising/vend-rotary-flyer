@@ -56,7 +56,7 @@ class pdf_generator {
         return $post_dates;
     }
 
-    public static function generate_placeholders($id_arr){
+    public static function generate_placeholders($id_arr, $date){
         $args = array(
             'post_type' => 'Rotary Placeholder',
             'post_status' => array('publish', 'pending'),
@@ -65,22 +65,64 @@ class pdf_generator {
 
         $loop = new \WP_Query( $args );
 
-        //find a way to duplicate post and insert into new rotary-flyer
+        //loop through placeholder posts and get the field values
+        //
+        //create new rotary-flyer post
+        //
+        //get new $post_ID
+        //
+        //use update_field($selector, $value, $post_ID) to insert field values
+        //
+        //use get_entries_sorted_by_date to get all posts
+        //
+        //create rotary flyer with generate_preview_for_date
+
+        while ( $loop->have_posts()) : $loop->the_post();
+            $post_id            =   trim(get_the_ID());
+            $title              =   trim(get_the_title());
+            $rotary_layout      =   get_field('rotary_layout');
+            $rotary_header      =   get_field('rotary_header');
+            $rotary_body        =   get_field('rotary_body');
+            $rotary_image       =   get_field('rotary_image');
+            $image_information  =   get_field('image_information', $post_id);
+            $date_arr           =   array(array("run_date" => $date));
+            //wp_insert_post();
+
+            $new_id = wp_insert_post(array(
+                'post_type' => 'vendi-rotary-flyer',
+                'post_title' => $title,
+                'post_content' => '',
+                'post_status'   => 'publish',
+            ));
+
+            if($new_id !== 0){
+                update_field('rotary_layout', $rotary_layout, $new_id);
+                update_field('rotary_header', $rotary_header, $new_id);
+                update_field('rotary_body', $rotary_body, $new_id);
+                update_field('rotary_image', $rotary_image, $new_id);
+                update_field('image_information', $image_information, $new_id);
+                update_field('run_dates', $date_arr, $new_id);
+            }
+
+
+        endwhile;
+
+
     }
 
     public static function generate_preview_for_date($id_arr, $week){
         $args = array(
             'post_type' => 'vendi-rotary-flyer',
             'post_status' => array('publish', 'pending'),
-            'post__in'      => $id_arr
+            'post__in'      => $id_arr,
         );
-
         $loop = new \WP_Query( $args );
+        $loop->posts = array_reverse($loop->posts);
         $html_string = '<div id="main-output">';
         $html_string .= '<div class="pdf-header">';
         $html_string .= '<img src="'. VENDI_ROTARY_FLYER_DIR .'/images/RotaryAds_top_graphic.jpg" alt"header-image" />';
         $html_string .= '</div>';
-        $html_string .= '<div class="pdf-date"><p> Week of: ' . $week . '</p></div>';
+        $html_string .= '<div data-date="' . $week . '" class="pdf-date"><p> Week of: ' . $week . '</p></div>';
         $html_string .= '<div class="main-output-region">';
 
 
@@ -123,10 +165,10 @@ class pdf_generator {
             }
 
             $post_date = str_replace( "/", "_", $week);
-            $form = '<form method="post" action="'. VENDI_ROTARY_PDF_GENERATION_PAGE .'">
+            $form = '<form class="generation-form" method="post" action="'. VENDI_ROTARY_PDF_GENERATION_PAGE .'">
                       <input type="hidden" type="text" id="placeholder_id_json" name="placeholder_id_json">
                       <input type="hidden" type="text" id="pdf_date" name="pdf_date" value="'.$post_date.'">
-                      <input type="submit" value="Generate PDF">
+                      <input class="center steps-button" type="submit" value="Generate PDF">
                     </form>';
 
             $rotary_layout = get_field('rotary_layout');

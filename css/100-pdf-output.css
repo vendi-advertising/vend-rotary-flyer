@@ -1,3 +1,12 @@
+.center{
+  margin: auto;
+  display: block;
+}
+
+
+.generation-form{
+  margin: 10px 0 10px 0;
+}
 
 .page-template-page-pdf-test,.page-template-page-pdf-test #footer,.page-template-page-pdf-test #header {
     background-color: white;
