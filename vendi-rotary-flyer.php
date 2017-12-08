@@ -10,6 +10,7 @@ define( 'VENDI_ROTARY_PLUGIN_NAME', 'vendi-rotary-flyer');
 define( 'VENDI_ROTARY_USER_DASHBOARD', '/test-page/');
 define( 'VENDI_ROTARY_ADMIN_DASHBOARD', '/admin-view/');
 define( 'VENDI_ROTARY_PDF_GENERATION_PAGE', '/pdf-builder/' );
+define( 'VENDI_ROTARY_CREDITS_CONFIRMATION_PAGE', '/credit-purchase-confirmation/' );
 require_once VENDI_ROTARY_FLYER_DIR . '/includes/autoload.php';
 
 
