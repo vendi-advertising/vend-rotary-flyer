@@ -78,6 +78,7 @@ class page_templater {
             'page-submitfinal.php'   => 'submit-final',
             'page-user-info.php'     => 'user-info',
             'page-admin-view.php'    => 'admin-view',
+            'page-rotary-user-dashboard.php' => 'rotary-user-dashboard',
             'page-pdf-builder.php'  => 'pdf-builder',
             'page-purchase-credits.php' => 'Purchase Credits',
             'page-credits-confirmation.php' => 'Credits Purchase Confirmation'

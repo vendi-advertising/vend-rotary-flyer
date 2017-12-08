@@ -26,7 +26,7 @@ $transaction_id = $payment->generate_transaction_id();
 <div id="main-content">
     <div class="main-content-region">
         <form method="post" action="<?php echo VENDI_ROTARY_CREDITS_CONFIRMATION_PAGE; ?>">
-          <input type="number" name="quantity" min="1" max="10">
+          <input type="number" name="quantity" value="1" min="1" max="10">
           <input type="hidden" name="transaction_id" value="<?php echo $transaction_id; ?>">
           <input type="submit" name="" value="Purchase Credits">
         </form>
