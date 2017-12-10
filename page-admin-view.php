@@ -23,9 +23,9 @@ foreach($date_organized_posts as $date => $id_arr){
     $htmlstring .= '<p> Contains ' . count($id_arr) . ' entries out of a maximum of 9: </p>';
     $htmlstring .= '<ol>';
     foreach ($id_arr as $id) {
-        $htmlstring .= '<li> ';
+        $htmlstring .= '<li > ';
         $htmlstring .= get_the_title( $id );
-        $htmlstring .= ' <a href=" /test-page/?post_id='. $id . '">';
+        $htmlstring .= ' <a class="steps-button" href=" /test-page/?post_id='. $id . '">';
         $htmlstring .= ' &#9998;edit';
         $htmlstring .= '</a>';
         $htmlstring .= ' </li>';

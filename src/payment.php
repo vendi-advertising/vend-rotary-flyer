@@ -180,6 +180,10 @@ class payment {
         return $this->user;
     }
 
+    public function get_price(){
+        return floatval($this->price);
+    }
+
     public static function init(){
         self::get_instance();
     }

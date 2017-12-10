@@ -30,7 +30,6 @@ function my_save_post( $post_id ) {
     $my_post = array();
     $my_post['ID'] = $post_id;
     $my_post['post_title'] = $title;
-
     wp_update_post( $my_post );
 
     wp_safe_redirect( $url_re ); exit;

@@ -49,6 +49,10 @@ h1 a:hover{
     font-size: 18px;
 }
 
+#preview-region{
+    border: #EEEEEE solid 1px;
+}
+
 .rotary-preview{
     font-family: 'Open Sans Condensed', sans-serif;
     box-sizing: border-box;
@@ -205,9 +209,8 @@ td.ui-datepicker-unselectable.ui-state-disabled span{
     margin: 10px 0px 10px 0px;
 }
 
-.admin-view-box li a{
-    text-decoration: none;
-    color: #0d4c94;
+.admin-view-box li+li{
+    margin-top: 5px;
 }
 
 .admin-view-box li a:hover{

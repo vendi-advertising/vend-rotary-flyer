@@ -73,9 +73,11 @@
                     response = JSON.parse(response);
                     console.log(response);
 
+                    //TODO: create white background logic
+
                     if(response['rotary_layout'] == 'Stand-alone Image'){
                         var html_ = [
-                            '<div id="post-' + response["id"] + '" class="rotary-output-wrapper  white-bg "><div class="approve-container">',
+                            '<div id="post-' + response["id"] + '" class="rotary-output-wrapper"><div class="approve-container">',
                             '<div data-name="' + response["id"] + '" class="toggle active">',
                                   '<h1> '+ response["rotary_header"] +' </h1>',
                                   '<div class="toggle-header"><label> Approval Status: </label></div>',
@@ -106,6 +108,8 @@
                             ''
                         ].join("\n")));
                     }
+
+                    modal.style.display = "none";
 
                     jQuery('html, body').removeClass('wait');
                 });

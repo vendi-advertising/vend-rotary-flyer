@@ -71,7 +71,6 @@ if(isset($_GET['postid'])){
                 $html_string .=          '</div>';
                 $html_string .=      '</div>';
                 $html_string .=  '</div>';
-                $html_string .=  '</div>';
             }
             else{
                 $html_string .=  '<div class="rotary-output headerbodytextimage '. $alt_bg .'">';

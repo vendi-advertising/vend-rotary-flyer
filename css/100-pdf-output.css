@@ -56,6 +56,13 @@
 .pdf-header{
 }
 
+.grey-bottom-border{
+    border-bottom: 1px solid #eee;
+    margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
+
+}
+
 .grey-box{
     padding: 10px;
     border: 1px solid #ccc;
