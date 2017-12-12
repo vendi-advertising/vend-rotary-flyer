@@ -4,25 +4,7 @@ class login
 {
     public function __construct()
     {
-        //Redirect logins for non-admins to the dragon boat dashboard
-        /*add_filter(
-                    'login_redirect',
-                    function( $redirect_to, $request, $user )
-                    {
-                        dump($redirect_to);
-                        if( ! $user instanceOf \WP_User )
-                        {
-                            return $redirect_to;
-                        }
 
-                        if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
-                        {
-                            return $redirect_to;
-                        }
-                    },
-                    10,
-                    3
-                );*/
         //Redirect any non-admin users that attempt to access the WP backend back to the dragon boat dashboard
         add_action(
                     'admin_init',
@@ -43,7 +25,7 @@ class login
                         //If the user is one of our custom roles then kick them to the dashboard
                         if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles ) )
                         {
-                            wp_safe_redirect( VENDI_ROTARY_USER_DASHBOARD);
+                            wp_safe_redirect( VENDI_ROTARY_PDF_CREATION);
                             exit;
                         }
 

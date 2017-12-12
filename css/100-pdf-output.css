@@ -1,5 +1,6 @@
 body{
   background-color: white;
+
 }
 
 .center{
@@ -89,7 +90,7 @@ body{
     font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
     border-left: black solid 1px;
-    height: 277px;
+    height: 267px;
     width: 277px;
     background-color: white;
     display: inline-block;
@@ -159,6 +160,7 @@ body{
     word-break: break-word;
     padding: 0 0 2px 0px;
     box-sizing: border-box;
+    font-size: 13px;
 }
 
 .rotary-body-output p{

@@ -121,7 +121,13 @@
                 current_radio = current_radio.join('').toLowerCase();
                 jQuery('.rotary-preview').addClass(current_radio);
             }
+            if(current_radio == 'standaloneimage'){
+                jQuery('label[for=acf-field_59d3d73f30577]').html('Logo/image (2.25" x 2.25") <span class="acf-required">*</span>');
+            }
+            else if(current_radio == 'headerbodytextimage'){
+                jQuery('label[for=acf-field_59d3d73f30577]').html('Logo/image <span class="acf-required">*</span>');
 
+            }
             /*if(current_radio == 'standaloneimage'){
                 jQuery(preview_image).resizable('destroy');
                 jQuery(preview_image).css('height','auto');

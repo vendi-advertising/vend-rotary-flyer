@@ -61,7 +61,7 @@ function my_acf_input_admin_footer() {
 
         var dateObjectArray = Array();
 
-            //look through all posts and count the number of adds on each date.
+            //look through all posts and count the number of ads on each date.
             $.getJSON(`/wp-json/wp/v2/vendi-rotary-flyer`, function () {
 
             })
@@ -281,3 +281,4 @@ function vendi_rotary_register_ajax_js( $file, $dependencies = false, $footer = 
 
     wp_localize_script( basename( $file, '.js' ), 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));
 }
+

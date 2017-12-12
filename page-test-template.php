@@ -9,7 +9,7 @@
 $role = get_role('Rotary User');
 $role->add_cap('upload_files');
 require 'rotary-functions.php';
-
+wp_enqueue_style('common');
 wp_enqueue_media();
 acf_form_head();
 

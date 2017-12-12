@@ -20,13 +20,15 @@ $this_user = get_current_user_id();
 
 $payment = new Vendi\RotaryFlyer\payment($this_user);
 //get post and check how many days it will run, use this to find the credits needed
-$required = count(get_field('field_59ef4bccd0939', $post_id));
+$required = floatval(count(get_field('field_59ef4bccd0939', $post_id)));
 //get the amount of credits that the user has
-$available = intval($payment->get_available_tokens());
+//
+$required = $required*($payment->get_price());
+$current = floatval($payment->get_current_balance());
 //compare user credits to required
-$difference = $available-$required;
+$difference = $current-$required;
 //if difference is greater than zero, then we move post into "pending" and deduct credits from user's account
-if($difference >= 0 && $post_status != 'pending' && $post_id != ''){
+if($post_status != 'pending' && $post_id != ''){
 
     $update_post = array(
         'ID' => $post_id,
@@ -34,7 +36,7 @@ if($difference >= 0 && $post_status != 'pending' && $post_id != ''){
     );
 
     wp_update_post( $update_post );
-    $payment->deduct_from_owed_balance($required);
+    $payment->deduct_from_owed_balance($required, $post_id);
     ?>
         <div class="main-messaging">
             <h1> Thank you! </h1>
