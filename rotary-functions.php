@@ -61,7 +61,7 @@ function my_acf_input_admin_footer() {
 
         var dateObjectArray = Array();
 
-            //look through all posts and count the number of ads on each date.
+            //look through all posts and count the number of adds on each date.
             $.getJSON(`/wp-json/wp/v2/vendi-rotary-flyer`, function () {
 
             })
@@ -213,7 +213,7 @@ add_action('acf/input/admin_footer', 'my_acf_input_admin_footer');
                  {
                      wp_enqueue_style(
                                          basename( $t, '.css' ) . '-p-style',
-                                         plugins_url($plugin = VENDI_ROTARY_PLUGIN_NAME ) . '/css/' . basename( $t ),
+                                         untrailingslashit( VENDI_ROTARY_WP_PLUGIN_DIR_URL ) . '/css/' . basename( $t ),
                                          null,
                                          filemtime( VENDI_ROTARY_FLYER_DIR . '/css/' . basename( $t ) ),
                                          'screen'
@@ -225,7 +225,7 @@ add_action('acf/input/admin_footer', 'my_acf_input_admin_footer');
                  {
                      wp_enqueue_script(
                                          basename( $t, '.js' ) . '-p-style',
-                                         plugins_url($plugin = VENDI_ROTARY_PLUGIN_NAME ) . '/js/' . basename( $t ),
+                                         untrailingslashit( VENDI_ROTARY_WP_PLUGIN_DIR_URL ) . '/js/' . basename( $t ),
                                          null,
                                          filemtime( VENDI_ROTARY_FLYER_DIR . '/js/' . basename( $t ) ),
                                          true
@@ -281,4 +281,3 @@ function vendi_rotary_register_ajax_js( $file, $dependencies = false, $footer = 
 
     wp_localize_script( basename( $file, '.js' ), 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));
 }
-
