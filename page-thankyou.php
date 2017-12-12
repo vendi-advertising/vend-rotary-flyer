@@ -14,16 +14,19 @@ get_header();
 
 if(isset($_GET['postid'])){
     $post_id = $_GET['postid'];
+}else{
+    $post_id = '';
 }
 
 ?>
 
 <div id="main-content">
     <div class="main-content-region">
-        <h1>Your finalized rotary announcement </h1>
-        <p>The announcement will display as it looks here:</p>
+        <div class="main-messaging">
+            <h1>Your finalized Rotary Announcement </h1>
+            <p>The announcement will display as it looks here:</p>
+        </div>
         <?php
-
             $rotary_layout = get_field('rotary_layout', $post_id);
             $rotary_header = get_field('rotary_header', $post_id);
             $rotary_body = get_field('rotary_body', $post_id);
@@ -44,8 +47,8 @@ if(isset($_GET['postid'])){
             $rotary_image_sizes  = wp_get_attachment_image_sizes(  $rotary_image[ 'ID' ], 'home-featured-service' );
 
             $rotary_image_server_path = get_attached_file($rotary_image[ 'ID' ]);
-
-            $html_string .= '<div class="grey-box">';
+            $html_string = '';
+            $html_string .= '<div class="finalization-region">';
 
             if($rotary_layout == 'Stand-alone Image'){
                 $html_string .=  '<div class="rotary-output standaloneimage">';
@@ -107,7 +110,7 @@ if(isset($_GET['postid'])){
 
     </div>
 <div class="acf-form-submit">
-            <a class="steps-button" href="<?php echo home_url('test-page?post_id='. $post_id . '');  ?>"> Edit Posting </a><a class="steps-button" href="<?php echo home_url('submit-final?post_id='. $post_id . '');  ?>"> Submit Final </a>
+            <a class="steps-button" href="<?php echo home_url('ad-creation?post_id='. $post_id . '');  ?>"> Edit Ad Post </a><a class="steps-button" href="<?php echo home_url('submit-final?post_id='. $post_id . '');  ?>"> Submit Final Ad</a>
         </div>
 </div>
 </div>

@@ -1,3 +1,7 @@
+body{
+  background-color: white;
+}
+
 .center{
   margin: auto;
   display: block;
@@ -32,7 +36,7 @@
 }
 
 .rotary-text .rotary-body-output{
-    font-family: "open_sansregular", sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 #main-output{
@@ -82,7 +86,7 @@
 }
 
 .rotary-output{
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
     border-left: black solid 1px;
     height: 277px;
@@ -91,17 +95,18 @@
     display: inline-block;
     vertical-align: top;
     margin: 17px;
+    margin-bottom: 16px;
     overflow: hidden;
 }
 
 .rotary-output-wrapper{
     position: relative;
     height: 100%;
-    width: calc(100% - 5px);
-    margin-left: 5px;
+    width: calc(100% - 10px);
+    margin-left: 10px;
     background-color: #f1f1f2;
     box-sizing: border-box;
-    padding: 10px 0 0 10px;
+    padding: 10px 10px 10px 10px;
 }
 
 
@@ -137,6 +142,10 @@
     background-color: white;
 }
 
+.rotary-output:nth-child(1), .rotary-output:nth-child(2), .rotary-output:nth-child(3){
+  margin-top: 12px;
+}
+
 .rotary-output:nth-child(1), .rotary-output:nth-child(3n+1){
     margin-left: 0;
 }
@@ -148,7 +157,7 @@
 
 .rotary-body-output{
     word-break: break-word;
-    padding: 0 0 2px 5px;
+    padding: 0 0 2px 0px;
     box-sizing: border-box;
 }
 
@@ -171,8 +180,8 @@
 }
 
 .headerbodytextimage .rotary-image-container{
-    width: 265px;
-    height: 200px;
+    width: 100%;
+    height: auto;
 }
 
 .headerbodytextimage .rotary-image-output{
@@ -220,8 +229,7 @@
 
 .standaloneimage .rotary-image-output{
     height: auto;
-    max-width: 265px;
-    max-height: 265px;
+    max-width: 100%;
     margin: auto;
 
 }
@@ -319,7 +327,7 @@
     text-align: center;
     color: white;
     padding: 10px 0px 10px 0px;
-    margin: 0px 0 0 0;
+    margin: 0px 0 10px 0;
 }
 
 .pdf-footer a:visted {
@@ -435,4 +443,8 @@
 body.wait *, body.wait
 {
     cursor: progress !important;
+}
+
+.admin-list li p{
+  margin-right: 10px;
 }

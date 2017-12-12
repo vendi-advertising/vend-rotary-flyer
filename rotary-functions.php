@@ -204,9 +204,6 @@ add_action('acf/input/admin_footer', 'my_acf_input_admin_footer');
              'wp_enqueue_scripts',
              function()
              {
-                 //Kill of Clef which wants to load on every page.
-                 //So far this has been safe because Clef special-cases the login page anyway
-                 wp_dequeue_style( 'wpclef-main' );
 
                  /*****************
                   *  Parent Theme *
@@ -284,6 +281,3 @@ function vendi_rotary_register_ajax_js( $file, $dependencies = false, $footer = 
 
     wp_localize_script( basename( $file, '.js' ), 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));
 }
-
-
-

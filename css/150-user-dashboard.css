@@ -6,15 +6,17 @@
 .payment-info-block{
     display: inline-block;
     width: 49%;
-
+    border-left: #EEEEEE solid 1px;
 }
 
 .payment-info-block+.payment-info-block{
     border-left: #EEEEEE solid 1px;
+    border-right: #EEEEEE solid 1px;
 }
 
 .payment-info-block h2{
     text-align: center;
+    margin: 5px 0px;
 }
 
 .payment-info-block p{

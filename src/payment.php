@@ -8,6 +8,8 @@ class payment {
      */
     private static $_instance;
 
+    private $user;
+
     public static function get_instance()
     {
         if( ! self::$_instance )
@@ -27,7 +29,7 @@ class payment {
         {
             $this->price = 5.00;
         }
-        if( ! $this->user )
+        if(! $this->user )
         {
             $this->user = 'user_'.$user_id;
         }
@@ -62,7 +64,7 @@ class payment {
     }
 
     //deduct from owed balance
-    private function deduct_from_owed_balance($amount_paid){
+    public function deduct_from_owed_balance($amount_paid){
         $current = $this->get_current_balance();
         $total = $current - $amount_paid;
         update_field('field_5a29a466c8593', $total, $post_id);

@@ -22,7 +22,8 @@ class user_types {
                     'edit_themes' => false, // false denies this capability. User can’t edit your theme
                     'install_plugins' => false, // User cant add new plugins
                     'update_plugin' => false, // User can’t update any plugins
-                    'update_core' => false // user cant perform core updates
+                    'update_core' => false, // user cant perform core updates
+                    'upload_files' => true
 
                     )
 

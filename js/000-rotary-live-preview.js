@@ -32,7 +32,9 @@
         }
 
         var rotary_image = jQuery('.acf-field-59d3d73f30577').find('[data-name="image"]');
-        var rotary_image_cancel = jQuery('.acf-field-59d3d73f30577').find('[data-name="image"]').next('.acf-soh-target').find('[data-name="remove"]');
+        //var rotary_image_cancel = jQuery('.acf-field-59d3d73f30577').find('[data-name="image"]').next('.acf-soh-target').find('[data-name="remove"]');
+
+        var rotary_image_cancel = jQuery('.acf-field-59d3d73f30577').find('[data-name="image"]').next('.acf-actions').find('[data-name="remove"]');
         var preview_image = document.getElementById('rotary-image-preview');
         var preview_wrapper = jQuery('.rotary-preview-wrapper');
         console.log('36',rotary_image_cancel);
@@ -67,7 +69,7 @@
             }
         }
 
-        jQuery(preview_image).on('load',function(){
+        /*jQuery(preview_image).on('load',function(){
             if(jQuery('.rotary-preview').hasClass('headerbodytextimage')){
                 jQuery(preview_image).resizable({
                     disabled: false,
@@ -77,16 +79,17 @@
                     stop: sendImageInfo
                 });
             }
-        });
+        });*/
 
         jQuery(rotary_image_cancel).on('click', function(){
 
-            if(jQuery(preview_image).is(':data(ui-resizable)')){
+            /*if(jQuery(preview_image).is(':data(ui-resizable)')){
                 jQuery(preview_image).resizable('destroy');
-            }
+            }*/
             jQuery(preview_image).css('height','auto');
             jQuery(preview_image).css('width','auto');
-            jQuery(preview_image).attr('src', '');
+            jQuery(preview_image).attr('src', '/wp-content/themes/vendi-base/images/transparent-placeholder.png');
+            console.log(preview_image);
             jQuery(preview_wrapper).removeClass('white-bg');
 
         });
@@ -119,7 +122,7 @@
                 jQuery('.rotary-preview').addClass(current_radio);
             }
 
-            if(current_radio == 'standaloneimage'){
+            /*if(current_radio == 'standaloneimage'){
                 jQuery(preview_image).resizable('destroy');
                 jQuery(preview_image).css('height','auto');
                 jQuery(preview_image).css('width','auto');
@@ -132,7 +135,7 @@
                     containment: "parent",
                     stop: sendImageInfo
                 });
-            }
+            }*/
           console.log(current_radio);
           console.log(e);
         });

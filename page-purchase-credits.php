@@ -27,7 +27,7 @@ $transaction_id = $payment->generate_transaction_id();
     <div class="main-content-region">
         <div  class="grey-bottom-border" >
             <h1> Purchase Credits </h1>
-            <p> Credits are used to purchase ad space in the weekly Rotary flyer. Each credit costs $<?php echo $payment->get_price() ?> and can be used to purchase one slot in a weekly flyer. Each subsequent week costs an additional credit. Select the number of credits you wish to purchase below. </p>
+            <p> Credits are used to purchase ad space in the weekly Rotary flyer. Each credit costs $<?php echo $payment->get_price() ?> and can be used to purchase one slot in a weekly flyer. Each subsequent week costs an additional credit. Select the number of credits that you wish to purchase below. </p>
         </div>
         <form method="post" action="<?php echo VENDI_ROTARY_CREDITS_CONFIRMATION_PAGE; ?>">
           <input type="number" name="quantity" value="1" min="1" max="10">

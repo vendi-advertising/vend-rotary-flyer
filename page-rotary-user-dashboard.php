@@ -23,6 +23,7 @@ $payment = new Vendi\RotaryFlyer\payment($this_user);
         <div class="user-dash-region user-payment-info-region">
             <div class="payment-info-block">
                 <h2> Current amount due </h2>
+                <?php //add in a jquery ui tool tip that explains this ?>
                 <p> $<?php echo floatval($payment->get_current_balance()); ?> </p>
             </div>
             <div class="payment-info-block">
@@ -45,7 +46,10 @@ $payment = new Vendi\RotaryFlyer\payment($this_user);
             <div class="ads-wrapper">
                 <ol>
                 <?php
-                    while ( $loop->have_posts()) : $loop->the_post();
+                    $htmlstring = '';
+                    while ( $loop->have_posts())
+                    {
+                        $loop->the_post();
                         $post_id       = trim(get_the_ID());
                         $post_title    = get_the_title();
                         $htmlstring .= '<li> ';
@@ -54,7 +58,8 @@ $payment = new Vendi\RotaryFlyer\payment($this_user);
                         $htmlstring .= ' &#9998;edit';
                         $htmlstring .= '</a>';
                         $htmlstring .= ' </li>';
-                    endwhile;
+                    }
+
                     echo $htmlstring;
 
                 ?>

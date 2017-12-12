@@ -33,10 +33,18 @@ class login
                         {
                             wp_die( 'Invalid user account found.' );
                         }
+
+                        //Allow AJAX requests to just pass through
+                        if( defined( 'DOING_AJAX' ) && DOING_AJAX )
+                        {
+                            return;
+                        }
+
+                        //If the user is one of our custom roles then kick them to the dashboard
                         if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles ) )
                         {
-                            wp_redirect( VENDI_ROTARY_USER_DASHBOARD);
-                            return $redirect_to;
+                            wp_safe_redirect( VENDI_ROTARY_USER_DASHBOARD);
+                            exit;
                         }
 
                     }
@@ -44,19 +52,27 @@ class login
 
 
 
-    add_filter('login_redirect', array($this, 'admin_default_page'), 10, 3);
+        add_filter(
+                    'login_redirect',
+                    function($redirect_to, $request, $user)
+                    {
+                        //Send WP admins to the custom admin dashboard
+                        if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
+                        {
+                            return VENDI_ROTARY_ADMIN_DASHBOARD;
+                        }
+
+                        //Send Rotary Users to the PDF creation screen
+                        if(isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles )){
+                            return VENDI_ROTARY_PDF_CREATION;
+                        }
+
+                        //Pass through for everyone else
+                        return $redirect_to;
+                    },
+                    10,
+                    3
+                );
 
     }
-    function admin_default_page($redirect_to, $request, $user){
-            if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
-            {
-                return VENDI_ROTARY_ADMIN_DASHBOARD;
-            }
-            else if(isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles )){
-                return VENDI_ROTARY_USER_DASHBOARD;
-            }
-            else{
-                return $redirect_to;
-            }
-        }
 }

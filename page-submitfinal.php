@@ -24,9 +24,9 @@ $required = count(get_field('field_59ef4bccd0939', $post_id));
 //get the amount of credits that the user has
 $available = intval($payment->get_available_tokens());
 //compare user credits to required
-$difference = $required-$available;
+$difference = $available-$required;
 //if difference is greater than zero, then we move post into "pending" and deduct credits from user's account
-if($difference >= 0 && $post_status != 'pending'){
+if($difference >= 0 && $post_status != 'pending' && $post_id != ''){
 
     $update_post = array(
         'ID' => $post_id,
@@ -34,11 +34,12 @@ if($difference >= 0 && $post_status != 'pending'){
     );
 
     wp_update_post( $update_post );
-    deduct_from_owed_balance($required);
+    $payment->deduct_from_owed_balance($required);
     ?>
+        <div class="main-messaging">
             <h1> Thank you! </h1>
-            <p> Your posting has been submitted and credits have been deducted in accordance with the number of ads purchased. </p>
-
+            <p> Your ad has been submitted. You will be billed with your next invoice for the number of ads purchased. </p>
+        </div>
             <?php
             $user = wp_get_current_user();
 
@@ -52,8 +53,8 @@ if($difference >= 0 && $post_status != 'pending'){
 
             ?>
 
-            <a class="steps-button" href="<?php echo $dashboard; ?>"> Return to Dashboard </a>
-
+            <a class="steps-button" href="<?php echo VENDI_ROTARY_PDF_CREATION; ?>"> Create More Ads </a>
+            <a class="steps-button" href="<?php echo wp_logout_url(); ?>"> Log Out </a>
 <?php
 }
 else if($post_status == 'pending'){

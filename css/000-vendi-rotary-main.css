@@ -1,4 +1,6 @@
-
+body{
+  background-color: white;
+}
 
 h1 a{
     color: #0d4c94;
@@ -8,6 +10,15 @@ h1 a{
 h1 a:hover{
     text-decoration: underline;
 }
+
+.main-messaging{
+    margin-bottom: 10px;
+}
+
+.main-messaging h1{
+    margin: 10px 0 10px 0;
+}
+
 
 .test-class{
     color: red;
@@ -50,11 +61,10 @@ h1 a:hover{
 }
 
 #preview-region{
-    border: #EEEEEE solid 1px;
 }
 
 .rotary-preview{
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
     border-left: 1px solid black;
     height: 277px;
@@ -65,10 +75,10 @@ h1 a:hover{
 
 .rotary-preview-wrapper{
     height: 100%;
-    width: calc(100% - 5px);
-    margin-left: 5px;
+    width: calc(100% - 10px);
+    margin-left: 10px;
     background-color: #f1f1f2;
-    padding: 10px 0 0 10px;
+    padding: 10px 10px 10px 10px;
     box-sizing: border-box;
 }
 
@@ -91,7 +101,7 @@ h1 a:hover{
 
 #rotary-body-preview{
     word-break: break-word;
-    padding: 0 0 2px 2px;
+    padding: 0 0 2px 0px;
     box-sizing: border-box;
     white-space: pre-wrap;
 }
@@ -160,8 +170,7 @@ h1 a:hover{
 .standaloneimage #rotary-image-preview{
     width: auto;
     height: auto;
-    max-width: 235px;
-    max-height: 235px;
+    max-width: 100%;
     margin: auto;
 
 }
@@ -173,7 +182,7 @@ h1 a:hover{
     background-color: #0d4c94;
     border: none;
     color: white;
-    padding: 7px;
+    padding: 12px;
     text-decoration: none;
     border-radius: 5px;
     outline: none;
@@ -201,12 +210,22 @@ td.ui-datepicker-unselectable.ui-state-disabled span{
 }
 
 .admin-view-box{
-    border-bottom: #EEEEEE solid 1px
+    border: #EEEEEE solid 1px;
+    padding: 5px 10px 5px 10px;
+}
 
+.admin-view-box+.admin-view-box{
+    margin-top: 5px;
+}
+
+.admin-view-box-description{
+    margin: 10px 0 10px 0;
+    display: block;
 }
 
 .admin-view-box h1{
-    margin: 10px 0px 10px 0px;
+    margin: 10px 5px 0px 0px;
+    display: inline-block;
 }
 
 .admin-view-box li+li{
@@ -217,10 +236,14 @@ td.ui-datepicker-unselectable.ui-state-disabled span{
     border-bottom: 1px solid #0d4c94;
 }
 
-.admin-view-box li a::visted{
+.admin-view-box li p{
+    display: inline-block;
+}
+
+.admin-view-box li a:visted{
     color: #0d4c94;
 }
 
-.pdf-footer a:visted {
+.pdf-footer a:visited {
     color: white;
 }
