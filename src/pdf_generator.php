@@ -125,7 +125,10 @@ class pdf_generator {
             $html_string .= '<img src="'. VENDI_ROTARY_FLYER_DIR .'/images/RotaryAds_top_graphic.jpg" alt"header-image" />';
             $html_string .= '</div>';
         }
-        $html_string .= '<div data-date="' . $week . '" class="pdf-date"><p> Week of: ' . $week . '</p></div>';
+        /*dump(str_replace('/','-', $week));
+        $date_string_to_time = strtotime(str_replace($week,'/','-'));
+        $newDate = date("F j, Y", strtotime($date_string_to_time));*/
+        $html_string .= '<div data-date="' . $week . '" class="pdf-date"><p> Week of: ' .  $week . '</p></div>';
         $html_string .= '<div class="main-output-region">';
 
 
