@@ -199,41 +199,6 @@ function my_acf_input_admin_footer() {
 add_action('acf/input/admin_footer', 'my_acf_input_admin_footer');
 
 
-//Load CSS and JavaScript
- add_action(
-             'wp_enqueue_scripts',
-             function()
-             {
-
-                 /*****************
-                  *  Parent Theme *
-                  *****************/
-                 //Load each CSS file that starts with three digits followed by a dash in numerical order
-                 foreach( glob( VENDI_ROTARY_FLYER_DIR . '/css/[0-9][0-9][0-9]-*.css' ) as $t )
-                 {
-                     wp_enqueue_style(
-                                         basename( $t, '.css' ) . '-p-style',
-                                         untrailingslashit( VENDI_ROTARY_WP_PLUGIN_DIR_URL ) . '/css/' . basename( $t ),
-                                         null,
-                                         filemtime( VENDI_ROTARY_FLYER_DIR . '/css/' . basename( $t ) ),
-                                         'screen'
-                                     );
-                 }
-                 wp_enqueue_script("jquery");
-                 //Load each JS file that starts with three digits followed by a dash in numerical order
-                 /*foreach( glob( VENDI_ROTARY_FLYER_DIR . '/js/[0-9][0-9][0-9]-*.js' ) as $t )
-                 {
-                     wp_enqueue_script(
-                                         basename( $t, '.js' ) . '-p-style',
-                                         untrailingslashit( VENDI_ROTARY_WP_PLUGIN_DIR_URL ) . '/js/' . basename( $t ),
-                                         null,
-                                         filemtime( VENDI_ROTARY_FLYER_DIR . '/js/' . basename( $t ) ),
-                                         true
-                                     );
-                 }*/
-             }
-         );
-
 function vendi_rotary_register_plugin_css( $file, $media = 'all' )
 {
     wp_enqueue_style(

@@ -148,7 +148,7 @@ class pdf_generator {
                       <div class="toggle-label toggle-label-on">Approved</div>
                     </div>
                     <div class="edit-post-container">
-                        <a href="/test-page/?post_id='. $post_id .'"> &#9998;Edit post </a>
+                        <a href="/ad-creation/?post_id='. $post_id .'"> &#9998;Edit post </a>
                     </div>
                     </div>';
             }
@@ -162,7 +162,7 @@ class pdf_generator {
                       <div class="toggle-label toggle-label-on">Unapproved</div>
                     </div>
                     <div class="edit-post-container">
-                        <a href="/test-page/?post_id='. $post_id .'"> &#9998;Edit post </a>
+                        <a href="/ad-creation/?post_id='. $post_id .'"> &#9998;Edit post </a>
                     </div>
                     </div>';
             }
@@ -277,13 +277,12 @@ class pdf_generator {
     public static function generate_for_date($id_arr, $week, $pdf=false){
         $args = array(
             'post_type' => 'vendi-rotary-flyer',
-            'post_status' => array('publish', 'pending'),
-            'post__in'      => $id_arr
+            'post_status' => array('publish'),
+            'post__in'      => $id_arr,
+            'posts_per_page' => 9
         );
-
         $loop = new \WP_Query( $args );
         $loop->posts = array_reverse($loop->posts);
-
         $fonts = [
                     'Open Sans' => [
                                         'Open Sans Bold Italic' =>  [
@@ -384,6 +383,10 @@ class pdf_generator {
         .rotary-output:nth-child(3n){
             margin-right: 0;
         }
+        .pdf-sub-footer{
+            font-size: 13px;
+            text-align: center;
+        }
         </style>
         <base href="'. get_site_url() .'/" />
         </head>
@@ -391,11 +394,11 @@ class pdf_generator {
 
         $html_string .= '<div id="main-output">';
         $html_string .= '<div class="pdf-header">';
-        $html_string .= '<img src="data:' . mime_content_type( VENDI_ROTARY_FLYER_DIR .'/images/RotaryAds_top_graphic.jpg' ) . ';base64,' . base64_encode( file_get_contents( VENDI_ROTARY_FLYER_DIR .'/images/RotaryAds_top_graphic.jpg' ) ) . '" alt="header-image" />';
+        $html_string .= '<img src="data:' . mime_content_type( VENDI_ROTARY_FLYER_DIR .'/images/RotaryAds_graphic_header.png' ) . ';base64,' . base64_encode( file_get_contents( VENDI_ROTARY_FLYER_DIR .'/images/RotaryAds_graphic_header.png' ) ) . '" alt="header-image" />';
 
         //$src = 'src="data: '.mime_content_type($tmpfname).';base64,'.$imageData . '" ';
         $html_string .= '</div>';
-        $html_string .= '<div class="pdf-date"><p> Week of: ' . $week . '</p></div>';
+        $html_string .= '<div class="pdf-date"><p> WEEK OF: ' . $week . '</p></div>';
         $html_string .= '<div class="main-output-region">';
 
 
@@ -415,7 +418,9 @@ class pdf_generator {
 
             $rotary_layout = get_field('rotary_layout');
             $rotary_header = get_field('rotary_header');
-            $rotary_body = get_field('rotary_body');
+//            $rotary_body = str_replace('–', '&ndash;', get_field('rotary_body'));
+            $rotary_body = htmlentities( get_field('rotary_body'));
+
             $rotary_image = get_field('rotary_image');
             //Get the default image SRC
             $rotary_image_src = wp_get_attachment_image_url(    $rotary_image[ 'ID' ], 'home-featured-service' );
@@ -516,7 +521,7 @@ class pdf_generator {
             $html_string .= "\n";
             $post_count++;
         endwhile;
-        $html_string .= '    <div class="pdf-footer"> Email rotarylax@charter.net for help or questions. Form app by Vendi Advertising. </div>';
+        $html_string .= '    <div><div class="pdf-footer"> Share an announcement with your Rotary Community. Weekly space available at: rotarycluboflacrosse.org </div><div class="pdf-sub-footer"> Web app by Vendi </div></div>';
         $html_string .= '    </div></div></body></html>';
 
         // $html_string = str_replace( get_site_url(), 'file://' . dirname( dirname( dirname( VENDI_ROTARY_FLYER_DIR ) ) ), $html_string);

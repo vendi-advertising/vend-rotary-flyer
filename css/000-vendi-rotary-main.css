@@ -1,9 +1,10 @@
 body{
   background-color: white;
+  font-family: "Open Sans", sans-serif;
 }
 
 h1 a{
-    color: #0d4c94;
+    color: rgb(13, 76, 148);
     text-decoration: none;
 }
 
@@ -97,6 +98,10 @@ h1 a:hover{
     word-break: break-all;
     padding: 0 0 2px 2px;
     box-sizing: border-box;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: bold;
+    line-height: 1.15;
+
 }
 
 #rotary-body-preview{
@@ -104,6 +109,8 @@ h1 a:hover{
     padding: 0 0 2px 0px;
     box-sizing: border-box;
     white-space: pre-wrap;
+    margin-top: 5px;
+    font-size: 17px;
 }
 
 
@@ -179,7 +186,7 @@ h1 a:hover{
 
 .card-half .acf-button, .steps-button{
     background:none;
-    background-color: #0d4c94;
+    background-color: rgb(13, 76, 148);
     border: none;
     color: white;
     padding: 12px;
@@ -233,7 +240,7 @@ td.ui-datepicker-unselectable.ui-state-disabled span{
 }
 
 .admin-view-box li a:hover{
-    border-bottom: 1px solid #0d4c94;
+    border-bottom: 1px solid rgb(13, 76, 148);
 }
 
 .admin-view-box li p{
@@ -241,9 +248,13 @@ td.ui-datepicker-unselectable.ui-state-disabled span{
 }
 
 .admin-view-box li a:visted{
-    color: #0d4c94;
+    color: rgb(13, 76, 148);
 }
 
 .pdf-footer a:visited {
     color: white;
+}
+
+.footer-region {
+    color: rgb(12, 76, 148);
 }

@@ -34,10 +34,14 @@ body{
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     font-size: 22px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    line-height: 1.15;
 }
 
 .rotary-text .rotary-body-output{
     font-family: "Open Sans", sans-serif;
+    margin-top: 5px;
+
 }
 
 #main-output{
@@ -56,6 +60,8 @@ body{
     -webkit-margin-after: 0em;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 17px;
 }
 
 .pdf-header{
@@ -160,7 +166,7 @@ body{
     word-break: break-word;
     padding: 0 0 2px 0px;
     box-sizing: border-box;
-    font-size: 13px;
+    font-size: 17px;
 }
 
 .rotary-body-output p{
@@ -325,7 +331,7 @@ body{
 }
 
 .pdf-footer{
-    background-color: #0d4c94;
+    background-color: rgb(13, 76, 148);
     text-align: center;
     color: white;
     padding: 10px 0px 10px 0px;
@@ -449,4 +455,9 @@ body.wait *, body.wait
 
 .admin-list li p{
   margin-right: 10px;
+}
+
+.admin-list a{
+  color: rgb(13, 76, 148);
+  text-decoration: none;
 }

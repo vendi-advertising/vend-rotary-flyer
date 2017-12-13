@@ -23,7 +23,7 @@ if(isset($_GET['postid'])){
 <div id="main-content">
     <div class="main-content-region">
         <div class="main-messaging">
-            <h1>Your finalized Rotary Announcement </h1>
+            <h1>Your finalized Rotary announcement </h1>
             <p>The announcement will display as it looks here:</p>
         </div>
         <?php

@@ -18,7 +18,7 @@ foreach($date_organized_posts as $date => $id_arr){
 
     //replace slashes so that it can be used as a get parameter - will need to convert back on the next page
     $htmlstring .= '<div class="admin-view-box">';
-    $htmlstring .= '<div class="grey-bottom-border"><h1>Flyer for ' . $date . '</h1><a class="steps-button" href="'. VENDI_ROTARY_PDF_ASSEMBLER_PAGE .'?date=' . str_replace("/", "_", $date) . '"> Prepare flyer </a>';
+    $htmlstring .= '<div class="grey-bottom-border"><h1>Flier for ' . $date . '</h1><a class="steps-button" href="'. VENDI_ROTARY_PDF_ASSEMBLER_PAGE .'?date=' . str_replace("/", "_", $date) . '"> Prepare flier </a>';
     $htmlstring .= '<p class="admin-view-box-description"> Contains ' . count($id_arr) . ' entries out of a maximum of 9: </p></div>';
     $htmlstring .= '<ol class="admin-list">';
     foreach ($id_arr as $id) {

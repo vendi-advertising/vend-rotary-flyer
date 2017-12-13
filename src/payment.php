@@ -21,7 +21,7 @@ class payment {
     public function __construct($user_id){
         if( ! $this->price )
         {
-            $this->price = 5.00;
+            $this->price = 10.00;
         }
         if(! $this->user )
         {
