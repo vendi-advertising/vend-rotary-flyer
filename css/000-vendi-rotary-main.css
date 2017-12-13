@@ -1,3 +1,25 @@
+body{
+  background-color: white;
+  font-family: "Open Sans", sans-serif;
+}
+
+h1 a{
+    color: rgb(13, 76, 148);
+    text-decoration: none;
+}
+
+h1 a:hover{
+    text-decoration: underline;
+}
+
+.main-messaging{
+    margin-bottom: 10px;
+}
+
+.main-messaging h1{
+    margin: 10px 0 10px 0;
+}
+
 
 .test-class{
     color: red;
@@ -12,9 +34,19 @@
 
 .acf-half{
     min-width: 300px;
-    width: calc(99% - 285px);
+    width: calc(99% - 300px);
     padding: 0 40px 0 0;
     box-sizing: border-box;
+}
+
+.acf-half td.acf-row-handle.order{
+    cursor: pointer !important;
+    pointer-events: none;
+
+}
+
+[data-event="collapse-row"]{
+    display: none !important;
 }
 
 .rotary-half{
@@ -29,25 +61,32 @@
     font-size: 18px;
 }
 
+#preview-region{
+}
+
 .rotary-preview{
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
     border-left: 1px solid black;
-    height: 244px;
-    width: 244px;
+    height: 267px;
+    width: 277px;
     background-color: white;
+    overflow: hidden;
 }
 
 .rotary-preview-wrapper{
     height: 100%;
-    width: 100%;
-    margin-left: 5px;
+    width: calc(100% - 10px);
+    margin-left: 10px;
     background-color: #f1f1f2;
+    padding: 10px 10px 10px 10px;
+    box-sizing: border-box;
 }
 
 .rotary-image-container{
     padding: 2px;
     box-sizing: border-box;
+
 }
 
 #rotary-image-preview{
@@ -59,15 +98,25 @@
     word-break: break-all;
     padding: 0 0 2px 2px;
     box-sizing: border-box;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: bold;
+    line-height: 1.15;
+
 }
 
 #rotary-body-preview{
-    word-break: break-all;
-    padding: 0 0 2px 2px;
+    word-break: break-word;
+    padding: 0 0 2px 0px;
     box-sizing: border-box;
-    white-space: pre;
+    white-space: pre-wrap;
+    margin-top: 5px;
+    font-size: 17px;
 }
 
+
+.hidden_field{
+    display:none;
+}
 
 /*header body text image layout*/
 .headerbodytextimage #rotary-header-preview{
@@ -79,14 +128,15 @@
 }
 
 .headerbodytextimage .rotary-image-container{
-
+    width: 265px;
+    height: 200px;
 }
 
 .headerbodytextimage #rotary-image-preview{
     width: auto;
     height: auto;
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 /* header body test layout */
@@ -108,6 +158,10 @@
 }
 /*Stand alone image layout*/
 
+.standaloneimage .rotary-preview-wrapper{
+    padding: 0;
+}
+
 .standaloneimage #rotary-body-preview{
     display: none;
 }
@@ -123,8 +177,7 @@
 .standaloneimage #rotary-image-preview{
     width: auto;
     height: auto;
-    max-width: 244px;
-    max-height: 244px;
+    max-width: 100%;
     margin: auto;
 
 }
@@ -133,10 +186,10 @@
 
 .card-half .acf-button, .steps-button{
     background:none;
-    background-color: #0d4c94;
+    background-color: rgb(13, 76, 148);
     border: none;
     color: white;
-    padding: 7px;
+    padding: 12px;
     text-decoration: none;
     border-radius: 5px;
     outline: none;
@@ -150,7 +203,8 @@
 }
 
 .acf-form-submit{
-    padding: 0 0 0 12px;
+    padding: 12px 0 0 12px;
+    border-top: #EEEEEE solid 1px;
 }
 
 
@@ -160,4 +214,47 @@
 
 td.ui-datepicker-unselectable.ui-state-disabled span{
     background-color: red;
+}
+
+.admin-view-box{
+    border: #EEEEEE solid 1px;
+    padding: 5px 10px 5px 10px;
+}
+
+.admin-view-box+.admin-view-box{
+    margin-top: 5px;
+}
+
+.admin-view-box-description{
+    margin: 10px 0 10px 0;
+    display: block;
+}
+
+.admin-view-box h1{
+    margin: 10px 5px 0px 0px;
+    display: inline-block;
+}
+
+.admin-view-box li+li{
+    margin-top: 5px;
+}
+
+.admin-view-box li a:hover{
+    border-bottom: 1px solid rgb(13, 76, 148);
+}
+
+.admin-view-box li p{
+    display: inline-block;
+}
+
+.admin-view-box li a:visted{
+    color: rgb(13, 76, 148);
+}
+
+.pdf-footer a:visited {
+    color: white;
+}
+
+.footer-region {
+    color: rgb(12, 76, 148);
 }

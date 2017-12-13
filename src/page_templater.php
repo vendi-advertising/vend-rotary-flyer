@@ -74,9 +74,15 @@ class page_templater {
         $this->templates = array(
             'page-test-template.php' => 'Submission',
             'page-thankyou.php'      => 'Thank You',
-            'page-pdf-test.php'      => 'pdf-test',
+            'page-pdf-assembler.php'      => 'pdf-assembler',
             'page-submitfinal.php'   => 'submit-final',
-            'page-user-info.php'     => 'user-info'
+            'page-user-info.php'     => 'user-info',
+            'page-admin-view.php'    => 'admin-view',
+            'page-rotary-user-dashboard.php' => 'rotary-user-dashboard',
+            'page-pdf-builder.php'  => 'pdf-builder',
+            'page-purchase-credits.php' => 'Purchase Credits',
+            'page-credits-confirmation.php' => 'Credits Purchase Confirmation',
+            'page-custom-login.php' => 'Custom login'
         );
     }
 

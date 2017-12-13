@@ -1,10 +1,25 @@
+body{
+  background-color: white;
+
+}
+
+.center{
+  margin: auto;
+  display: block;
+}
+
+
+.generation-form{
+  margin: 10px 0 10px 0;
+}
 
 .page-template-page-pdf-test,.page-template-page-pdf-test #footer,.page-template-page-pdf-test #header {
     background-color: white;
-    width: 800px;
-        margin: auto;
+    width: 900px;
+        margin: 0 auto;
 
 }
+
 .page-template-page-pdf-test #footer{
     display: none;
 }
@@ -19,14 +34,52 @@
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     font-size: 22px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    line-height: 1.15;
 }
 
 .rotary-text .rotary-body-output{
-    font-family: "open_sansregular", sans-serif;
+    font-family: "Open Sans", sans-serif;
+    margin-top: 5px;
+
 }
 
 #main-output{
 
+}
+
+.pdf-date {
+    text-align: right;
+}
+
+.pdf-date p{
+    margin: 0;
+    font-weight: bold;
+    display: block;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 17px;
+}
+
+.pdf-header{
+}
+
+.grey-bottom-border{
+    border-bottom: 1px solid #eee;
+    margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
+
+}
+
+.grey-box{
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    width: 300px;
+    margin: 10px 0 10px 0;
 }
 
 .pdf-header img{
@@ -35,45 +88,85 @@
 }
 
 .main-output-region{
-    width: 800px;
+    width: 900px;
     margin: auto;
 }
 
 .rotary-output{
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
     border-left: black solid 1px;
-    height: 244px;
-    width: 244px;
+    height: 267px;
+    width: 277px;
     background-color: white;
     display: inline-block;
     vertical-align: top;
     margin: 17px;
+    margin-bottom: 16px;
+    overflow: hidden;
 }
 
 .rotary-output-wrapper{
+    position: relative;
     height: 100%;
-    width: 100%;
-    margin-left: 5px;
+    width: calc(100% - 10px);
+    margin-left: 10px;
     background-color: #f1f1f2;
+    box-sizing: border-box;
+    padding: 10px 10px 10px 10px;
+}
+
+
+.rotary-output-wrapper:hover > .approve-container{
+    display: block;
+    background-color: rgba(0, 0, 0, .75);
+    visibility: visible;
+    opacity: 1;
+}
+
+.approve-container{
+    padding: 5px;
+    box-sizing: border-box;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    -webkit-transition: opacity .2s ease-out;
+      -moz-transition: opacity .2s ease-out;
+      -o-transition: opacity .2s ease-out;
+      transition: opacity .2s ease-out;
+      opacity: 0;
+}
+
+.approve-container .slider-toggle{
+    height: 20px;
 }
 
 .white-bg{
     background-color: white;
 }
 
-.rotary-output:nth-child(1), .rotary-output:nth-child(4), .rotary-output:nth-child(7){
+.rotary-output:nth-child(1), .rotary-output:nth-child(2), .rotary-output:nth-child(3){
+  margin-top: 12px;
+}
+
+.rotary-output:nth-child(1), .rotary-output:nth-child(3n+1){
     margin-left: 0;
 }
 
-.rotary-output:nth-child(3), .rotary-output:nth-child(6), .rotary-output:nth-child(9){
+/*.rotary-output:nth-child(3), .rotary-output:nth-child(6), .rotary-output:nth-child(9){*/
+.rotary-output:nth-child(3n){
     margin-right: 0;
 }
 
 .rotary-body-output{
-    word-break: break-all;
-    padding: 0 0 2px 5px;
+    word-break: break-word;
+    padding: 0 0 2px 0px;
     box-sizing: border-box;
+    font-size: 17px;
 }
 
 .rotary-body-output p{
@@ -95,14 +188,16 @@
 }
 
 .headerbodytextimage .rotary-image-container{
-
+    width: 100%;
+    height: auto;
 }
 
 .headerbodytextimage .rotary-image-output{
+
     width: auto;
     height: auto;
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 /* header body test layout */
@@ -124,6 +219,10 @@
 }
 /*Stand alone image layout*/
 
+.standaloneimage .rotary-output-wrapper{
+    padding: 0;
+}
+
 .standaloneimage .rotary-body-output{
     display: none;
 }
@@ -137,18 +236,228 @@
 }
 
 .standaloneimage .rotary-image-output{
-    width: 100%;
     height: auto;
-    max-width: 240px;
-    max-height: 240px;
+    max-width: 100%;
     margin: auto;
 
 }
 
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-preview-output{
+  cursor: pointer;
+}
+
+.modal-preview-output .approve-container p{
+  text-align: center;
+}
+
+.place-holder-entry{
+    border: 1px dotted black;
+    text-align: center;
+    transition: background-color 0.1s ease-out;
+
+}
+
+.place-holder-entry:hover{
+    background-color: #404040;
+    cursor: pointer;
+}
+
+.place-holder-filled{
+  cursor: pointer;l
+}
+
+.place-holder-filled .approve-container{
+    text-align: center;
+}
+
+.modal-preview-output .approve-container p,
+.place-holder-filled .approve-container p,
+.place-holder-entry p{
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+}
+
+.modal-preview-output:hover .approve-container p,
+.place-holder-filled:hover .approve-container p,
+.place-holder-entry:hover p{
+    color: white;
+    text-decoration: underline;
+}
+
+.remove-placeholder.rotary-output{
+    border: 1px dotted black;
+}
+
 .pdf-footer{
-    background-color: #0d4c94;
+    background-color: rgb(13, 76, 148);
     text-align: center;
     color: white;
     padding: 10px 0px 10px 0px;
-    margin: 0px 0 0 0;
+    margin: 0px 0 10px 0;
+}
+
+.pdf-footer a:visted {
+    color: white;
+}
+
+
+
+.toggle{
+    padding: 10px 0 5px 0;
+    box-sizing: border-box;
+}
+
+.toggle h1{
+    color: white;
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid white;
+}
+
+.toggle-header label{
+    margin: 0 0 0 3px;
+    color: white;
+}
+
+.toggle-switch {
+  background-color: #ccc;
+  width: 80px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 34px;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 3px;
+  margin-top: 10px;
+  cursor: pointer;
+  -webkit-transition: background-color .2s ease-out;
+  -moz-transition: background-color .2s ease-out;
+  -o-transition: background-color .2s ease-out;
+  transition: background-color .2s ease-out;
+  vertical-align: middle;
+}
+
+
+.toggle-switch:hover:after {
+    border: 1px solid #aaa;
+}
+
+.active .toggle-switch{
+    background-color: green;
+}
+
+.toggle-switch:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  margin: 2px 0 0 3px;
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  border: 1px solid white;
+
+}
+.active .toggle-switch:after {
+  margin-left: 50px;
+}
+
+.toggle-label {
+  display: inline-block;
+  line-height: 30px;
+  font-weight: bold;
+  text-shadow: 0px 0px 5px black;
+  font-size: 14px;
+  vertical-align: middle;
+  margin-top: 10px;
+}
+
+.toggle-label-off {
+  color: red;
+}
+
+.active .toggle-label-off {
+  color: white;
+}
+
+.toggle-label-on {
+  color: white;
+}
+
+.active .toggle-label-on {
+  color: green;
+}
+
+.edit-post-container{
+    margin: auto;
+    margin-top: 10px;
+    margin-left: 3px;
+}
+
+.edit-post-container a{
+    color: white;
+    text-decoration: none;
+}
+
+.edit-post-container a:hover{
+    border-bottom: 1px solid white;
+}
+
+body.wait *, body.wait
+{
+    cursor: progress !important;
+}
+
+.admin-list li p{
+  margin-right: 10px;
+}
+
+.admin-list a{
+  color: rgb(13, 76, 148);
+  text-decoration: none;
 }

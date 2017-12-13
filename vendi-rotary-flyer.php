@@ -5,10 +5,16 @@ Version: 0.1
 */
 
 define( 'VENDI_ROTARY_FLYER_FILE', __FILE__ );
-define( 'VENDI_ROTARY_FLYER_DIR', dirname( __FILE__ ) );
-define( 'VENDI_ROTARY_PLUGIN_NAME', 'vendi-rotary-flyer');
+define( 'VENDI_ROTARY_FLYER_DIR', dirname( VENDI_ROTARY_FLYER_FILE ) );
 
+//Additional constants
+require_once VENDI_ROTARY_FLYER_DIR . '/includes/constants.php';
+
+//Auto-load code
 require_once VENDI_ROTARY_FLYER_DIR . '/includes/autoload.php';
 
-Vendi\RotaryFlyer\content_types::init();
-Vendi\RotaryFlyer\page_templater::init();
+//Hooks such as add_filter() and add_action()
+require_once VENDI_ROTARY_FLYER_DIR . '/includes/hooks.php';
+
+//Any misc code
+require_once VENDI_ROTARY_FLYER_DIR . '/includes/init.php';
