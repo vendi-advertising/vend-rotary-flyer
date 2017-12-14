@@ -34,7 +34,7 @@ if(isset($_GET['postid'])){
             //Get the default image SRC
             $rotary_image_src = wp_get_attachment_image_url(    $rotary_image[ 'ID' ], 'home-featured-service' );
 
-            $alt_bg = ' white-bg ';
+            $alt_bg = '';
 
             if(wp_check_filetype( $rotary_image_src)['ext'] != "png" && wp_check_filetype( $rotary_image_src)['ext'] != false){
                 $alt_bg = ' white-bg ';
@@ -51,8 +51,8 @@ if(isset($_GET['postid'])){
             $html_string .= '<div class="finalization-region">';
 
             if($rotary_layout == 'Stand-alone Image'){
-                $html_string .=  '<div class="rotary-output standaloneimage">';
-                $html_string .=  '<div class="rotary-output-wrapper '. $alt_bg .'">';
+                $html_string .=  '<div class="rotary-output standaloneimage white-bg ">';
+                $html_string .=  '<div class="rotary-output-wrapper  white-bg '. $alt_bg .'">';
                 $html_string .=      '<div class="rotary-image-container">';
                 if($rotary_image){
                     $html_string .=          '<img class="rotary-image-output" ';
@@ -76,8 +76,8 @@ if(isset($_GET['postid'])){
                 $html_string .=  '</div>';
             }
             else{
-                $html_string .=  '<div class="rotary-output headerbodytextimage '. $alt_bg .'">';
-                $html_string .=  '<div class="rotary-output-wrapper '. $alt_bg .'">';
+                $html_string .=  '<div class="rotary-output headerbodytextimage  white-bg '. $alt_bg .'">';
+                $html_string .=  '<div class="rotary-output-wrapper  white-bg '. $alt_bg .'">';
                 $html_string .=      '<div class="rotary-text">';
                 $html_string .=          '<h2 class="rotary-header-output">' . $rotary_header . '</h2>';
                 $html_string .=          '<div class="rotary-body-output">';

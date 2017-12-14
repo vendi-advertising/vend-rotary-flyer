@@ -184,9 +184,10 @@ class pdf_generator {
             $rotary_image_src = wp_get_attachment_image_url(    $rotary_image[ 'ID' ], 'home-featured-service' );
 
             $alt_bg = '';
-            if(wp_check_filetype( $rotary_image_src)['ext'] != "png" && wp_check_filetype( $rotary_image_src)['ext'] != false){
+            /*if(wp_check_filetype( $rotary_image_src)['ext'] != "png" && wp_check_filetype( $rotary_image_src)['ext'] != false){
                 $alt_bg = ' white-bg ';
-            }
+            }*/
+
 
             //Get additional srcsets
             $rotary_image_srcset = wp_get_attachment_image_srcset( $rotary_image[ 'ID' ], 'home-featured-service' );
@@ -201,8 +202,8 @@ class pdf_generator {
             }
 
             if($rotary_layout == 'Stand-alone Image'){
-                $html_string .=  '<div class="rotary-output standaloneimage">';
-                $html_string .=  '<div id="post-'. $post_id .'" class="rotary-output-wrapper '. $alt_bg .'">';
+                $html_string .=  '<div class="rotary-output standaloneimage white-bg ">';
+                $html_string .=  '<div id="post-'. $post_id .'" class="rotary-output-wrapper white-bg '. $alt_bg .'">';
                 $html_string .=  $toggleString;
                 $html_string .=      '<div class="rotary-image-container">';
                 if($rotary_image){
@@ -229,7 +230,7 @@ class pdf_generator {
             }
             else{
                 $html_string .=  '<div class="rotary-output headerbodytextimage '. $alt_bg .'">';
-                $html_string .=  '<div id="post-'. $post_id .'" class="rotary-output-wrapper '. $alt_bg .'">';
+                $html_string .=  '<div id="post-'. $post_id .'" class="rotary-output-wrapper white-bg '. $alt_bg .'">';
                 $html_string .=  $toggleString;
                 $html_string .=      '<div class="rotary-text">';
                 $html_string .=          '<h2 class="rotary-header-output">' . $rotary_header . '</h2>';
