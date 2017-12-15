@@ -41,7 +41,7 @@ body{
 .rotary-text .rotary-body-output{
     font-family: "Open Sans", sans-serif;
     margin-top: 5px;
-
+    line-height: 1.35;
 }
 
 #main-output{

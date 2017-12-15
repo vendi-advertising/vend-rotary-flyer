@@ -10,6 +10,7 @@ class login
                     'admin_init',
                     function()
                     {
+
                         $user = wp_get_current_user();
                         if( ! $user instanceOf \WP_User )
                         {
@@ -21,10 +22,10 @@ class login
                         {
                             return;
                         }
-
                         //If the user is one of our custom roles then kick them to the dashboard
                         if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles ) )
                         {
+
                             wp_safe_redirect( VENDI_ROTARY_PDF_CREATION);
                             exit;
                         }
@@ -46,9 +47,9 @@ class login
 
                         //Send Rotary Users to the PDF creation screen
                         if(isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles )){
+
                             return VENDI_ROTARY_PDF_CREATION;
                         }
-
                         //Pass through for everyone else
                         return $redirect_to;
                     },

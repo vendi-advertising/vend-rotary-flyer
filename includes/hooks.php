@@ -40,7 +40,7 @@ add_action(
     <!-- begin footer -->
     <div id="footer">
         <div class="footer-region">
-            <div class="pdf-footer">Share an announcement with your Rotary community. Weekly space available at: rotarycluboflacrosse.org </div>
+            <div class="pdf-footer">Share an announcement with your Rotary community. Weekly space available at: Rotarynewswheel.org </div>
             <div> Web app by <a href="https://www.vendiadvertising.com" >Vendi </a></div>
         </div>
     </div>
@@ -54,7 +54,9 @@ add_action(
             'vendi/rotary-flyer/body-header',
             function()
             {
-                ?>
+
+
+    ?>
     <!-- begin header -->
     <div id="header" role="banner">
         <div class="header-region">

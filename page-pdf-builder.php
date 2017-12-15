@@ -18,7 +18,7 @@ if($pdf_render_mode){
     $date_organized_posts = Vendi\RotaryFlyer\pdf_generator::get_entries_sorted_by_date(true);
     $date = str_replace( "_", "/", $date);
     $result = Vendi\RotaryFlyer\pdf_generator::generate_for_date($date_organized_posts[$date], $date, true);
-    file_put_contents(VENDI_ROTARY_FLYER_DIR . '/text-html2.html',$result['html'] );
+    //file_put_contents(VENDI_ROTARY_FLYER_DIR . '/text-html2.html',$result['html'] );
     // echo $result['html'];
     // die;
     ?>

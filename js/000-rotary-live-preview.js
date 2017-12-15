@@ -24,11 +24,13 @@
                 console.log(e['key']);
 
             if(e['key'] == 'Enter'){
-                document.getElementById('rotary-body-preview').innerHTML = this.value+'<br/>';
-
+                console.log('27',this.value);
+                document.getElementById('rotary-body-preview').innerHTML = this.value.replace(/\r?\n/g, '<br />');
+                //$current_value = document.getElementById('rotary-body-preview').innerHTML;
+                //document.getElementById('rotary-body-preview').innerHTML = $current_value +
             }
             else{
-                document.getElementById('rotary-body-preview').innerHTML = this.value;
+                document.getElementById('rotary-body-preview').innerHTML = this.value.replace(/\r?\n/g, '<br />');
             }
         }
 
