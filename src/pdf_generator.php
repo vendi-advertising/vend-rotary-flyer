@@ -125,10 +125,9 @@ class pdf_generator {
             $html_string .= '<img src="'. VENDI_ROTARY_FLYER_DIR .'/images/RotaryAds_top_graphic.jpg" alt"header-image" />';
             $html_string .= '</div>';
         }
-        /*dump(str_replace('/','-', $week));
-        $date_string_to_time = strtotime(str_replace($week,'/','-'));
-        $newDate = date("F j, Y", strtotime($date_string_to_time));*/
-        $html_string .= '<div data-date="' . $week . '" class="pdf-date"><p> Week of: ' .  $week . '</p></div>';
+        $date_string_to_time = strtotime($week);
+        $newDate = date("F j, Y", $date_string_to_time);
+        $html_string .= '<div data-date="' . $week . '" class="pdf-date"><p> Week of: ' .  $newDate . '</p></div>';
         $html_string .= '<div class="main-output-region">';
 
 
@@ -401,8 +400,11 @@ class pdf_generator {
         $html_string .= '<img src="data:' . mime_content_type( VENDI_ROTARY_FLYER_DIR .'/images/RotaryAds_graphic_header.png' ) . ';base64,' . base64_encode( file_get_contents( VENDI_ROTARY_FLYER_DIR .'/images/RotaryAds_graphic_header.png' ) ) . '" alt="header-image" />';
 
         //$src = 'src="data: '.mime_content_type($tmpfname).';base64,'.$imageData . '" ';
+
+        $date_string_to_time = strtotime($week);
+        $newDate = date("F j, Y", $date_string_to_time);
         $html_string .= '</div>';
-        $html_string .= '<div class="pdf-date"><p> WEEK OF: ' . $week . '</p></div>';
+        $html_string .= '<div class="pdf-date"><p> WEEK OF: ' . $newDate . '</p></div>';
         $html_string .= '<div class="main-output-region">';
 
 
@@ -424,13 +426,12 @@ class pdf_generator {
             $rotary_header = get_field('rotary_header');
 //            $rotary_body = str_replace('–', '&ndash;', get_field('rotary_body'));
             $rotary_body = htmlentities( get_field('rotary_body'));
-            $rotary_body = str_replace("&lt;br /&gt;","<br />",$rotary_body);
 
             $rotary_image = get_field('rotary_image');
             //Get the default image SRC
             $rotary_image_src = wp_get_attachment_image_url(    $rotary_image[ 'ID' ], 'home-featured-service' );
 
-            $alt_bg = ' white-bg ';
+            $alt_bg = '';
             if(wp_check_filetype( $rotary_image_src)['ext'] != "png" && wp_check_filetype( $rotary_image_src)['ext'] != false){
                 $alt_bg = ' white-bg ';
             }
