@@ -1,0 +1,30 @@
+.response-row{
+
+}
+
+.response-row + .response-row{
+    border-top: 1px solid #eee;
+}
+
+.response-col{
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.response-col-name{
+    width: 70%;
+}
+
+.response-col-ads{
+    width: 15%;
+}
+
+.response-col-price{
+    width: 15%;
+}
+
+.header-row{
+    background-color: #0d4c94;
+    color: white;
+}

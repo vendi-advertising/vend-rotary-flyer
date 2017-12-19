@@ -246,3 +246,24 @@ function vendi_rotary_register_ajax_js( $file, $dependencies = false, $footer = 
 
     wp_localize_script( basename( $file, '.js' ), 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));
 }
+
+/**
+ * Load jQuery datepicker.
+ *
+ * By using the correct hook you don't need to check `is_admin()` first.
+ * If jQuery hasn't already been loaded it will be when we request the
+ * datepicker script.
+ */
+function wpse_enqueue_datepicker() {
+    // Load the datepicker script (pre-registered in WordPress).
+    wp_enqueue_script( 'jquery-ui-datepicker' );
+
+    wp_register_style( 'jquery-ui', 'https://rotary-pdfs.helix.vendiadvertising.com/wp-content/plugins/advanced-custom-fields-pro/assets/inc/datepicker/jquery-ui.min.css?ver=1.11.4' );
+    wp_enqueue_style( 'jquery-ui' );
+
+    wp_register_style( 'jquery-ui-timepicker', 'https://rotary-pdfs.helix.vendiadvertising.com/wp-content/plugins/advanced-custom-fields-pro/assets/inc/timepicker/jquery-ui-timepicker-addon.min.css?ver=1.6.1' );
+    wp_enqueue_style( 'jquery-ui-timepicker' );
+
+    wp_register_style( 'jquery-ui2', 'https://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css' );
+    wp_enqueue_style( 'jquery-ui2' );
+}

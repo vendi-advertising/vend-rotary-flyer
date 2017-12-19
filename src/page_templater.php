@@ -82,7 +82,8 @@ class page_templater {
             'page-pdf-builder.php'  => 'pdf-builder',
             'page-purchase-credits.php' => 'Purchase Credits',
             'page-credits-confirmation.php' => 'Credits Purchase Confirmation',
-            'page-custom-login.php' => 'Custom login'
+            'page-custom-login.php' => 'Custom login',
+            'page-member-costs.php' => 'member-costs'
         );
     }
 

@@ -76,13 +76,8 @@ else if($post_status == 'pending'){
 }
 else{
     ?>
-    <div class="grey-bottom-border">
-        <h1> Not enough credits </h1>
-        <p> You do not have enough credits to submit a posting at the moment. If you wish, you may purchase credits.</p>
-    </div>
 
-    <a class="steps-button" href="<?php echo VENDI_ROTARY_CREDITS_PURCHASE_PAGE; ?>"> Purchase credits </a>
-    <?php
+
 }
 
 ?>

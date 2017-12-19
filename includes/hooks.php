@@ -32,6 +32,57 @@ add_action(
             }
         );
 
+//this is the ajax action for getting all the costs of the members for a given date range
+add_action(
+            'wp_ajax_query_costs',
+            function()
+            {
+                global $wpdb; // this is how you get access to the database
+
+                $from_date = $_POST['from_date'];
+                $to_date = $_POST['to_date'];
+                $from_parts = explode('/',$from_date);
+                $to_parts = explode('/',$to_date);
+                $args = array(
+                'post_type' => 'vendi-rotary-flyer',
+                'post_status' => 'publish',
+                'posts_per_page'   => -1,
+                'date_query' =>
+                        array(
+                            'after'     => array('year'=>$from_parts[2],
+                                                 'month'=>$from_parts[0],
+                                                 'day'=>$from_parts[1]
+                                                ),
+                            'before'    => array('year'=>$to_parts[2],
+                                                 'month'=>$to_parts[0],
+                                                 'day'=>$to_parts[1]
+                                                ),
+                            'inclusive' => true,
+                        )
+
+                );
+
+                $query = new WP_Query($args);
+                $user_cost_arr = array();
+                while ( $query->have_posts()) : $query->the_post();
+                    $author = get_the_author();
+                    if(array_key_exists ($author , $user_cost_arr )){
+                        $user_cost_arr[$author]['ads_created']++;
+                        $user_cost_arr[$author]['amount_owed'] = $user_cost_arr[$author]['ads_created']*10;
+
+                    }
+                    else{
+                        $user_cost_arr[$author]['ads_created'] = 1;
+                        $user_cost_arr[$author]['amount_owed'] = $user_cost_arr[$author]['ads_created']*10;
+                    }
+                endwhile;
+
+                echo json_encode($user_cost_arr);
+
+                exit;
+            }
+        );
+
 add_action(
             'vendi/rotary-flyer/footer',
             function()
