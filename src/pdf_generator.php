@@ -182,7 +182,7 @@ class pdf_generator {
             //Get the default image SRC
             $rotary_image_src = wp_get_attachment_image_url(    $rotary_image[ 'ID' ], 'home-featured-service' );
 
-            $alt_bg = '';
+            $alt_bg = ' white-bg ';
             /*if(wp_check_filetype( $rotary_image_src)['ext'] != "png" && wp_check_filetype( $rotary_image_src)['ext'] != false){
                 $alt_bg = ' white-bg ';
             }*/
@@ -426,12 +426,12 @@ class pdf_generator {
             $rotary_header = get_field('rotary_header');
 //            $rotary_body = str_replace('–', '&ndash;', get_field('rotary_body'));
             $rotary_body = htmlentities( get_field('rotary_body'));
-
+            $rotary_body = str_replace("&lt;br /&gt;","<br />",$rotary_body);
             $rotary_image = get_field('rotary_image');
             //Get the default image SRC
             $rotary_image_src = wp_get_attachment_image_url(    $rotary_image[ 'ID' ], 'home-featured-service' );
 
-            $alt_bg = '';
+            $alt_bg = ' white-bg ';
             if(wp_check_filetype( $rotary_image_src)['ext'] != "png" && wp_check_filetype( $rotary_image_src)['ext'] != false){
                 $alt_bg = ' white-bg ';
             }
