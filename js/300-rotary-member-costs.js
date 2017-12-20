@@ -13,6 +13,7 @@
                                     'to_date': to_date
                                 }
                 jQuery('html, body').addClass('wait');
+                jQuery('#rotary-owed-results').html('<h2> Loading results... </h2>');
                 if(from_date == '' || to_date == '' ){
                     jQuery('#rotary-owed-results').html('<h2> Please fill out all fields </h2>');
                     jQuery('html, body').removeClass('wait');
