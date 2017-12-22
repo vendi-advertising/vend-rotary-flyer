@@ -75,9 +75,54 @@ else if($post_status == 'pending'){
      <?php
 }
 else{
+
+$update_post = array(
+    'ID' => $post_id,
+    'post_status' => 'publish'
+);
+
+wp_update_post( $update_post );
+
+
     ?>
 
 
+<div class="main-messaging">
+            <h1> Thank you! </h1>
+            <p> Your ad has been updated. </p>
+        </div>
+            <?php
+            $user = wp_get_current_user();
+
+            if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
+                {
+                    $dashboard = VENDI_ROTARY_ADMIN_DASHBOARD;
+                }
+                else if(isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles )){
+                    $dashboard = VENDI_ROTARY_USER_DASHBOARD;
+                }
+
+            ?>
+
+            <a class="steps-button" href="<?php echo VENDI_ROTARY_PDF_CREATION; ?>"> Create More Ads </a>
+
+            <?php
+
+            if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
+                {
+
+             ?>
+            <a class="steps-button" href="<?php echo $dashboard; ?>"> Return to Dashboard </a>
+
+            <?php
+                }
+
+            ?>
+
+            <a class="steps-button" href="<?php echo wp_logout_url(); ?>"> Log Out </a>
+
+
+<?php
 }
 
 ?>
@@ -85,4 +130,4 @@ else{
 </div>
 <?php
 
-get_footer(); ?>
+get_footer();

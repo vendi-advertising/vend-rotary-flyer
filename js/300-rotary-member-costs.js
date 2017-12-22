@@ -15,7 +15,7 @@
                 jQuery('html, body').addClass('wait');
                 jQuery('#rotary-owed-results').html('<h2> Loading results... </h2>');
                 if(from_date == '' || to_date == '' ){
-                    jQuery('#rotary-owed-results').html('<h2> Please fill out all fields </h2>');
+                    jQuery('#rotary-owed-results').html('<h2> Please fill out all fields in the form </h2>');
                     jQuery('html, body').removeClass('wait');
                 }
                 else{
@@ -25,18 +25,18 @@
                         jQuery('#rotary-owed-results').html('');
                         var html_string = '';
                         if(!Array.isArray(response)){
-                            html_string = '<h2> Members who owe money </h2>';
+                            html_string = '<h2> Charges for ads created between '+from_date+' and '+to_date+' </h2>';
                             html_string += '<div class="response-row header-row">'+
                                         '<div class="response-col response-col-name"> User Name </div>'+
-                                        '<div class="response-col response-col-ads"> Number of Ads </div>'+
-                                        '<div class="response-col response-col-ads"> Amount Owed </div>'+
+                                        '<div class="response-col response-col-ads"> Number of Ads Created</div>'+
+                                        '<div class="response-col response-col-price"> Amount Owed </div>'+
                                         '</div>';
                             for (var property in response) {
                                 if (response.hasOwnProperty(property)) {
                                     html_string += '<div class="response-row">';
                                     html_string += '<div class="response-col response-col-name">'+ property +'</div>';
                                     html_string += '<div class="response-col response-col-ads">'+ response[property]['ads_created'] +'</div>';
-                                    html_string += '<div class="response-col response-col-cost">$'+ response[property]['amount_owed'] +'</div>';
+                                    html_string += '<div class="response-col response-col-price">$'+ response[property]['amount_owed'] +'</div>';
                                     html_string += '</div>';
                                 }
                             }

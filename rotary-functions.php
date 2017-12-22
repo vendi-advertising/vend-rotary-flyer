@@ -113,7 +113,7 @@ function my_acf_input_admin_footer() {
               var todays_date = new Date()
               var todays_day = todays_date.getDay();
               todays_date = todays_date.setHours(0,0,0,0);
-              var at_least_seven_days_out = (date - todays_date) > (7*24*60*60*1000);
+              var at_least_seven_days_out = (date - todays_date) > (5*24*60*60*1000);
               var day = date.getDay();
               var return_statement;
               var alreadyPicked = Array();
@@ -153,7 +153,7 @@ function my_acf_input_admin_footer() {
                 return_statement = [false, '', 'This date is in the past.'];
               }
               else if(!at_least_seven_days_out){
-                return_statement = [false, '', 'You must register for a date at least 7 days in advance.'];
+                return_statement = [false, '', 'You must register for a date at least 4 days in advance.'];
               }
               else{
                 return_statement = [false, '', 'Ads do not run on this day.'];

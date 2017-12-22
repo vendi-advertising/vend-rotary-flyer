@@ -42,7 +42,10 @@ endwhile;
 
         <label for="rotary-to-date">To</label>
         <input id="rotary-to-date" type="text">
-        <input id="rotary-query-owed" class="steps-button" type="submit" value="Check Balances"><a class="steps-button" href="<?php echo VENDI_ROTARY_ADMIN_DASHBOARD; ?>"> Return to Dashboard </a>
+        <input id="rotary-query-owed" class="steps-button" type="submit" value="Check Balances">
+        <a class="steps-button" href="<?php echo VENDI_ROTARY_ADMIN_DASHBOARD; ?>"> Return to Dashboard </a>
+        <a class="steps-button" href="<?php echo wp_logout_url(); ?>"> Log Out </a>
+
         <hr>
         <div id="rotary-owed-results">
 

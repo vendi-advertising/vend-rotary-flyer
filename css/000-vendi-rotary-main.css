@@ -64,6 +64,10 @@ h1 a:hover{
 #preview-region{
 }
 
+.admin-options-region{
+    margin-bottom: 40px;
+}
+
 .rotary-preview{
     font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
@@ -258,4 +262,11 @@ td.ui-datepicker-unselectable.ui-state-disabled span{
 
 .footer-region {
     color: rgb(12, 76, 148);
+}
+
+@media (max-width: 768px) {
+    .card-half{
+        width: 100%;
+    }
+
 }
