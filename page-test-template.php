@@ -22,9 +22,11 @@ vendi_rotary_register_plugin_js( '100-floating-preview.js' );
 
 if(isset($_GET['post_id'])){
     $post_id = $_GET['post_id'];
+    $header_text = 'Edit this ad';
 }
 else{
     $post_id = 'new_post';
+    $header_text = 'Create an ad';
 }
 //test comment
 
@@ -32,7 +34,7 @@ else{
 
 <div id="main-content">
     <div class="main-content-region">
-        <h1> Create an ad </h1>
+        <h1> <?php echo $header_text; ?> </h1>
         <?php /* The loop */
 
         ?>

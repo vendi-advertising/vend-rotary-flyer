@@ -1,8 +1,18 @@
 (function() {
 
     jQuery( document ).ready(function() {
-        jQuery('#rotary-from-date').datepicker();
-        jQuery('#rotary-to-date').datepicker();
+        jQuery('#rotary-from-date').datepicker({
+            "showButtonPanel": true,
+            "changeMonth": true,
+            "changeYear": true
+
+        });
+        jQuery('#rotary-to-date').datepicker({
+            "showButtonPanel": true,
+            "changeMonth": true,
+            "changeYear": true
+        });
+        jQuery('#ui-datepicker-div').wrap('<div class="acf-ui-datepicker"/>');
         var ad_cost = 10;
         jQuery('#rotary-query-owed').click(function(){
                 var from_date = jQuery('#rotary-from-date').val();

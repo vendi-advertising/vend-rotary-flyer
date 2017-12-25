@@ -9,7 +9,7 @@ require 'rotary-functions.php';
 get_header();
 vendi_rotary_register_ajax_js( '300-rotary-member-costs.js', array('jquery-ui-datepicker') );
 wpse_enqueue_datepicker();
-
+vendi_rotary_register_outside_css('rotary-date-picker-css',  plugins_url( '/css-assets/datepicker.css', VENDI_ROTARY_FLYER_FILE ));
 $args = array(
                 'post_type' => 'vendi-rotary-flyer',
                 'post_status' => 'publish',

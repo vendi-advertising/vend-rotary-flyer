@@ -18,7 +18,7 @@
         if(rotary_body.value){
             document.getElementById('rotary-body-preview').innerHTML = rotary_body.value;
         }
-
+    
         rotary_body = rotary_body.onkeyup = function(e){
             console.log(e);
                 console.log(e['key']);

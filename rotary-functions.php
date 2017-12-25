@@ -113,7 +113,7 @@ function my_acf_input_admin_footer() {
               var todays_date = new Date()
               var todays_day = todays_date.getDay();
               todays_date = todays_date.setHours(0,0,0,0);
-              var at_least_seven_days_out = (date - todays_date) > (5*24*60*60*1000);
+              var at_least_seven_days_out = (date - todays_date) > (2*24*60*60*1000);
               var day = date.getDay();
               var return_statement;
               var alreadyPicked = Array();
@@ -152,7 +152,7 @@ function my_acf_input_admin_footer() {
               else if(date <= todays_date){
                 return_statement = [false, '', 'This date is in the past.'];
               }
-              else if(!at_least_seven_days_out){
+              else if(day == 4 && !at_least_seven_days_out){
                 return_statement = [false, '', 'You must register for a date at least 4 days in advance.'];
               }
               else{
@@ -197,7 +197,7 @@ function my_acf_input_admin_footer() {
 }
 
 add_action('acf/input/admin_footer', 'my_acf_input_admin_footer');
-
+///wp-content/plugins/advanced-custom-fields-pro/assets/inc/datepicker/jquery-ui.min.css?ver=1.11.4
 
 function vendi_rotary_register_plugin_css( $file, $media = 'all' )
 {

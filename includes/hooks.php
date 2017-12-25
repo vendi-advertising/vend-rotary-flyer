@@ -224,3 +224,17 @@ if ( $GLOBALS['pagenow'] === 'wp-login.php' ) {
                 }
             );
 }
+
+add_filter( 'show_admin_bar' , 'handle_admin_bar');
+
+function handle_admin_bar($content) {
+     // 'manage_options' is a capability assigned only to administrators
+     // here, the check for the admin dashboard is not necessary
+
+     if (!current_user_can('manage_options')) {
+        return false;
+     }
+     else{
+        return true;
+     }
+}
