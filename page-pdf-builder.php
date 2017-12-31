@@ -28,7 +28,7 @@ if($pdf_render_mode){
         <h1> PDF generated </h1>
         <p> The Rotary Flyer PDF for <?php echo $date; ?> has been generated. Preview and print the PDF using the button below or return to the dashboard. </p>
     </div>
-    <a href="<?php echo $result['link']; ?>" class="steps-button"> Flyer PDF </a>            <a class="steps-button" href="<?php echo VENDI_ROTARY_ADMIN_DASHBOARD; ?>"> Return to Dashboard </a>
+    <a href="<?php echo $result['link']; ?>" class="steps-button"> Flier PDF </a>            <a class="steps-button" href="<?php echo VENDI_ROTARY_ADMIN_DASHBOARD; ?>"> Return to Dashboard </a>
 
 </div>
     <?php

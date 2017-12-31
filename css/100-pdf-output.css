@@ -8,6 +8,10 @@ body{
   display: block;
 }
 
+.width-auto{
+  width: auto;
+  display: inline-block;
+}
 
 .generation-form{
   margin: 10px 0 10px 0;

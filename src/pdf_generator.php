@@ -114,7 +114,7 @@ class pdf_generator {
     public static function generate_preview_for_date($id_arr, $week, $pdf_wrapper=false){
         $args = array(
             'post_type' => 'vendi-rotary-flyer',
-            'post_status' => array('publish', 'pending'),
+            'post_status' => array('publish'),
             'post__in'      => $id_arr,
         );
         $loop = new \WP_Query( $args );
@@ -172,7 +172,10 @@ class pdf_generator {
             $post_date = str_replace( "/", "_", $week);
             $form = '<form class="generation-form" method="post" action="'. VENDI_ROTARY_PDF_GENERATION_PAGE .'">
                       <input type="hidden" type="text" id="pdf_date" name="pdf_date" value="'.$post_date.'">
-                      <input class="center steps-button" type="submit" value="Generate PDF">
+                      <div class="acf-form-submit">
+                          <input class="steps-button" type="submit" value="Generate PDF">
+                          <a class="steps-button" href="'. wp_logout_url() .'"> Log Out </a>
+                      </div>
                     </form>';
 
             $rotary_layout = get_field('rotary_layout');
@@ -470,8 +473,8 @@ class pdf_generator {
             //
 
             if($rotary_layout == 'Stand-alone Image'){
-                $html_string .=  '<div class="rotary-output standaloneimage">';
-                $html_string .=  '<div id="post-'. $post_id .'" class="rotary-output-wrapper '. $alt_bg .'">';
+                $html_string .=  '<div class="rotary-output standaloneimage white-bg ">';
+                $html_string .=  '<div id="post-'. $post_id .'" class="rotary-output-wrapper white-bg '. $alt_bg .'">';
                 $html_string .=  $toggleString;
                 $html_string .=      '<div class="rotary-image-container">';
                 if($rotary_image){

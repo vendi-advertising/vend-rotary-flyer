@@ -112,8 +112,10 @@ add_action(
     <div id="header" role="banner">
         <div class="header-region">
             <div class="header-wrapper">
-                <h1> Rotary Club of La Crosse </h1>
-                <h2> NEWS WHEEL </h2>
+                <div class="header-text">
+                  <h1> Rotary Club of La Crosse </h1>
+                  <h2> NEWS WHEEL </h2>
+                </div>
                 <img class="logo" src="<?php echo VENDI_ROTARY_WP_PLUGIN_DIR_URL; ?>images/Rotary_Gear.png" alt="Rotary News Wheel Logo" />
             </div>
             <div class="lower-ribbon">

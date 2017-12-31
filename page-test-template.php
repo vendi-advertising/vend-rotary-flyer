@@ -59,7 +59,7 @@ else{
                     ),
                     'uploader' => 'wp',
                     'return' => home_url('thank-you'),
-                    'html_submit_button'    => '<input type="submit" class="acf-button button button-primary button-large" value="%s" />'
+                    'html_submit_button'    => '<input type="submit" class="acf-button button button-primary button-large" value="%s" /> <a class="steps-button" href="' . wp_logout_url() .'"> Log Out </a>'
                 ));
                 ?>
                 </div>

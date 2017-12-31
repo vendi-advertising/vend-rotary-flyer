@@ -118,7 +118,7 @@ function my_acf_input_admin_footer() {
               var return_statement;
               var alreadyPicked = Array();
               var date_compare_string = str_pad((date.getMonth()+1))+'/'+str_pad(date.getDate())+'/'+date.getFullYear();
-              var max_ad_count = 9;
+              var max_ad_count = 8;
 
               $('.hasDatepicker').each(function(){
                 if($(this).context.value !== ''){
@@ -136,7 +136,7 @@ function my_acf_input_admin_footer() {
                     if(dateObjectArray.hasOwnProperty(date_compare_string) && dateObjectArray[date_compare_string]['count'] >= max_ad_count){
                         console.log(dateObjectArray[date_compare_string]['count'], '125');
 
-                        return_statement = [false, '','There are already '+ max_ad_count +' ad slots filled for this day.'];
+                        return_statement = [false, '','There are already '+ (max_ad_count+1) +' ad slots filled for this day.'];
                     }
 
                     else{

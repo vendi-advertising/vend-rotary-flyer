@@ -53,7 +53,7 @@
                             html_string += '<hr>';
                         }
                         else{
-                            html_string = '<h2> No ads found for this range </h2>';
+                            html_string = '<h2> No ads found between '+from_date+' and '+to_date+' </h2>';
                         }
                             jQuery('#rotary-owed-results').html(html_string);
 

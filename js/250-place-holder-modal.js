@@ -36,30 +36,7 @@
 
         jQuery('.modal-preview-output').each(function(){
             jQuery(this).click(function(){
-                /*var savedhtml = jQuery(placeholder_id).html();
-                jQuery(placeholder_id).html(jQuery(this).html());
-                if(jQuery(this).hasClass('standaloneimage')){
-                    jQuery(placeholder_id).addClass('standaloneimage');
-                }
-                else if(jQuery(this).hasClass('headerbodytextimage')){
-                    jQuery(placeholder_id).addClass('headerbodytextimage');
-                }
-                else if(jQuery(this).hasClass('headerbodytext')){
-                    jQuery(placeholder_id).addClass('headerbodytext');
-                }
-                jQuery(placeholder_id).removeClass('place-holder-entry');
-                jQuery(placeholder_id).addClass('place-holder-filled');
 
-                var admin_html = '<p> Change Placeholder </p>';
-
-                jQuery(placeholder_id).find('.approve-container').html(admin_html);
-                modal.style.display = "none";
-                placeholder_arr[slot] = parseInt(jQuery(this).attr('data-id'));
-                jQuery('#placeholder_id_json').val(JSON.stringify(placeholder_arr));*/
-
-                //
-                //new code
-                //
                 var placeholder_id = parseInt(jQuery(this).attr('data-id'));
                 var date = jQuery('.pdf-date').attr('data-date');
                 var data = {
