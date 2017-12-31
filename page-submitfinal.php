@@ -51,6 +51,18 @@ if($post_status != 'publish' && $post_id != ''){
             ?>
 
             <a class="steps-button" href="<?php echo VENDI_ROTARY_PDF_CREATION; ?>"> Create More Ads </a>
+            <?php
+
+            if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
+                {
+
+             ?>
+            <a class="steps-button" href="<?php echo $dashboard; ?>"> Return to Dashboard </a>
+
+            <?php
+                }
+
+            ?>
             <a class="steps-button" href="<?php echo wp_logout_url(); ?>"> Log Out </a>
 <?php
 }
@@ -68,14 +80,13 @@ else if($post_status == 'pending'){
     ?>
     <div class="grey-bottom-border">
         <h1> Thank you! </h1>
-        <p> Your post has already been submitted, and will be approved by an administrator. </p>
+        <p> Your ad has been submitted. You will be billed with your next invoice for the number of ads purchased. </p>
     </div>
 
         <a class="steps-button" href="<?php echo $dashboard; ?>"> Return to Dashboard </a>
      <?php
 }
 else{
-
 $update_post = array(
     'ID' => $post_id,
     'post_status' => 'publish'

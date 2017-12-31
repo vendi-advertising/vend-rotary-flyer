@@ -23,8 +23,13 @@ if(isset($_GET['date'])){
     $date = $_GET['date'];
     $date_organized_posts = Vendi\RotaryFlyer\pdf_generator::get_entries_sorted_by_date(true);
     $date = str_replace( "_", "/", $date);
-    echo Vendi\RotaryFlyer\pdf_generator::generate_preview_for_date($date_organized_posts[$date], $date);
 
+    if(array_key_exists ( $date, $date_organized_posts )){
+    	echo Vendi\RotaryFlyer\pdf_generator::generate_preview_for_date($date_organized_posts[$date], $date);
+	}
+	else{
+		echo Vendi\RotaryFlyer\pdf_generator::generate_preview_for_date(array(), $date);
+	}
 }
 else{
     Vendi\RotaryFlyer\pdf_generator::generate();

@@ -131,15 +131,23 @@ class pdf_generator {
         $html_string .= '<div class="main-output-region">';
 
 
-
         $post_count = 0;
         $post_limit = 9;
+                    $post_date = str_replace( "/", "_", $week);
+        
+        $form = '<form class="generation-form" method="post" action="'. VENDI_ROTARY_PDF_GENERATION_PAGE .'">
+                      <input type="hidden" type="text" id="pdf_date" name="pdf_date" value="'.$post_date.'">
+                      <div class="acf-form-submit">
+                          <input class="steps-button" type="submit" value="Generate PDF">
+                          <a class="steps-button" href="'. wp_logout_url() .'"> Log Out </a>
+                      </div>
+                    </form>';
+
 
         while ( $loop->have_posts() && $post_count < $post_limit) : $loop->the_post();
 
             $post_id       = trim(get_the_ID());
             $post_status   = get_post_status( $post_id );
-
             if($post_status == 'publish'){
                 $toggleString = '<div class="approve-container">
 
@@ -169,14 +177,7 @@ class pdf_generator {
                     </div>';
             }
 
-            $post_date = str_replace( "/", "_", $week);
-            $form = '<form class="generation-form" method="post" action="'. VENDI_ROTARY_PDF_GENERATION_PAGE .'">
-                      <input type="hidden" type="text" id="pdf_date" name="pdf_date" value="'.$post_date.'">
-                      <div class="acf-form-submit">
-                          <input class="steps-button" type="submit" value="Generate PDF">
-                          <a class="steps-button" href="'. wp_logout_url() .'"> Log Out </a>
-                      </div>
-                    </form>';
+            
 
             $rotary_layout = get_field('rotary_layout');
             $rotary_header = get_field('rotary_header');
@@ -551,10 +552,10 @@ class pdf_generator {
         $snappy->setOption('margin-top', 0);
         $snappy->setOption('margin-left', 5);
         $snappy->setOption('margin-right', 3);
-        $snappy->generateFromHtml($html_string, VENDI_ROTARY_FLYER_DIR . '/pdfs/bill-1234.pdf', array(), $overwrite = true);
+        $snappy->generateFromHtml($html_string, VENDI_ROTARY_FLYER_DIR . '/pdfs/generated-pdf.pdf', array(), $overwrite = true);
         $return_arr = array(
             'html' => $html_string,
-            'link' => plugins_url() . '/vendi-rotary-flyer/pdfs/bill-1234.pdf'
+            'link' => plugins_url() . '/vendi-rotary-flyer/pdfs/generated-pdf.pdf'
         );
         return $return_arr;
 
