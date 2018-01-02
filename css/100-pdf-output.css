@@ -267,6 +267,8 @@ body{
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    max-height: 80vh;
+    overflow-y: scroll;
 }
 
 /* The Close Button */
@@ -286,6 +288,10 @@ body{
 
 .modal-preview-output{
   cursor: pointer;
+  margin-right: 12px !important;
+  margin-left: 12px !important;
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
 }
 
 .modal-preview-output .approve-container p{

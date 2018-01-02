@@ -134,7 +134,7 @@ class pdf_generator {
         $post_count = 0;
         $post_limit = 9;
                     $post_date = str_replace( "/", "_", $week);
-        
+
         $form = '<form class="generation-form" method="post" action="'. VENDI_ROTARY_PDF_GENERATION_PAGE .'">
                       <input type="hidden" type="text" id="pdf_date" name="pdf_date" value="'.$post_date.'">
                       <div class="acf-form-submit">
@@ -177,7 +177,7 @@ class pdf_generator {
                     </div>';
             }
 
-            
+
 
             $rotary_layout = get_field('rotary_layout');
             $rotary_header = get_field('rotary_header');
