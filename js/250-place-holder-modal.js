@@ -12,6 +12,8 @@
                 placeholder_id = jQuery(this);
                 entry_id = jQuery(this).attr('id');
                 slot = jQuery(this).attr('data-slot');
+                jQuery('body').addClass('modal-open');
+
                 jQuery('#placeholderModal').show();
             });
         });
@@ -25,12 +27,16 @@
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
             modal.style.display = "none";
+            jQuery('body').removeClass('modal-open');
+
         }
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
+                jQuery('body').removeClass('modal-open');
+
             }
         }
 
@@ -87,6 +93,7 @@
                     }
 
                     modal.style.display = "none";
+                    jQuery('body').removeClass('modal-open');
 
                     jQuery('html, body').removeClass('wait');
                 });
