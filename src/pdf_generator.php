@@ -394,6 +394,10 @@ class pdf_generator {
             font-size: 13px;
             text-align: center;
         }
+        .footer-region a{
+            color: rgb(12, 76, 148);
+        }
+
         </style>
         <base href="'. get_site_url() .'/" />
         </head>
@@ -531,7 +535,7 @@ class pdf_generator {
             $html_string .= "\n";
             $post_count++;
         endwhile;
-        $html_string .= '    <div><div class="pdf-footer"> Share an announcement with your Rotary Community. Weekly space available at: rotarycluboflacrosse.org </div><div class="pdf-sub-footer"> Web app by Vendi </div></div>';
+        $html_string .= '    <div><div class="pdf-footer"> Share an announcement with your Rotary Community. Weekly space available at: Rotarynewswheel.org </div><div class="pdf-sub-footer"> Web app by <a href="https://vendiadvertising.com/" >Vendi</a> </div></div>';
         $html_string .= '    </div></div></body></html>';
 
         // $html_string = str_replace( get_site_url(), 'file://' . dirname( dirname( dirname( VENDI_ROTARY_FLYER_DIR ) ) ), $html_string);

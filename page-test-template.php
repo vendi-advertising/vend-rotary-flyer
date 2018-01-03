@@ -31,7 +31,16 @@ else{
 //test comment
 
 ?>
+<?php
+            $user = wp_get_current_user();
 
+            $admin_button = '';
+            if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
+                {
+
+                    $admin_button = '<a class="steps-button" href="/admin-view"> Admin Dashboard </a>';
+                }
+?>
 <div id="main-content">
     <div class="main-content-region">
         <h1> <?php echo $header_text; ?> </h1>
@@ -59,7 +68,7 @@ else{
                     ),
                     'uploader' => 'wp',
                     'return' => home_url('thank-you'),
-                    'html_submit_button'    => '<input type="submit" class="acf-button button button-primary button-large" value="%s" /> <a class="steps-button" href="' . wp_logout_url() .'"> Log Out </a>'
+                    'html_submit_button'    => '<input type="submit" class="acf-button button button-primary button-large" value="%s" /> <a class="steps-button" href="' . wp_logout_url() .'"> Log Out </a>' . $admin_button
                 ));
                 ?>
                 </div>

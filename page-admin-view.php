@@ -17,13 +17,13 @@ get_header();
                 <h1 class=" "> Administrator Dashboard </h1>
                 <p> Check member balances or prepare a flier for printing. </p>
             </div>
+            <a class="steps-button" href="/ad-creation"> Create An Ad </a>
             <a class="steps-button" href="/member-costs"> Check Member Balances </a>
             <a class="steps-button" href="<?php echo wp_logout_url(); ?>"> Log Out </a>
-
         </div>
         <div class="flier-region">
 
-            <?php 
+            <?php
             $date_organized_posts = Vendi\RotaryFlyer\pdf_generator::get_entries_sorted_by_date(true);
             $htmlstring = '';
             if(count($date_organized_posts) > 0){

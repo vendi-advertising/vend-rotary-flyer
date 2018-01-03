@@ -110,7 +110,7 @@ if(isset($_GET['postid'])){
 
     </div>
 <div class="acf-form-submit">
-            <a class="steps-button" href="<?php echo home_url('ad-creation?post_id='. $post_id . '');  ?>"> Edit Ad Post </a><a class="steps-button" href="<?php echo home_url('submit-final?post_id='. $post_id . '');  ?>"> Submit Final Ad</a>            <a class="steps-button" href="<?php echo wp_logout_url(); ?>"> Log Out </a>
+            <a class="steps-button" href="<?php echo home_url('ad-creation?post_id='. $post_id . '');  ?>"> Edit Ad Post </a><a class="steps-button" href="<?php echo home_url('submit-final?post_id='. $post_id . '');  ?>"> Submit Final Ad</a>
 
         </div>
 </div>

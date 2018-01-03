@@ -216,16 +216,28 @@ if ( $GLOBALS['pagenow'] === 'wp-login.php' ) {
     add_filter( 'gettext',
                 function($text)
                 {
+
                 if ($text == 'Lost your password?'){
                     $text = 'Lost your password or signing in for the first time?';
                 }
                 if ($text == 'Log In'){
                     $text = 'Login';
                 }
+                if ($text == 'Lost your password?'){
+                    $text = 'Click here if you are registering for the first time or having trouble logging in. ';
+                }
                 return $text;
                 }
             );
 }
+
+/*add_filter( 'login_errors', function($message){
+    return 'test';
+});*/
+
+add_filter( 'login_message', function($message){
+    return $message . ' Trouble logging in? Use your email address on file with Rotary. If you’ve forgotten that address, please contact rotarylax@charter.net.';
+});
 
 add_filter( 'show_admin_bar' , 'handle_admin_bar');
 

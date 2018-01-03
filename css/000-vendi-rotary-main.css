@@ -215,7 +215,7 @@ h1 a:hover{
 
 
 .steps-button+.steps-button{
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 td.ui-datepicker-unselectable.ui-state-disabled span{
@@ -262,6 +262,10 @@ td.ui-datepicker-unselectable.ui-state-disabled span{
 }
 
 .footer-region {
+    color: rgb(12, 76, 148);
+}
+
+.footer-region a{
     color: rgb(12, 76, 148);
 }
 
