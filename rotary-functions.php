@@ -1,10 +1,14 @@
 <?php
 
-
+function check_posts(){
+    
+}
 
 function my_save_post( $post_id ) {
     // bail early if not a vendi-rotary-flyer post
     //
+
+
 
     if( get_post_type($post_id) !== 'vendi-rotary-flyer' ) {
 
@@ -20,9 +24,12 @@ function my_save_post( $post_id ) {
 
     }
 
-
     // vars
     $post = get_post( $post_id );
+
+    $run_dates = get_field_object('field_59ef4bccd0939', $post_id)['value'];
+
+    
     $title = get_field('organization', $post_id);
 
     $url_re = '/thank-you/?postid=' . $post_id;
@@ -58,40 +65,57 @@ function my_acf_input_admin_footer() {
 
     if (typeof acf !== 'undefined') {
 
+        var author_id = '<?php echo get_current_user_id(); ?>';
 
         var dateObjectArray = Array();
-
             //look through all posts and count the number of adds on each date.
-            $.getJSON(`/wp-json/wp/v2/vendi-rotary-flyer`, function () {
-
+        $.getJSON(`/wp-json/wp/v2/vendi-rotary-flyer`, function () {
+            console.log('RUNNING');
             })
                 .done(function (data){
                     console.log('data', data);
+
                     $.each(data, function(key, value) {
+                        console.log(value['author'].toString(), author_id);
+                        console.log(value['author'].toString() == author_id);
                         var run_dates = value['acf']['run_dates'];
                         $.each(run_dates, function(key1, run_date){
                             console.log(run_dates[key1]['run_date']);
+                            console.log()
                             if(dateObjectArray.hasOwnProperty(run_date['run_date'])){
                                 dateObjectArray[run_date['run_date']]['count']++;
                             }
                             else{
                                 dateObjectArray[run_date['run_date']] = {
-                                    count: 1
+                                    count: 1,
+                                    author: false
                                 }
+                            }
+                            if(value['author'].toString() == author_id){
+                                dateObjectArray[run_date['run_date']]['author'] = true;
                             }
                         });
                     });
-                    console.log(dateObjectArray);
+                    console.log(dateObjectArray, 86);
+                    jQuery('.hasDatepicker').each(function(){
+                        jQuery(this).attr('disabled', false);
+                        jQuery(this).attr('title', '');
+                    });
+                   
+
                     return dateObjectArray;
                 })
                 .fail(function (){
                     console.log('fail :(');
-                })
+                    jQuery('.hasDatepicker').each(function(){
+                        jQuery(this).attr('disabled', false);
+                        jQuery(this).attr('title', '');
+                    });
+                });
 
-
-            console.log(dateObjectArray, '1');
             acf.add_filter('date_picker_args', function( args, $field ){
                 args['beforeShowDay'] =  onlyThursday;
+                args['beforeShow'] = checkDates;
                 args['showOtherMonths'] =  true;
                 args['selectOtherMonths'] =  true;
                 return args;
@@ -108,6 +132,49 @@ function my_acf_input_admin_footer() {
             function str_pad(n) {
                 return String("00" + n).slice(-2);
             }
+            function checkDates(input, instance){
+                /*$.getJSON(`/wp-json/wp/v2/vendi-rotary-flyer`, function () {
+                })
+                .done(function (data){
+                    console.log('data', data);
+
+                    $.each(data, function(key, value) {
+                        console.log(value['author'].toString(), author_id);
+                        console.log(value['author'].toString() == author_id);
+                        var run_dates = value['acf']['run_dates'];
+                        $.each(run_dates, function(key1, run_date){
+                            console.log(run_dates[key1]['run_date']);
+                            console.log()
+                            if(dateObjectArray.hasOwnProperty(run_date['run_date'])){
+                                dateObjectArray[run_date['run_date']]['count']++;
+                            }
+                            else{
+                                dateObjectArray[run_date['run_date']] = {
+                                    count: 1,
+                                    author: false
+                                }
+                            }
+                            if(value['author'].toString() == author_id){
+                                dateObjectArray[run_date['run_date']]['author'] = true;
+                            }
+                        });
+                    });
+                    console.log(dateObjectArray, 86);
+                    jQuery('.hasDatepicker').each(function(){
+                        jQuery(this).attr('disabled', false);
+                        jQuery(this).attr('title', '');
+                    });
+                   
+
+                    return dateObjectArray;
+                })
+                .fail(function (){
+                    jQuery('.hasDatepicker').each(function(){
+                        jQuery(this).attr('disabled', false);
+                        jQuery(this).attr('title', '');
+                    });
+                });*/
+            }
 
             function onlyThursday(date){
               var todays_date = new Date()
@@ -119,16 +186,20 @@ function my_acf_input_admin_footer() {
               var alreadyPicked = Array();
               var date_compare_string = str_pad((date.getMonth()+1))+'/'+str_pad(date.getDate())+'/'+date.getFullYear();
               var max_ad_count = 8;
-
               $('.hasDatepicker').each(function(){
+
                 if($(this).context.value !== ''){
                     var dateString = new Date($(this).context.value);
-                    dateString = (dateString.getMonth()+1)+'/'+ str_pad(dateString.getDate())+'/'+ dateString.getFullYear();
+                    dateString = (str_pad(dateString.getMonth()+1))+'/'+ str_pad(dateString.getDate())+'/'+ dateString.getFullYear();
                     alreadyPicked.push(dateString);
                     console.log(alreadyPicked);
 
                 }
               });
+
+              if(alreadyPicked.indexOf(date_compare_string) > -1){
+              console.log(date_compare_string, alreadyPicked, alreadyPicked.indexOf(date_compare_string),'TEST');
+              }
 
               if((day == 4 && date >= todays_date && alreadyPicked.indexOf(date_compare_string) == -1) && at_least_seven_days_out){
                     console.log(dateObjectArray, '119');
@@ -138,7 +209,10 @@ function my_acf_input_admin_footer() {
 
                         return_statement = [false, '','There are already '+ (max_ad_count+1) +' ad slots filled for this day.'];
                     }
+                    else if(dateObjectArray.hasOwnProperty(date_compare_string) && dateObjectArray[date_compare_string]['author'] == true){
+                        return_statement = [false, '','You already have an ad set to run on this day.'];
 
+                    }
                     else{
                         return_statement = [true, ''];
                     }

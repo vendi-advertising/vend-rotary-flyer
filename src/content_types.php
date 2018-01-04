@@ -41,7 +41,7 @@ class content_types {
                 'label'                 => __( 'Vendi rotary flyer', 'vendi-rotary-flyer' ),
                 'description'           => __( 'Vendi rotary flyer', 'vendi-rotary-flyer' ),
                 'labels'                => $labels,
-                'supports'              => array( 'title', 'page-attributes', ),
+                'supports'              => array( 'title', 'page-attributes', 'author'),
                 'taxonomies'            => array( 'category', 'post_tag' ),
                 'hierarchical'          => false,
                 'public'                => true,

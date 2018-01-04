@@ -1,8 +1,13 @@
 
 (function() {
     jQuery( document ).ready(function() {
-        var rotary_header = document.getElementById('acf-field_59d3d72a30576');
 
+        jQuery('.hasDatepicker').each(function(){
+            jQuery(this).attr('disabled', true);
+            jQuery(this).attr('title', 'loading...');
+        });
+
+        var rotary_header = document.getElementById('acf-field_59d3d72a30576');
         //set on page load
         if(rotary_header.value){
             document.getElementById('rotary-header-preview').innerHTML = rotary_header.value;

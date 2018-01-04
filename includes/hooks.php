@@ -216,10 +216,6 @@ if ( $GLOBALS['pagenow'] === 'wp-login.php' ) {
     add_filter( 'gettext',
                 function($text)
                 {
-
-                if ($text == 'Lost your password?'){
-                    $text = 'Lost your password or signing in for the first time?';
-                }
                 if ($text == 'Log In'){
                     $text = 'Login';
                 }
@@ -236,7 +232,7 @@ if ( $GLOBALS['pagenow'] === 'wp-login.php' ) {
 });*/
 
 add_filter( 'login_message', function($message){
-    return $message . ' Trouble logging in? Use your email address on file with Rotary. If you’ve forgotten that address, please contact rotarylax@charter.net.';
+    return '<p class="message" > Use your email address on file with Rotary. If you’ve forgotten that address, please contact rotarylax@charter.net. </p>';
 });
 
 add_filter( 'show_admin_bar' , 'handle_admin_bar');
