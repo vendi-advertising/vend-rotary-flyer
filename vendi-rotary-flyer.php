@@ -21,3 +21,5 @@ require_once VENDI_ROTARY_FLYER_DIR . '/includes/hooks.php';
 
 //Any misc code
 require_once VENDI_ROTARY_FLYER_DIR . '/includes/init.php';
+
+require_once VENDI_ROTARY_FLYER_DIR . '/rotary-functions.php';
