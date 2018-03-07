@@ -61,11 +61,11 @@ function all_dates_with_max_ads(){
         'post_status'       => 'publish'
     );
     $query = new WP_Query($args);
-    dump($query);
+    // dump($query);
 }
 
 function my_acf_input_admin_footer() {
-dump('test');
+// dump('test');
 ?>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css"/>
 
