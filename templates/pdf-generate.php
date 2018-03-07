@@ -1,17 +1,8 @@
 <?php
-/**
- * Template Name: Thank you
- *
- */
-
-
-$pdf_render_mode = isset($_POST['pdf_date']);
 
 \Vendi\Shared\template_router::get_instance()->get_header();
 
-
-
-if($pdf_render_mode){
+if(isset($_POST['pdf_date'])){
     $date = $_POST['pdf_date'];
     $date = str_replace( "_", "/", $date);
     $date_organized_posts = Vendi\RotaryFlyer\pdf_generator::get_entries_sorted_by_date(true);
@@ -26,7 +17,7 @@ if($pdf_render_mode){
                 <p> The Rotary Flyer PDF for <?php echo $date; ?> has been generated. Preview and print the PDF using the button below or return to the dashboard. </p>
             </div>
             <a href="<?php echo $result['link']; ?>" class="steps-button"> Flier PDF </a>
-            <a class="steps-button" href="<?php echo \Vendi\Shared\template_router::get_instance()->create_url('dashboard'); ?>"> Return to Dashboard </a>
+            <a class="steps-button" href="<?php echo \Vendi\RotaryFlyer\CurrentUser::get_dashboard_url(); ?>"> Return to Dashboard </a>
 
         </div>
         <?php
@@ -38,7 +29,7 @@ if($pdf_render_mode){
                 <h1> PDF could not be generated </h1>
                 <p> There were no ads found for this date. </p>
             </div>
-            <a class="steps-button" href="<?php echo \Vendi\Shared\template_router::get_instance()->create_url('dashboard'); ?>"> Return to Dashboard </a>
+            <a class="steps-button" href="<?php echo \Vendi\RotaryFlyer\CurrentUser::get_dashboard_url(); ?>"> Return to Dashboard </a>
 
         </div>
         <?php
