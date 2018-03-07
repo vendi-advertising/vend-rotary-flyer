@@ -1,0 +1,56 @@
+
+
+.front-page-column{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.front-page-column ul{
+    margin-bottom: 0;
+    list-style-type: disc;
+    margin-left: 0;
+}
+
+.front-page-column li{
+    margin-bottom: 0;
+}
+
+.front-page-column .steps-button{
+    background:none;
+    background-color: #0d4c94;
+    border: none;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    outline: none;
+    word-break: keep-all;
+    display: inline-block;
+    width: auto;
+    font-size: 24px;
+    margin: 10px 0 50px 0;
+    padding: 10px 50px;
+    text-decoration: none;
+    transition: background-color 0.5s ease 0s;
+}
+
+.front-page-column .steps-button:hover{
+    background-color: #06264a;
+}
+
+.front-page-column .flyer-image-container{
+    max-width: 320px;
+    margin: auto;
+}
+
+.front-page-column img{
+    width: 100%;
+    height: auto;
+}
+
+.front-page-copy-region{
+    padding-bottom: 10px;
+    border-bottom: #EEEEEE solid 1px;
+}

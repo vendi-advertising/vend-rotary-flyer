@@ -69,7 +69,7 @@ add_action(
                     $post_id = get_the_ID();
                     if(!get_field('is_placeholder', $post_id) == 'True'){
 
-                    
+
                         $count = count(get_field('run_dates', $post_id));
                         if(array_key_exists ($author , $user_cost_arr )){
                             $user_cost_arr[$author]['ads_created'] = $user_cost_arr[$author]['ads_created']+$count;
@@ -198,9 +198,19 @@ add_filter(
             'login_headerurl',
             function()
             {
-                return home_url();
+                return \Vendi\Shared\template_router::get_instance()->create_url();
             }
         );
+
+// add_filter(
+//             'home_url',
+//             function($url, $path, $orig_scheme, $blog_id)
+//             {
+//                 return \Vendi\Shared\template_router::get_instance()->create_url(null, [], true);
+//             },
+//             10,
+//             4
+//         );
 
 add_filter(
             'login_headertitle',
@@ -232,24 +242,62 @@ if ( $GLOBALS['pagenow'] === 'wp-login.php' ) {
             );
 }
 
-/*add_filter( 'login_errors', function($message){
-    return 'test';
-});*/
+add_filter(
+            'login_message',
+            function($message)
+            {
+                return '<p class="message" > Use your email address on file with Rotary. If you’ve forgotten that address, please contact rotarylax@charter.net. </p>';
+            }
+        );
 
-add_filter( 'login_message', function($message){
-    return '<p class="message" > Use your email address on file with Rotary. If you’ve forgotten that address, please contact rotarylax@charter.net. </p>';
-});
+add_filter(
+            'show_admin_bar',
+            function($content)
+            {
 
-add_filter( 'show_admin_bar' , 'handle_admin_bar');
+                // 'manage_options' is a capability assigned only to administrators
+                // here, the check for the admin dashboard is not necessary
+                return current_user_can('manage_options');
+            }
+        );
 
-function handle_admin_bar($content) {
-     // 'manage_options' is a capability assigned only to administrators
-     // here, the check for the admin dashboard is not necessary
+//Load CSS and JavaScript
+add_action(
+            'wp_enqueue_scripts',
+            function()
+            {
+                /*****************
+                 *  Parent Theme *
+                 *****************/
 
-     if (!current_user_can('manage_options')) {
-        return false;
-     }
-     else{
-        return true;
-     }
-}
+                if( is_dir( VENDI_ROTARY_FLYER_DIR . '/media/css/' ) )
+                {
+                    //Load each CSS file that starts with three digits followed by a dash in numerical order
+                    foreach( glob( VENDI_ROTARY_FLYER_DIR . '/media/css/[0-9][0-9][0-9]-*.css' ) as $t )
+                    {
+                        wp_enqueue_style(
+                                            basename( $t, '.css' ) . '-p-style',
+                                            VENDI_ROTARY_WP_PLUGIN_DIR_URL . 'media/css/' . basename( $t ),
+                                            null,
+                                            filemtime( VENDI_ROTARY_FLYER_DIR . '/media/css/' . basename( $t ) ),
+                                            'screen'
+                                        );
+                    }
+                }
+
+                if( is_dir( VENDI_ROTARY_FLYER_DIR . '/media/js/' ) )
+                {
+                    //Load each JS file that starts with three digits followed by a dash in numerical order
+                    foreach( glob( VENDI_ROTARY_FLYER_DIR . '/media/js/[0-9][0-9][0-9]-*.js' ) as $t )
+                    {
+                        wp_enqueue_script(
+                                            basename( $t, '.js' ) . '-p-style',
+                                            VENDI_ROTARY_WP_PLUGIN_DIR_URL . 'media/js/' . basename( $t ),
+                                            null,
+                                            filemtime( VENDI_ROTARY_FLYER_DIR . '/media/js/' . basename( $t ) ),
+                                            true
+                                        );
+                    }
+                }
+            }
+        );

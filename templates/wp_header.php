@@ -12,7 +12,7 @@ else{
     // if admin page, then redirect user away
     if(is_page(array('admin-view','pdf-assembler','pdf-builder','member-costs'))) {
         if(!current_user_can( 'delete_users' )) {
-            wp_safe_redirect( VENDI_ROTARY_PDF_CREATION);
+            wp_safe_redirect(\Vendi\RotaryFlyer\CurrentUser::get_dashboard_url());
         }
     }
 }

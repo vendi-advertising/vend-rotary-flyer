@@ -1,6 +1,6 @@
 <?php
 
-\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_header();
+\Vendi\Shared\template_router::get_instance()->get_header();
 
 if(isset($_GET['postid'])){
     $post_id = $_GET['postid'];
@@ -100,12 +100,12 @@ if(isset($_GET['postid'])){
 
     </div>
     <div class="acf-form-submit">
-        <a class="steps-button" href="<?php echo \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('add-edit-ad', ['post_id' => $post_id]);  ?>"> Edit Ad Post </a>
-        <a class="steps-button" href="<?php echo \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('submit-ad', ['post_id' => $post_id]);  ?>"> Submit Final Ad</a>
+        <a class="steps-button" href="<?php echo \Vendi\Shared\template_router::get_instance()->create_url('add-edit-ad', ['post_id' => $post_id]);  ?>"> Edit Ad Post </a>
+        <a class="steps-button" href="<?php echo \Vendi\Shared\template_router::get_instance()->create_url('submit-ad', ['post_id' => $post_id]);  ?>"> Submit Final Ad</a>
 
         </div>
 </div>
 </div>
 
 <?php
-\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_footer();
+\Vendi\Shared\template_router::get_instance()->get_footer();

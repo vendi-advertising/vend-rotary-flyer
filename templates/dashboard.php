@@ -1,13 +1,12 @@
 <?php
 // require 'rotary-functions.php';
 
-\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_header();
+\Vendi\Shared\template_router::get_instance()->get_header();
 
 $this_user = get_current_user_id();
 $user_info = wp_get_current_user();
-$first_name = $user_info->user_firstname;
+
 $payment = new Vendi\RotaryFlyer\payment($this_user);
-//Vendi\RotaryFlyer\pdf_generator::generate_from_url();
 ?>
 <div id="main-content">
     <div class="main-content-region">
@@ -50,7 +49,7 @@ $payment = new Vendi\RotaryFlyer\payment($this_user);
                         $post_title    = get_the_title();
                         $htmlstring .= '<li> ';
                         $htmlstring .= get_the_title( $id );
-                        $htmlstring .= ' <a class="steps-button" href=" /test-page/?post_id='. $id . '">';
+                        $htmlstring .= ' <a class="steps-button" href="' . \Vendi\Shared\template_router::get_instance()->create_url('add-edit-ad', ['post_id' => $id ] ) . '">';
                         $htmlstring .= ' &#9998;edit';
                         $htmlstring .= '</a>';
                         $htmlstring .= ' </li>';
@@ -72,4 +71,4 @@ $payment = new Vendi\RotaryFlyer\payment($this_user);
 </div>
 
 <?php
-\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_footer();
+\Vendi\Shared\template_router::get_instance()->get_footer();

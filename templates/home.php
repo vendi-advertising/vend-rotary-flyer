@@ -1,5 +1,5 @@
 <?php
-\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_header();
+\Vendi\Shared\template_router::get_instance()->get_header();
 ?>
 
     <div id="main-content">
@@ -33,45 +33,35 @@
                 </div>
                 <?php
 
-                if(!is_user_logged_in()){
+                $links = [];
 
-                ?>
-                    <a class="steps-button" href="<?php echo wp_login_url(); ?>">
-                        Login
-                    </a>
+                if(!\Vendi\RotaryFlyer\CurrentUser::is_user_logged_in()){
+                    $links['Login'] = wp_login_url();
+                }else{
+                    if(\Vendi\RotaryFlyer\CurrentUser::is_user_admin()){
+                        $links['Manage Fliers'] = \Vendi\RotaryFlyer\CurrentUser::get_dashboard_url();
+                    }else{
+                        $links['Create An Ad'] = \Vendi\Shared\template_router::get_instance()->create_url('add-edit-ad');
+                    }
 
-                <?php
+                    //Always add the logout link for anyone that's logged in
+                    $links['Log Out'] = wp_logout_url();
                 }
-                else{
-                    $user = wp_get_current_user();
-                    //Send Rotary Users to the PDF creation screen
-                    if(isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles )){
-                        ?>
-                        <a class="steps-button" href="<?php echo VENDI_ROTARY_PDF_CREATION; ?>">
-                            Create An Ad
-                        </a>
-                        <a class="steps-button" href="<?php echo wp_logout_url(); ?>">
-                            Log Out
-                        </a>
-                        <?php
-                    }
-                    else{
-                        ?>
-                        <a class="steps-button" href="<?php echo VENDI_ROTARY_ADMIN_DASHBOARD; ?>">
-                            Manage Fliers
-                        </a>
-                        <a class="steps-button" href="<?php echo wp_logout_url(); ?>">
-                            Log Out
-                        </a>
-                        <?php
-                    }
+
+                foreach($links as $text => $link){
+                    echo sprintf(
+                                    '<a class="steps-button" href="%1$s">%2$s</a> ',
+                                    esc_url( $link ),
+                                    esc_html( $text )
+                                );
                 }
+
                 ?>
             </div><!--
             --><div class="front-page-column">
                 <div class="flyer-image-container">
-                    <a href="<?php echo get_stylesheet_directory_uri(); ?>/images/Rotary-Ads-and-Announcements-newest.png">
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/Rotary-Ads-and-Announcements-newest-thumb.png" alt="rotary flier screenshot"/>
+                    <a href="<?php echo VENDI_ROTARY_WP_PLUGIN_DIR_URL; ?>/media/images/Rotary-Ads-and-Announcements-newest.png">
+                        <img src="<?php echo VENDI_ROTARY_WP_PLUGIN_DIR_URL; ?>/media/images/Rotary-Ads-and-Announcements-newest-thumb.png" alt="Rotary flier screenshot"/>
                     </a>
                 </div>
             </div>
@@ -79,4 +69,4 @@
     </div><!-- #main-content -->
 
 <?php
-\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_footer();
+\Vendi\Shared\template_router::get_instance()->get_footer();

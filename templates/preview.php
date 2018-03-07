@@ -2,7 +2,7 @@
 
 $pdf_output = true;
 
-\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_header();
+\Vendi\Shared\template_router::get_instance()->get_header();
 
 vendi_rotary_register_ajax_js( '200-slider-enable.js', array('jquery'));
 vendi_rotary_register_plugin_js( '250-place-holder-modal.js');
@@ -31,4 +31,4 @@ else{
 }
 
 
-\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_footer();
+\Vendi\Shared\template_router::get_instance()->get_footer();

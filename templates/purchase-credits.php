@@ -1,6 +1,6 @@
 <?php
 
-\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_header();
+\Vendi\Shared\template_router::get_instance()->get_header();
 
 $payment = new Vendi\RotaryFlyer\payment(get_current_user_id());
 
@@ -21,7 +21,7 @@ $transaction_id = $payment->generate_transaction_id();
             <h1> Purchase Credits </h1>
             <p> Credits are used to purchase ad space in the weekly Rotary flier. Each credit costs $<?php echo $payment->get_price() ?> and can be used to purchase one slot in a weekly flier. Each subsequent week costs an additional credit. Select the number of credits that you wish to purchase below. </p>
         </div>
-        <form method="post" action="<?php echo \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('purchase-credits-confirm'); ?>">
+        <form method="post" action="<?php echo \Vendi\Shared\template_router::get_instance()->create_url('purchase-credits-confirm'); ?>">
           <input type="number" name="quantity" value="1" min="1" max="10">
           <input type="hidden" name="transaction_id" value="<?php echo $transaction_id; ?>">
           <input type="submit" name="" class="steps-button" value="Purchase Credits">
@@ -30,4 +30,4 @@ $transaction_id = $payment->generate_transaction_id();
 </div>
 <?php
 
-\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_footer();
+\Vendi\Shared\template_router::get_instance()->get_footer();

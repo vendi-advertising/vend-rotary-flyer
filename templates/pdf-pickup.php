@@ -33,7 +33,7 @@ if(!$is_admin){
     exit;
 }
 
-\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_header();
+\Vendi\Shared\template_router::get_instance()->get_header();
 
 ?>
 
@@ -46,4 +46,4 @@ if(!$is_admin){
 
 <?php
 
-\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_footer();
+\Vendi\Shared\template_router::get_instance()->get_footer();

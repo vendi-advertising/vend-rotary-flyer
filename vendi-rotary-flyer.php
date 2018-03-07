@@ -5,7 +5,7 @@ Version: 0.1
 */
 
 define( 'VENDI_ROTARY_FLYER_FILE', __FILE__ );
-define( 'VENDI_ROTARY_FLYER_DIR', dirname( VENDI_ROTARY_FLYER_FILE ) );
+define( 'VENDI_ROTARY_FLYER_DIR', __DIR__ );
 
 //Additional constants
 require_once VENDI_ROTARY_FLYER_DIR . '/includes/constants.php';
