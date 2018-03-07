@@ -1,12 +1,6 @@
 <?php
-/**
- * Template Name: Credits Confirmation
- *
- */
-?>
-<?php
-require 'rotary-functions.php';
-get_header();
+
+\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_header();
 $payment = new Vendi\RotaryFlyer\payment(get_current_user_id());
 
 ?>
@@ -25,10 +19,10 @@ if( isset($_POST['quantity']) && isset($_POST['transaction_id']) )
 
         if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
         {
-            $dashboard = VENDI_ROTARY_ADMIN_DASHBOARD;
+            $dashboard = \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('admin-dashboard');
         }
         else if(isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles )){
-            $dashboard = VENDI_ROTARY_USER_DASHBOARD;
+            $dashboard = \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('dashboard');
         }
 
         ?>
@@ -48,10 +42,10 @@ if( isset($_POST['quantity']) && isset($_POST['transaction_id']) )
 
         if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
         {
-            $dashboard = VENDI_ROTARY_ADMIN_DASHBOARD;
+            $dashboard = \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('admin-dashboard');
         }
         else if(isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles )){
-            $dashboard = VENDI_ROTARY_USER_DASHBOARD;
+            $dashboard = \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('dashboard');
         }
 
         $payment->purchase_tokens($quantity);
@@ -77,6 +71,4 @@ else{
 </div>
 <?php
 
-?>
-<?php
-get_footer();
+\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_footer();

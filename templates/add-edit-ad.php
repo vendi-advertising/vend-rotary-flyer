@@ -1,20 +1,14 @@
 <?php
-/**
- * Template Name: test
- *
- */
-?>
-<?php
 
 $role = get_role('Rotary User');
 $role->add_cap('upload_files');
-require 'rotary-functions.php';
+// require 'rotary-functions.php';
 wp_enqueue_style('common');
 wp_enqueue_media();
 acf_form_head();
 
 
-get_header();
+\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_header();
 
 //vendi_rotary_register_plugin_js( '100-floating-preview.js' );
 vendi_rotary_register_plugin_js( '000-rotary-live-preview.js' );
@@ -39,7 +33,7 @@ else{
             if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
                 {
 
-                    $admin_button = '<a class="steps-button" href="/admin-view"> Admin Dashboard </a>';
+                    $admin_button = sprintf( '<a class="steps-button" href="%1$s"> Admin Dashboard </a>', \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('admin-dashboard') );
                 }
 ?>
 <div id="main-content">
@@ -49,10 +43,6 @@ else{
 
         ?>
         <?php while ( have_posts() ) : the_post(); ?>
-
-            <?php
-            //$title = $_POST['fields']['field_59d3d72a30576'];
-            ?>
 
             <div class="card">
                 <div class="card-half acf-half">
@@ -64,11 +54,11 @@ else{
                     'new_post' => array(
                         'post_type' => 'vendi-rotary-flyer',
                         'post_status'   => 'draft',
-                        'post_title' => ''//$_POST['fields']['field_59d3d72a30576']
+                        'post_title' => '',
 
                     ),
                     'uploader' => 'wp',
-                    'return' => home_url('thank-you'),
+                    'return' => \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('ad-thank-you'),
                     'html_submit_button'    => '<input type="submit" class="acf-button button button-primary button-large" value="%s" /> ' . $admin_button
                 ));
                 ?>
@@ -96,4 +86,5 @@ else{
 </div>
 
 
-<?php get_footer(); ?>
+<?php
+\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_footer();

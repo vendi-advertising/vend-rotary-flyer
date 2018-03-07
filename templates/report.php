@@ -1,12 +1,6 @@
 <?php
-/**
- * Template Name: Member Costs
- *
- * This page allows the admin to view how much members owe for a given date range.
- */
-require 'rotary-functions.php';
 
-get_header();
+\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_header();
 vendi_rotary_register_ajax_js( '300-rotary-member-costs.js', array('jquery-ui-datepicker') );
 wpse_enqueue_datepicker();
 vendi_rotary_register_outside_css('rotary-date-picker-css',  plugins_url( '/css-assets/datepicker.css', VENDI_ROTARY_FLYER_FILE ));
@@ -45,7 +39,7 @@ endwhile;
             <label for="rotary-to-date">To</label>
             <input id="rotary-to-date" type="text">
             <input id="rotary-query-owed" class="steps-button" type="submit" value="Check Balances">
-            <a class="steps-button" href="<?php echo VENDI_ROTARY_ADMIN_DASHBOARD; ?>"> Return to Dashboard </a>
+            <a class="steps-button" href="<?php echo \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('dashboard'); ?>"> Return to Dashboard </a>
             <a class="steps-button" href="<?php echo wp_logout_url(); ?>"> Log Out </a>
 
             <hr>
@@ -99,4 +93,4 @@ endwhile;
 
 <?php
 
-get_footer(); ?>
+\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_footer();

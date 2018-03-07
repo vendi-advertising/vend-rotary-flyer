@@ -1,14 +1,9 @@
 <?php
-/**
- * Template Name: Thank you
- *
- */
-?>
-<?php
-require 'rotary-functions.php';
+
 $pdf_output = true;
-get_header();
-//Vendi\RotaryFlyer\pdf_generator::generate_from_url();
+
+\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_header();
+
 vendi_rotary_register_ajax_js( '200-slider-enable.js', array('jquery'));
 vendi_rotary_register_plugin_js( '250-place-holder-modal.js');
 
@@ -18,7 +13,7 @@ vendi_rotary_register_outside_css( 'jqueryui-smoothness-theme','https://ajax.goo
 
 <?php
 
-include 'placeholder-modal.php';
+include VENDI_ROTARY_FLYER_DIR . '/placeholder-modal.php';
 if(isset($_GET['date'])){
     $date = $_GET['date'];
     $date_organized_posts = Vendi\RotaryFlyer\pdf_generator::get_entries_sorted_by_date(true);
@@ -36,12 +31,4 @@ else{
 }
 
 
-?>
-
-<?php
-
-//echo '<link rel="stylesheet" id="pdf-css" href="' . VENDI_ROTARY_FLYER_DIR . '/css/100-pdf-output.css" type="text/css" media="all">';
-
-?>
-
-<?php get_footer();
+\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_footer();

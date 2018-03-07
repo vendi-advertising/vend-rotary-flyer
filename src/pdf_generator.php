@@ -2,8 +2,9 @@
 
 namespace Vendi\RotaryFlyer;
 
-use Knp\Snappy\Pdf;
 use dawood\phpChrome\Chrome;
+use Knp\Snappy\Pdf;
+use Ramsey\Uuid\Uuid;
 
 class pdf_generator {
 
@@ -135,7 +136,7 @@ class pdf_generator {
         $post_limit = 9;
                     $post_date = str_replace( "/", "_", $week);
 
-        $form = '<form class="generation-form" method="post" action="'. VENDI_ROTARY_PDF_GENERATION_PAGE .'">
+        $form = '<form class="generation-form" method="post" action="'. \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('pdf-generate') .'">
                       <input type="hidden" type="text" id="pdf_date" name="pdf_date" value="'.$post_date.'">
                       <div class="acf-form-submit">
                           <input class="steps-button" type="submit" value="Generate PDF">
@@ -538,6 +539,8 @@ class pdf_generator {
         $html_string .= '    <div><div class="pdf-footer"> Share an announcement with your Rotary Community. Weekly space available at: Rotarynewswheel.org </div><div class="pdf-sub-footer"> Web app by <a href="https://vendiadvertising.com/" >Vendi</a> </div></div>';
         $html_string .= '    </div></div></body></html>';
 
+        $export_file_id = Uuid::uuid4()->toString();
+
         // $html_string = str_replace( get_site_url(), 'file://' . dirname( dirname( dirname( VENDI_ROTARY_FLYER_DIR ) ) ), $html_string);
 
         // echo $html_string;
@@ -556,12 +559,12 @@ class pdf_generator {
         $snappy->setOption('margin-top', 0);
         $snappy->setOption('margin-left', 5);
         $snappy->setOption('margin-right', 3);
-        $snappy->generateFromHtml($html_string, VENDI_ROTARY_FLYER_DIR . '/pdfs/generated-pdf.pdf', array(), $overwrite = true);
-        $return_arr = array(
-            'html' => $html_string,
-            'link' => plugins_url() . '/vendi-rotary-flyer/pdfs/generated-pdf.pdf'
-        );
-        return $return_arr;
+        $snappy->generateFromHtml($html_string, VENDI_ROTARY_FLYER_DIR . '/pdfs/' . $export_file_id . '.pdf', array(), $overwrite = true);
+
+        return [
+                'html' => $html_string,
+                'link' => \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('pdf-pickup', ['id' => $export_file_id]),
+        ];
 
 
     }

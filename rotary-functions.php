@@ -26,7 +26,7 @@ add_action(
 
                 $title = get_field('organization', $post_id);
 
-                $url_re = '/thank-you/?postid=' . $post_id;
+                $url_re = \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('ad-thank-you', ['postid' => $post_id]);
 
                 $my_post = array();
                 $my_post['ID'] = $post_id;

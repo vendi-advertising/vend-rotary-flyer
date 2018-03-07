@@ -1,11 +1,6 @@
 <?php
-/**
- * Template Name: Submit Final
- *
- */
-require 'rotary-functions.php';
 
-get_header();
+\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_header();
 
 ?>
 <div id="main-content">
@@ -42,15 +37,15 @@ if($post_status != 'publish' && $post_id != ''){
 
             if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
                 {
-                    $dashboard = VENDI_ROTARY_ADMIN_DASHBOARD;
+                    $dashboard = \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('admin-dashboard');
                 }
                 else if(isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles )){
-                    $dashboard = VENDI_ROTARY_USER_DASHBOARD;
+                    $dashboard = \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('dashboard');
                 }
 
             ?>
 
-            <a class="steps-button" href="<?php echo VENDI_ROTARY_PDF_CREATION; ?>"> Create More Ads </a>
+            <a class="steps-button" href="<?php echo \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('add-edit-ad'); ?>"> Create More Ads </a>
             <?php
 
             if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
@@ -72,10 +67,10 @@ else if($post_status == 'pending'){
 
     if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
     {
-        $dashboard = VENDI_ROTARY_ADMIN_DASHBOARD;
+        $dashboard = \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('admin-dashboard');
     }
     else if(isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles )){
-        $dashboard = VENDI_ROTARY_USER_DASHBOARD;
+        $dashboard = \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('dashboard');
     }
     ?>
     <div class="grey-bottom-border">
@@ -107,15 +102,15 @@ wp_update_post( $update_post );
 
             if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
                 {
-                    $dashboard = VENDI_ROTARY_ADMIN_DASHBOARD;
+                    $dashboard = \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('admin-dashboard');
                 }
                 else if(isset( $user->roles ) && is_array( $user->roles ) && in_array( 'Rotary User', $user->roles )){
-                    $dashboard = VENDI_ROTARY_USER_DASHBOARD;
+                    $dashboard = \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('dashboard');
                 }
 
             ?>
 
-            <a class="steps-button" href="<?php echo VENDI_ROTARY_PDF_CREATION; ?>"> Create More Ads </a>
+            <a class="steps-button" href="<?php echo \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('add-edit-ad'); ?>"> Create More Ads </a>
 
             <?php
 
@@ -139,6 +134,6 @@ wp_update_post( $update_post );
 ?>
     </div>
 </div>
-<?php
 
-get_footer();
+<?php
+\Vendi\Shared\template_router::get_instance( 'RotaryFlyer' )->get_footer();

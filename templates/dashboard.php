@@ -64,8 +64,8 @@ $payment = new Vendi\RotaryFlyer\payment($this_user);
         </div>
         <div class="user-dash-region user-decision-region">
             <h2> Actions </h2>
-                <a class="steps-button" href="<?php echo VENDI_ROTARY_PDF_CREATION; ?>"> Create an ad </a>
-                <a class="steps-button" href="<?php echo VENDI_ROTARY_CREDITS_PURCHASE_PAGE; ?>"> Purchase credits </a>
+                <a class="steps-button" href="<?php echo \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('add-edit-ad'); ?>"> Create an ad </a>
+                <a class="steps-button" href="<?php echo \Vendi\Shared\template_router::get_instance('RotaryFlyer')->create_url('purchase-credits'); ?>"> Purchase credits </a>
         </div>
     </div>
 
