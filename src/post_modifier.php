@@ -44,7 +44,7 @@ class post_modifier {
         $date_arr           = array(array("field_59e7bc2b9e5bb" => $date));
 
         //post args
-        $args = array(  
+        $args = array(
             'post_type' => 'vendi-rotary-flyer',
             'post_title' => 'placeholder',
             'post_content' => '',
