@@ -151,6 +151,7 @@ class pdf_generator {
             $loop->the_post();
             $obj = new SingleAd(get_post());
             $html_string .= $obj->get_html($pdf_wrapper);
+            $post_count++;
 
         }
 
