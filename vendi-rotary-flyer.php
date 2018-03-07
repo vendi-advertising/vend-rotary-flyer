@@ -13,6 +13,9 @@ require_once VENDI_ROTARY_FLYER_DIR . '/includes/constants.php';
 //Auto-load code
 require_once VENDI_ROTARY_FLYER_DIR . '/includes/autoload.php';
 
+//Additional constants
+require_once VENDI_ROTARY_FLYER_DIR . '/includes/routes.php';
+
 //Hooks such as add_filter() and add_action()
 require_once VENDI_ROTARY_FLYER_DIR . '/includes/hooks.php';
 

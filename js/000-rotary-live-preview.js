@@ -1,7 +1,17 @@
 
 (function() {
     jQuery( document ).ready(function() {
+        jQuery(document).on('acf/validate_field', function( e, field ){
+            // vars
+            $field = jQuery(field);
+            alert($field);
+            // set validation to false on this field
+            if( $field.find('input').val() == 'test' )
+            {
+                $field.data('validation', false);
+            }
 
+        });
         jQuery('.hasDatepicker').each(function(){
             jQuery(this).attr('disabled', true);
             jQuery(this).attr('title', 'loading...');
@@ -23,7 +33,7 @@
         if(rotary_body.value){
             document.getElementById('rotary-body-preview').innerHTML = rotary_body.value;
         }
-    
+
         rotary_body = rotary_body.onkeyup = function(e){
             console.log(e);
                 console.log(e['key']);
@@ -131,9 +141,17 @@
             }
             if(current_radio == 'standaloneimage'){
                 jQuery('label[for=acf-field_59d3d73f30577]').html('Logo/image (2.25" x 2.25") <span class="acf-required">*</span>');
+                jQuery(preview_image).show();
+                jQuery(preview_wrapper).addClass('white-bg');
+            }
+            else if(current_radio == 'headerbodytext'){
+                jQuery(preview_image).hide();
+                jQuery(preview_wrapper).removeClass('white-bg');
             }
             else if(current_radio == 'headerbodytextimage'){
                 jQuery('label[for=acf-field_59d3d73f30577]').html('Logo/image <span class="acf-required">*</span>');
+                jQuery(preview_image).show();
+                jQuery(preview_wrapper).addClass('white-bg');
 
             }
             /*if(current_radio == 'standaloneimage'){

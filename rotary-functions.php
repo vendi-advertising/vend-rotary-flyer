@@ -1,49 +1,44 @@
 <?php
 
 function check_posts(){
-    
-}
-
-function my_save_post( $post_id ) {
-    // bail early if not a vendi-rotary-flyer post
-    //
-
-
-
-    if( get_post_type($post_id) !== 'vendi-rotary-flyer' ) {
-
-        return;
-
-    }
-
-
-    // bail early if editing in admin
-    if( is_admin() ) {
-
-        return;
-
-    }
-
-    // vars
-    $post = get_post( $post_id );
-
-    $run_dates = get_field_object('field_59ef4bccd0939', $post_id)['value'];
-
-    
-    $title = get_field('organization', $post_id);
-
-    $url_re = '/thank-you/?postid=' . $post_id;
-
-    $my_post = array();
-    $my_post['ID'] = $post_id;
-    $my_post['post_title'] = $title;
-    wp_update_post( $my_post );
-
-    wp_safe_redirect( $url_re ); exit;
 
 }
 
-add_action('acf/save_post', 'my_save_post', 11);
+add_action(
+            'acf/save_post',
+            function( $post_id )
+            {
+                // bail early if not a vendi-rotary-flyer post
+                if( get_post_type($post_id) !== 'vendi-rotary-flyer' ) {
+                    return;
+                }
+
+                // bail early if editing in admin
+                if( is_admin() ) {
+                    return;
+                }
+
+                // vars
+                $post = get_post( $post_id );
+
+                $run_dates = get_field_object('field_59ef4bccd0939', $post_id)['value'];
+
+
+                $title = get_field('organization', $post_id);
+
+                $url_re = '/thank-you/?postid=' . $post_id;
+
+                $my_post = array();
+                $my_post['ID'] = $post_id;
+                $my_post['post_title'] = $title;
+                wp_update_post( $my_post );
+
+                wp_safe_redirect( $url_re );
+                exit;
+
+            },
+            11
+        );
 
 
 function my_acf_load_value( $value, $post_id, $field )
@@ -54,9 +49,23 @@ function my_acf_load_value( $value, $post_id, $field )
     return $value;
 }
 
+/*
+Function needs to find all posts in the future and find their run dates.
+loop through these run dates and tally them. Return an array that has dates with 9 published posts.
+
+ */
+function all_dates_with_max_ads(){
+    $args = array(
+        'type'              => 'vendi-rotary-flyer',
+        'numberposts'       => -1,
+        'post_status'       => 'publish'
+    );
+    $query = new WP_Query($args);
+    dump($query);
+}
 
 function my_acf_input_admin_footer() {
-
+dump('test');
 ?>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css"/>
 
@@ -101,7 +110,7 @@ function my_acf_input_admin_footer() {
                         jQuery(this).attr('disabled', false);
                         jQuery(this).attr('title', '');
                     });
-                   
+
 
                     return dateObjectArray;
                 })
@@ -164,7 +173,7 @@ function my_acf_input_admin_footer() {
                         jQuery(this).attr('disabled', false);
                         jQuery(this).attr('title', '');
                     });
-                   
+
 
                     return dateObjectArray;
                 })
@@ -341,3 +350,4 @@ function wpse_enqueue_datepicker() {
     wp_register_style( 'jquery-ui2', 'https://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css' );
     wp_enqueue_style( 'jquery-ui2' );
 }
+

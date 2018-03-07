@@ -44,7 +44,7 @@ class post_modifier {
         $date_arr           = array(array("field_59e7bc2b9e5bb" => $date));
 
         //post args
-        $args = array(
+        $args = array(  
             'post_type' => 'vendi-rotary-flyer',
             'post_title' => 'placeholder',
             'post_content' => '',
@@ -61,6 +61,7 @@ class post_modifier {
             update_field('field_59d3d73f30577', (int)$image['ID'], $new_id);
             update_field('field_59f74ba0f3181', $image_information, $new_id);
             update_field('field_59ef4bccd0939', $date_arr, $new_id);
+            update_field('is_placeholder', 1 ,$new_id);
         }
 
         $json = array(  'rotary_layout' => $ad_type,
