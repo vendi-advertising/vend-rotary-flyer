@@ -25,7 +25,6 @@ add_action(
                 $id = $_POST['id'];
                 $date = $_POST['date'];
                 $result = Vendi\RotaryFlyer\post_modifier::create_post_from_placeholder_id($id, $date);
-
                 echo $result;
 
                 exit;
@@ -64,16 +63,22 @@ add_action(
 
                 $query = new WP_Query($args);
                 $user_cost_arr = array();
+
                 while ( $query->have_posts()) : $query->the_post();
                     $author = get_the_author();
-                    if(array_key_exists ($author , $user_cost_arr )){
-                        $user_cost_arr[$author]['ads_created']++;
-                        $user_cost_arr[$author]['amount_owed'] = $user_cost_arr[$author]['ads_created']*10;
+                    $post_id = get_the_ID();
+                    if(!get_field('is_placeholder', $post_id) == 'True'){
 
-                    }
-                    else{
-                        $user_cost_arr[$author]['ads_created'] = 1;
-                        $user_cost_arr[$author]['amount_owed'] = $user_cost_arr[$author]['ads_created']*10;
+                    
+                        $count = count(get_field('run_dates', $post_id));
+                        if(array_key_exists ($author , $user_cost_arr )){
+                            $user_cost_arr[$author]['ads_created'] = $user_cost_arr[$author]['ads_created']+$count;
+                            $user_cost_arr[$author]['amount_owed'] = $user_cost_arr[$author]['ads_created']*10;
+                        }
+                        else{
+                            $user_cost_arr[$author]['ads_created'] = $count;
+                            $user_cost_arr[$author]['amount_owed'] = $user_cost_arr[$author]['ads_created']*10;
+                        }
                     }
                 endwhile;
 
