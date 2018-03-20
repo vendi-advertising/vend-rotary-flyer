@@ -2,15 +2,20 @@
 
 namespace Vendi\RotaryFlyer;
 
-class user_types {
-    public static function init(){
+class user_types
+{
+    public static function init()
+    {
         // Add a custom user role
 
-                $result = add_role( 'Rotary User', __(
+        $result = add_role(
+                    'Rotary User',
+                    __(
 
-                    'Rotary User' ),
+                    'Rotary User'
+                ),
 
-                    array(
+                    [
 
                     'read' => true, // true allows this capability
                     'edit_posts' => true, // Allows user to edit their own posts
@@ -25,11 +30,10 @@ class user_types {
                     'update_core' => false, // user cant perform core updates
                     'upload_files' => true
 
-                    )
+                    ]
 
                 );
     }
 
     // Register Custom Post Type
-
 }

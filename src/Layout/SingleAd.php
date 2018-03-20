@@ -34,11 +34,10 @@ class SingleAd
         $edit_url = \Vendi\Shared\template_router::get_instance()->create_url('add-edit-ad', ['post_id' => $post_id]);
 
         $classes = ['toggle'];
-        if('publish' === $this->_post->post_status)
-        {
+        if ('publish' === $this->_post->post_status) {
             $classes[] = 'active';
             $text = 'Approved';
-        }else{
+        } else {
             $text = 'Unapproved';
         }
 
@@ -58,8 +57,8 @@ class SingleAd
                         ',
                         $post_id,
                         implode(' ', $classes),
-                        esc_html( $text ),
-                        esc_url( $edit_url )
+                        esc_html($text),
+                        esc_url($edit_url)
                     );
     }
 
@@ -67,25 +66,25 @@ class SingleAd
     {
         $layout = get_field('rotary_layout', $this->_post);
 
-        switch($layout){
+        switch ($layout) {
             case 'Stand-alone Image':
                 $this
-                    ->with_outer_classes( ['rotary-output', 'standaloneimage', 'white-bg'] )
-                    ->with_inner_classes( ['rotary-output-wrapper', 'white-bg'] )
+                    ->with_outer_classes(['rotary-output', 'standaloneimage', 'white-bg'])
+                    ->with_inner_classes(['rotary-output-wrapper', 'white-bg'])
                 ;
                 break;
 
             case 'Header, Body Text':
                 $this
-                    ->with_outer_classes( ['rotary-output', 'headerbodytext'] )
-                    ->with_inner_classes( ['rotary-output-wrapper'] )
+                    ->with_outer_classes(['rotary-output', 'headerbodytext'])
+                    ->with_inner_classes(['rotary-output-wrapper'])
                 ;
                 break;
 
             default:
                 $this
-                    ->with_outer_classes( ['rotary-output', 'headerbodytextimage', 'white-bg'] )
-                    ->with_inner_classes( ['rotary-output-wrapper', 'white-bg'] )
+                    ->with_outer_classes(['rotary-output', 'headerbodytextimage', 'white-bg'])
+                    ->with_inner_classes(['rotary-output-wrapper', 'white-bg'])
                 ;
                 break;
         }
@@ -94,7 +93,7 @@ class SingleAd
     private function _get_inner_part_image_with_wrapper(bool $pdf_wrapper) : string
     {
         $rotary_image = get_field('rotary_image', $this->_post);
-        $rotary_image_server_path = $pdf_wrapper ? get_attached_file($rotary_image[ 'ID' ]) : wp_get_attachment_image_url( $rotary_image[ 'ID' ], 'home-featured-service' );
+        $rotary_image_server_path = $pdf_wrapper ? get_attached_file($rotary_image[ 'ID' ]) : wp_get_attachment_image_url($rotary_image[ 'ID' ], 'home-featured-service');
 
         $image_information = json_decode(get_field('image_information', $this->_post));
 
@@ -102,8 +101,8 @@ class SingleAd
         $html_string .=      '<div class="rotary-image-container">';
         $html_string .=          '<img class="rotary-image-output" ';
         $html_string .=                 ' src="' . $rotary_image_server_path . '" ';
-        if($image_information){
-            $html_string .= 'style="width: '. esc_attr( $image_information[0]->width ) .'px !important; height: '. esc_attr( $image_information[0]->height ) .'px !important;"';
+        if ($image_information) {
+            $html_string .= 'style="width: '. esc_attr($image_information[0]->width) .'px !important; height: '. esc_attr($image_information[0]->height) .'px !important;"';
         }
         $html_string .=                 ' alt="rotary-image" />';
         $html_string .=      '</div>';
@@ -120,9 +119,9 @@ class SingleAd
 
         $html_string = '';
 
-        if('Stand-alone Image' === $layout){
+        if ('Stand-alone Image' === $layout) {
             $html_string .= $this->_get_inner_part_image_with_wrapper($pdf_wrapper);
-        }else{
+        } else {
             $html_string .=      '<div class="rotary-text">';
             $html_string .=          '<h2 class="rotary-header-output">' . $rotary_header . '</h2>';
             $html_string .=          '<div class="rotary-body-output">';
@@ -130,7 +129,7 @@ class SingleAd
             $html_string .=          '</div>';
             $html_string .=      '</div>';
 
-            if(get_field('rotary_image', $this->_post)){
+            if (get_field('rotary_image', $this->_post)) {
                 $html_string .= $this->_get_inner_part_image_with_wrapper($pdf_wrapper);
             }
         }
@@ -144,8 +143,8 @@ class SingleAd
 
         $buf = [];
 
-        $buf[] = sprintf( '<div class="%1$s">', implode(' ', $this->outer_classes) );
-        $buf[] = sprintf( '<div class="%1$s">', implode(' ', $this->inner_classes) );
+        $buf[] = sprintf('<div class="%1$s">', implode(' ', $this->outer_classes));
+        $buf[] = sprintf('<div class="%1$s">', implode(' ', $this->inner_classes));
         $buf[] = $this->get_toggle_html($pdf_wrapper);
         $buf[] = $this->_get_inner_part($pdf_wrapper);
 
@@ -155,5 +154,4 @@ class SingleAd
 
         return implode("\n", $buf);
     }
-
 }

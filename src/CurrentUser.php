@@ -2,7 +2,7 @@
 
 namespace Vendi\RotaryFlyer;
 
-use \Vendi\Shared\template_router;
+use Vendi\Shared\template_router;
 
 final class CurrentUser
 {
@@ -16,12 +16,12 @@ final class CurrentUser
         $user = self::get_current_user();
 
         //If they aren't logged in, send them to the default page
-        if( !self::is_user_logged_in() ){
+        if (!self::is_user_logged_in()) {
             return template_router::get_instance()->create_url();
         }
 
         //If they're an admin, send to admin dasboard
-        if( self::is_user_admin()){
+        if (self::is_user_admin()) {
             return template_router::get_instance()->create_url('admin-dashboard');
         }
 
@@ -38,13 +38,13 @@ final class CurrentUser
 
     public static function is_user_admin() : bool
     {
-        if(!self::is_user_logged_in()){
+        if (!self::is_user_logged_in()) {
             return false;
         }
 
         $user = self::get_current_user();
 
         //If they're an admin, send to admin dasboard
-        return isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles );
+        return isset($user->roles) && is_array($user->roles) && in_array('administrator', $user->roles);
     }
 }
