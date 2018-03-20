@@ -301,3 +301,36 @@ add_action(
                 }
             }
         );
+
+
+add_filter(
+            'wp_handle_upload_prefilter',
+            function( $file )
+            {
+
+                //Sanity check and bail early
+                if(!$file || ! is_array($file))
+                {
+                    return $file;
+                }
+
+                if(! array_key_exists('type', $file))
+                {
+                    return $file;
+                }
+
+                //We only want to process images
+                if(false === strpos($file[ 'type' ], 'image/') )
+                {
+                    return $file;
+                }
+
+                //Block out CMYK (or more specifically, 4-channel) images
+                $image_info   = getimagesize( $file['tmp_name'] );
+                if( 4 === $image_info['channels'] )
+                {
+                    $file['error'] = 'This image is CMYK, please convert it to RGB and upload again.';
+                }
+                return $file;
+            }
+        );
