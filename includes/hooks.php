@@ -319,3 +319,40 @@ add_filter(
                 return $file;
             }
         );
+
+add_action(
+            'admin_menu',
+            function()
+            {
+                remove_menu_page( 'index.php' );                                        //Dashboard
+                remove_menu_page( 'edit.php' );                                         //Posts
+                remove_menu_page( 'edit.php?post_type=page' );                          //Pages
+                remove_menu_page( 'edit-comments.php' );                                //Comments
+                remove_menu_page( 'themes.php' );                                       //Appearance
+                remove_menu_page( 'plugins.php' );                                      //Plugins
+                remove_menu_page( 'users.php' );                                        //Users
+                remove_menu_page( 'tools.php' );                                        //Tools
+                remove_submenu_page( 'options-general.php', 'options-media.php' );      //Settings, Media
+                remove_submenu_page( 'options-general.php', 'options-discussion.php' ); //Settings, Discussion
+                remove_submenu_page( 'options-general.php', 'options-reading.php' );    //Settings, Reading
+                remove_submenu_page( 'options-general.php', 'options-writing.php' );    //Settings, Writing
+            }
+        );
+
+add_action(
+            'admin_bar_menu',
+            function($wp_admin_bar )
+            {
+                $wp_admin_bar->remove_menu('customize');
+                $wp_admin_bar->remove_menu('new-content');
+                $wp_admin_bar->remove_menu('comments');
+                $wp_admin_bar->remove_menu('wp-logo');
+                $wp_admin_bar->remove_menu('dashboard');
+                $wp_admin_bar->remove_menu('themes');
+                $wp_admin_bar->remove_menu('view-site');
+                $wp_admin_bar->remove_menu('edit-profile');
+                $wp_admin_bar->remove_menu('search');
+                $wp_admin_bar->remove_menu('user-info');
+            },
+            100
+        );
