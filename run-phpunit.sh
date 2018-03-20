@@ -4,42 +4,33 @@
 # Use -gt 1 to consume two arguments per pass in the loop
 # Use -gt 0 to consume one or more arguments per pass in the loop
 
-DB_USER='unit_chris'
-DB_PASS='unit_chris'
-DB_NAME='unit_chris'
-CREATE_DB=false
+RUN_PHAN=false
+RUN_LINT=true
+RUN_SEC=true
+RUN_PHP_CS=true
 while [[ $# -gt 0 ]]
 do
     key="$1"
 
         case $key in
 
-            -g|--group)
-                GROUP="$2"
-                shift # past argument
+            --simple)
+                RUN_PHP_CS=false
+                RUN_LINT=true
+                RUN_PHAN=false
+                RUN_SEC=false
             ;;
 
-            -d|--database)
-                DB_NAME="$2"
-                shift # past argument
+            --no-run-php-cs)
+                RUN_PHP_CS=false
             ;;
 
-            -u|--user)
-                DB_USER="$2"
-                shift # past argument
+            --no-lint)
+                RUN_LINT=false
             ;;
 
-            -p|--password)
-                DB_PASS="$2"
-                shift # past argument
-            ;;
-
-            --create-database)
-                CREATE_DB=true
-            ;;
-
-            --update-composer)
-                UPDATE=true
+            --run-phan)
+                RUN_PHAN=true
             ;;
 
             *)
@@ -50,34 +41,74 @@ do
     shift # past argument or value
 done
 
-if [ ! -d './vendor' ]; then
-    UPDATE=true
-fi
+maybe_run_php_cs()
+{
+    echo "Maybe running PHP CS Fixer...";
+    if [ "$RUN_PHP_CS" = true ]; then
+    {
+        echo "running...";
 
-if [ "$UPDATE" = true ]; then
-    composer update
+        vendor/bin/php-cs-fixer fix
+        if [ $? -ne 0 ]; then
+        {
+            echo "Error with composer... exiting";
+            exit 1;
+        }
+        fi
+    }
+    else
+        echo "skipping";
+    fi
+
+    printf "\n";
+}
+
+maybe_run_linter()
+{
+    echo "Maybe running linter...";
+    if [ "$RUN_LINT" = true ]; then
+    {
+        echo "running...";
+        ./vendor/bin/parallel-lint --exclude vendor/ --exclude var/ --exclude .git/ --exclude bin/ .
+        if [ $? -ne 0 ]; then
+        {
+            echo "Error with PHP linter... exiting";
+            exit 1;
+        }
+        fi
+    }
+    else
+        echo "skipping";
+    fi
+
+    printf "\n";
+}
+
+maybe_run_security_check()
+{
+    echo "Maybe running security check...";
+    if [ "$RUN_SEC" = true ]; then
+    {
+        echo "running...";
+        vendor/bin/security-checker security:check --end-point=http://security.sensiolabs.org/check_lock --timeout=30 ./composer.lock
+        if [ $? -ne 0 ]; then
+        {
+            echo "Error with security checker... exiting";
+            exit 1;
+        }
+        fi
+    }
+    else
+        echo "skipping";
+    fi
+
+    printf "\n";
+}
+
+if [ ! -d './vendor' ]; then
     composer install
 fi
 
-vendor/bin/security-checker security:check ./composer.lock
-
-CONFIG_TEMPLATE_FILE='./vendor/WordPress/wordpress-develop/wp-tests-config-sample.php';
-CONFIG_FILE='./vendor/WordPress/wordpress-develop/wp-tests-config.php';
-
-cp $CONFIG_TEMPLATE_FILE $CONFIG_FILE
-sed -i "s|youremptytestdbnamehere|${DB_NAME}|g" $CONFIG_FILE
-sed -i "s|yourusernamehere|${DB_USER}|g" $CONFIG_FILE
-sed -i "s|yourpasswordhere|${DB_PASS}|g" $CONFIG_FILE
-
-if [ "$CREATE_DB" = true ]; then
-    mysqladmin create $DB_NAME --user="$DB_USER" --password="$DB_PASS"
-fi
-
-if [ -z "$GROUP" ]; then
-    ./vendor/bin/phpunit --coverage-html ./tests/logs/coverage/
-else
-    ./vendor/bin/phpunit --coverage-html ./tests/logs/coverage/ --group $GROUP
-fi
-
-
-#phpunit --coverage-html ./tests/logs/coverage/
+maybe_run_linter;
+maybe_run_php_cs;
+maybe_run_security_check;
