@@ -35,9 +35,25 @@ final class Utilities
         //Build an array who's key is the flier date
         $post_dates = [];
 
+        //Force our timezone
+        date_default_timezone_set('America/Chicago');
+
+        //Calculate "last week"
+        $day = date('w');
+        $now = new \DateTimeImmutable();
+        $sunday = $now->setTimestamp(strtotime('-'.$day.' days'));
+        $last_sunday = $sunday->modify('-1 week');
+
         foreach ($post_array as $post) {
             $run_dates = get_field('run_dates', $post->ID);
             foreach ($run_dates as $run_date) {
+                $rd = new \DateTimeImmutable($run_date['run_date']);
+
+                //Only show future, this week and last week fliers
+                if($rd < $last_sunday){
+                    continue;
+                }
+
                 if (!array_key_exists($run_date['run_date'], $post_dates)) {
                     $post_dates[$run_date['run_date']] = [];
                 }
@@ -45,7 +61,7 @@ final class Utilities
             }
         }
 
-        //Sort by farthest future data first
+        //Sort by farthest past date first
         uksort(
                 $post_dates,
                 function($left, $right)
@@ -55,7 +71,7 @@ final class Utilities
                     $dr = new \DateTime($right);
 
                     //Spaceship!!!
-                    return $dr <=> $dl;
+                    return $dl <=> $dr;
                 }
             );
 
