@@ -202,16 +202,6 @@ add_filter(
             }
         );
 
-// add_filter(
-//             'home_url',
-//             function($url, $path, $orig_scheme, $blog_id)
-//             {
-//                 return \Vendi\Shared\template_router::get_instance()->create_url(null, [], true);
-//             },
-//             10,
-//             4
-//         );
-
 add_filter(
             'login_headertitle',
             function()
@@ -220,24 +210,19 @@ add_filter(
             }
         );
 
-function remove_lostpassword_text ( $text ) {
-         if ($text == 'Lost your password?'){
-            $text = '';
-        }
-                return $text;
-         }
-
-if ( $GLOBALS['pagenow'] === 'wp-login.php' ) {
-    add_filter( 'gettext',
+if ( $GLOBALS['pagenow'] === 'wp-login.php' )
+{
+    add_filter(
+                'gettext',
                 function($text)
                 {
-                if ($text == 'Log In'){
-                    $text = 'Login';
-                }
-                if ($text == 'Lost your password?'){
-                    $text = 'Click here if you are registering for the first time or having trouble logging in. ';
-                }
-                return $text;
+                    if ($text == 'Log In'){
+                        $text = 'Login';
+                    }
+                    if ($text == 'Lost your password?'){
+                        $text = 'Click here if you are registering for the first time or having trouble logging in. ';
+                    }
+                    return $text;
                 }
             );
 }
