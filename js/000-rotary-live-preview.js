@@ -1,17 +1,7 @@
 
 (function() {
     jQuery( document ).ready(function() {
-        jQuery(document).on('acf/validate_field', function( e, field ){
-            // vars
-            $field = jQuery(field);
-            alert($field);
-            // set validation to false on this field
-            if( $field.find('input').val() == 'test' )
-            {
-                $field.data('validation', false);
-            }
 
-        });
         jQuery('.hasDatepicker').each(function(){
             jQuery(this).attr('disabled', true);
             jQuery(this).attr('title', 'loading...');
@@ -35,11 +25,11 @@
         }
 
         rotary_body = rotary_body.onkeyup = function(e){
-            console.log(e);
-                console.log(e['key']);
+            // console.log(e);
+                // console.log(e['key']);
 
             if(e['key'] == 'Enter'){
-                console.log('27',this.value);
+                // console.log('27',this.value);
                 document.getElementById('rotary-body-preview').innerHTML = this.value.replace(/\r?\n/g, '<br />');
                 //$current_value = document.getElementById('rotary-body-preview').innerHTML;
                 //document.getElementById('rotary-body-preview').innerHTML = $current_value +
@@ -55,15 +45,15 @@
         var rotary_image_cancel = jQuery('.acf-field-59d3d73f30577').find('[data-name="image"]').next('.acf-actions').find('[data-name="remove"]');
         var preview_image = document.getElementById('rotary-image-preview');
         var preview_wrapper = jQuery('.rotary-preview-wrapper');
-        console.log('36',rotary_image_cancel);
+        // console.log('36',rotary_image_cancel);
 
         //load image in preview when image selected
         jQuery(rotary_image).on('load', function(){
             var source = jQuery(this).attr('src');
-            console.log(source);
+            // console.log(source);
             var width = jQuery(rotary_image).width();
             var height = jQuery(rotary_image).height();
-            console.log(width, height);
+            // console.log(width, height);
             jQuery(preview_image).attr('src', source);
             jQuery(preview_wrapper).addClass('white-bg');
 
@@ -71,7 +61,7 @@
         });
 
         function sendImageInfo(event, ui){
-            console.log(ui);
+            // console.log(ui);
             var json = [{
                 "height":Math.round(ui['size']['height']),
                 "width":Math.round(ui['size']['width'])
@@ -107,7 +97,7 @@
             jQuery(preview_image).css('height','auto');
             jQuery(preview_image).css('width','auto');
             jQuery(preview_image).attr('src', '/wp-content/themes/vendi-base/images/transparent-placeholder.png');
-            console.log(preview_image);
+            // console.log(preview_image);
             jQuery(preview_wrapper).removeClass('white-bg');
 
         });
@@ -120,7 +110,7 @@
         //class change event in order to generate correct preview
         jQuery('[data-key="field_59d553bebeefd"] input[type="radio"]').on('change', function(e) {
             //change the class on the preview so that we can assign different layouts
-            console.log(e.target.value);
+            // console.log(e.target.value);
             if(current_radio == ''){
                 //remove all special characters and split into array via spaces
                 current_radio = e.target.value.replace(/[^a-zA-Z ]/g, "").split(' ');
@@ -168,8 +158,8 @@
                     stop: sendImageInfo
                 });
             }*/
-          console.log(current_radio);
-          console.log(e);
+          // console.log(current_radio);
+          // console.log(e);
         });
 
         if(rotary_image.attr('src')){

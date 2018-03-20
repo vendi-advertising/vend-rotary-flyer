@@ -24,7 +24,7 @@ jQuery( document ).ready(function() {
 
         jQuery.post(myAjax.ajaxurl, data, function(response) {
             response = JSON.parse(response);
-            console.log(response['status']);
+            // console.log(response['status']);
             if(response['status'] == 'publish'){
                 jQuery(toggle).addClass('active');
                 jQuery(label).text('Approved');

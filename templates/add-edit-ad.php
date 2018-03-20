@@ -13,7 +13,7 @@ acf_form_head();
 //vendi_rotary_register_plugin_js( '100-floating-preview.js' );
 vendi_rotary_register_plugin_js( '000-rotary-live-preview.js' );
 vendi_rotary_register_plugin_js( '100-floating-preview.js' );
-vendi_rotary_register_plugin_js( '150-rotary-acf-custom-validation.js', array( 'acf-input' ));
+//vendi_rotary_register_plugin_js( '150-rotary-acf-custom-validation.js', array( 'acf-input' ));
 
 if(isset($_GET['post_id'])){
     $post_id = $_GET['post_id'];
@@ -23,19 +23,22 @@ else{
     $post_id = 'new_post';
     $header_text = 'Create an ad';
 }
-//test comment
 
+$user = wp_get_current_user();
+
+$admin_button = '';
+if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
+{
+
+    $admin_button = sprintf( '<a class="steps-button" href="%1$s"> Admin Dashboard </a>', \Vendi\Shared\template_router::get_instance()->create_url('admin-dashboard') );
+}
 ?>
-<?php
-            $user = wp_get_current_user();
-
-            $admin_button = '';
-            if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
-                {
-
-                    $admin_button = sprintf( '<a class="steps-button" href="%1$s"> Admin Dashboard </a>', \Vendi\Shared\template_router::get_instance()->create_url('admin-dashboard') );
-                }
-?>
+<style>
+.acf-image-uploader.has-value .acf-icon[data-name="edit"]
+{
+    display: none;
+}
+</style>
 <div id="main-content">
     <div class="main-content-region">
         <h1> <?php echo $header_text; ?> </h1>

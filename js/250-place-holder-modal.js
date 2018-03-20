@@ -51,10 +51,10 @@
                     'date': date
                 }
                 jQuery('html, body').addClass('wait');
-                console.log(placeholder_id);
+                // console.log(placeholder_id);
                 jQuery.post(myAjax.ajaxurl, data, function(response) {
                     response = JSON.parse(response);
-                    console.log(response);
+                    // console.log(response);
 
                     //TODO: create white background logic
 
@@ -72,7 +72,7 @@
                                 '</div>',
                                 '</div><div class="rotary-image-container"><img class="rotary-image-output" src="'+ response["rotary_image"]["url"] + '" alt="rotary-image"></div></div>'
                         ].join("");
-                        console.log(entry_id);
+                        // console.log(entry_id);
                         jQuery('#'+entry_id).html(html_);
                         jQuery('#'+entry_id).removeClass();
                         jQuery('#'+entry_id).addClass('rotary-output standaloneimage');

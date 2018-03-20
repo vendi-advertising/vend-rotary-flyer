@@ -31,7 +31,7 @@
                 else{
                     jQuery.post(myAjax.ajaxurl, data, function(response) {
                         response = JSON.parse(response);
-                        console.log(response);
+                        // console.log(response);
                         jQuery('#rotary-owed-results').html('');
                         var html_string = '';
                         if(!Array.isArray(response)){

@@ -79,18 +79,18 @@ function my_acf_input_admin_footer() {
         var dateObjectArray = Array();
             //look through all posts and count the number of adds on each date.
         $.getJSON(`/wp-json/wp/v2/vendi-rotary-flyer`, function () {
-            console.log('RUNNING');
+            // console.log('RUNNING');
             })
                 .done(function (data){
-                    console.log('data', data);
+                    // console.log('data', data);
 
                     $.each(data, function(key, value) {
-                        console.log(value['author'].toString(), author_id);
-                        console.log(value['author'].toString() == author_id);
+                        // console.log(value['author'].toString(), author_id);
+                        // console.log(value['author'].toString() == author_id);
                         var run_dates = value['acf']['run_dates'];
                         $.each(run_dates, function(key1, run_date){
-                            console.log(run_dates[key1]['run_date']);
-                            console.log()
+                            // console.log(run_dates[key1]['run_date']);
+                            // console.log()
                             if(dateObjectArray.hasOwnProperty(run_date['run_date'])){
                                 dateObjectArray[run_date['run_date']]['count']++;
                             }
@@ -105,7 +105,7 @@ function my_acf_input_admin_footer() {
                             }
                         });
                     });
-                    console.log(dateObjectArray, 86);
+                    // console.log(dateObjectArray, 86);
                     jQuery('.hasDatepicker').each(function(){
                         jQuery(this).attr('disabled', false);
                         jQuery(this).attr('title', '');
@@ -115,7 +115,7 @@ function my_acf_input_admin_footer() {
                     return dateObjectArray;
                 })
                 .fail(function (){
-                    console.log('fail :(');
+                    // console.log('fail :(');
                     jQuery('.hasDatepicker').each(function(){
                         jQuery(this).attr('disabled', false);
                         jQuery(this).attr('title', '');
@@ -201,20 +201,20 @@ function my_acf_input_admin_footer() {
                     var dateString = new Date($(this).context.value);
                     dateString = (str_pad(dateString.getMonth()+1))+'/'+ str_pad(dateString.getDate())+'/'+ dateString.getFullYear();
                     alreadyPicked.push(dateString);
-                    console.log(alreadyPicked);
+                    // console.log(alreadyPicked);
 
                 }
               });
 
               if(alreadyPicked.indexOf(date_compare_string) > -1){
-              console.log(date_compare_string, alreadyPicked, alreadyPicked.indexOf(date_compare_string),'TEST');
+              // console.log(date_compare_string, alreadyPicked, alreadyPicked.indexOf(date_compare_string),'TEST');
               }
 
-              if((day == 4 && date >= todays_date && alreadyPicked.indexOf(date_compare_string) == -1) && at_least_seven_days_out){
-                    console.log(dateObjectArray, '119');
-                    console.log(dateObjectArray.hasOwnProperty(date_compare_string), date_compare_string, '120');
+              if(day == 4 && date >= todays_date /*&& (alreadyPicked.indexOf(date_compare_string) == -1)*/ /*&& at_least_seven_days_out*/){
+                    // console.log(dateObjectArray, '119');
+                    // console.log(dateObjectArray.hasOwnProperty(date_compare_string), date_compare_string, '120');
                     if(dateObjectArray.hasOwnProperty(date_compare_string) && dateObjectArray[date_compare_string]['count'] >= max_ad_count){
-                        console.log(dateObjectArray[date_compare_string]['count'], '125');
+                        // console.log(dateObjectArray[date_compare_string]['count'], '125');
 
                         return_statement = [false, '','There are already '+ (max_ad_count+1) +' ad slots filled for this day.'];
                     }
@@ -229,7 +229,7 @@ function my_acf_input_admin_footer() {
 
               }
               else if(alreadyPicked.indexOf(date_compare_string) > -1){
-                console.log('This date has already been selected');
+                // console.log('This date has already been selected');
                 return_statement = [false, 'already-chosen', 'This date has already been selected.'];
               }
               else if(date <= todays_date){
@@ -246,7 +246,7 @@ function my_acf_input_admin_footer() {
 
             //disable repeater sorting on front end form
             acf.add_action('load', function( $el ){
-                console.log(acf.fields.repeate);
+                // console.log(acf.fields.repeate);
                 $.extend( acf.fields.repeater, {
                     _mouseenter: function( e ){
                         if( $( this.$tbody.closest('.acf-field-repeater') ).hasClass('disable-sorting') ){
