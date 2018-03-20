@@ -5,6 +5,7 @@ namespace Vendi\RotaryFlyer;
 use Knp\Snappy\Pdf;
 use Ramsey\Uuid\Uuid;
 use Vendi\RotaryFlyer\Layout\SingleAd;
+use Vendi\RotaryFlyer\V2\Utilities;
 
 class pdf_generator
 {
@@ -25,37 +26,7 @@ class pdf_generator
 
     public static function get_entries_sorted_by_date($publish)
     {
-        $post_array = [];
-        if ($publish) {
-            $args = [
-                'numberposts' => -1,
-                'orderby' => 'date',
-                'order' => 'DESC',
-                'post_type' => 'vendi-rotary-flyer',
-                'post_status' => ['pending', 'publish']
-            ];
-        } else {
-            $args = [
-                'numberposts' => -1,
-                'orderby' => 'date',
-                'order' => 'DESC',
-                'post_type' => 'vendi-rotary-flyer',
-                'post_status' => ['publish']
-            ];
-        }
-        $post_array = get_posts($args);
-        $post_dates = [];
-        foreach ($post_array as $post) {
-            $run_dates = get_field('run_dates', $post->ID);
-            foreach ($run_dates as $run_date) {
-                if (!array_key_exists($run_date['run_date'], $post_dates)) {
-                    $post_dates[$run_date['run_date']] = [];
-                }
-                array_push($post_dates[$run_date['run_date']], $post->ID);
-            }
-        }
-
-        return $post_dates;
+        return Utilities::get_entries_sorted_by_date($publish);
     }
 
     public static function generate_placeholders($id_arr, $date)
