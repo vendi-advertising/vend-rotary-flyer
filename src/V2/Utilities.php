@@ -2,15 +2,10 @@
 
 namespace Vendi\RotaryFlyer\V2;
 
-use Knp\Snappy\Pdf;
-use Ramsey\Uuid\Uuid;
-use Vendi\RotaryFlyer\Layout\SingleAd;
-
 final class Utilities
 {
     private function __construct()
     {
-
     }
 
     public static function get_entries_sorted_by_date(bool $include_pending = false) : array
@@ -50,7 +45,7 @@ final class Utilities
                 $rd = new \DateTimeImmutable($run_date['run_date']);
 
                 //Only show future, this week and last week fliers
-                if($rd < $last_sunday){
+                if ($rd < $last_sunday) {
                     continue;
                 }
 
@@ -64,8 +59,7 @@ final class Utilities
         //Sort by farthest past date first
         uksort(
                 $post_dates,
-                function($left, $right)
-                {
+                function ($left, $right) {
                     //These are expected to be in MM/DD/YYYY format
                     $dl = new \DateTime($left);
                     $dr = new \DateTime($right);
