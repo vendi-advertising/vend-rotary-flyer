@@ -22,7 +22,7 @@ jQuery( document ).ready(function() {
 
     jQuery(document).scroll(function(e) {
         scrollTop = jQuery(window).scrollTop();
-        console.log(mq.matches, preview_top);
+        // console.log(mq.matches, preview_top);
         if (mq.matches) {
 
             if(scrollTop >= preview_top - topPadding){
@@ -43,7 +43,7 @@ jQuery( document ).ready(function() {
             }
         }
         else{
-            console.log('test');
+            // console.log('test');
             jQuery(preview).css('top', 0);
             jQuery(preview).css('margin-top', 0);
         }

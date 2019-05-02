@@ -1,16 +1,6 @@
 <?php
-/**
- * Template Name: Thank you
- *
- */
-?>
-<?php
 
-
-
-require 'rotary-functions.php';
-
-get_header();
+\Vendi\Shared\template_router::get_instance()->get_header();
 
 if(isset($_GET['postid'])){
     $post_id = $_GET['postid'];
@@ -34,7 +24,7 @@ if(isset($_GET['postid'])){
             //Get the default image SRC
             $rotary_image_src = wp_get_attachment_image_url(    $rotary_image[ 'ID' ], 'home-featured-service' );
 
-            $alt_bg = ' white-bg ';
+            $alt_bg = '';
 
             if(wp_check_filetype( $rotary_image_src)['ext'] != "png" && wp_check_filetype( $rotary_image_src)['ext'] != false){
                 $alt_bg = ' white-bg ';
@@ -51,8 +41,8 @@ if(isset($_GET['postid'])){
             $html_string .= '<div class="finalization-region">';
 
             if($rotary_layout == 'Stand-alone Image'){
-                $html_string .=  '<div class="rotary-output standaloneimage">';
-                $html_string .=  '<div class="rotary-output-wrapper '. $alt_bg .'">';
+                $html_string .=  '<div class="rotary-output standaloneimage white-bg ">';
+                $html_string .=  '<div class="rotary-output-wrapper  white-bg '. $alt_bg .'">';
                 $html_string .=      '<div class="rotary-image-container">';
                 if($rotary_image){
                     $html_string .=          '<img class="rotary-image-output" ';
@@ -76,8 +66,8 @@ if(isset($_GET['postid'])){
                 $html_string .=  '</div>';
             }
             else{
-                $html_string .=  '<div class="rotary-output headerbodytextimage '. $alt_bg .'">';
-                $html_string .=  '<div class="rotary-output-wrapper '. $alt_bg .'">';
+                $html_string .=  '<div class="rotary-output headerbodytextimage  white-bg '. $alt_bg .'">';
+                $html_string .=  '<div class="rotary-output-wrapper  white-bg '. $alt_bg .'">';
                 $html_string .=      '<div class="rotary-text">';
                 $html_string .=          '<h2 class="rotary-header-output">' . $rotary_header . '</h2>';
                 $html_string .=          '<div class="rotary-body-output">';
@@ -109,11 +99,13 @@ if(isset($_GET['postid'])){
 
 
     </div>
-<div class="acf-form-submit">
-            <a class="steps-button" href="<?php echo home_url('ad-creation?post_id='. $post_id . '');  ?>"> Edit Ad Post </a><a class="steps-button" href="<?php echo home_url('submit-final?post_id='. $post_id . '');  ?>"> Submit Final Ad</a>
+    <div class="acf-form-submit">
+        <a class="steps-button" href="<?php echo \Vendi\Shared\template_router::get_instance()->create_url('add-edit-ad', ['post_id' => $post_id]);  ?>"> Edit Ad Post </a>
+        <a class="steps-button" href="<?php echo \Vendi\Shared\template_router::get_instance()->create_url('submit-ad', ['post_id' => $post_id]);  ?>"> Submit Final Ad</a>
+
         </div>
 </div>
 </div>
 
-
-<?php get_footer(); ?>
+<?php
+\Vendi\Shared\template_router::get_instance()->get_footer();

@@ -1,46 +1,51 @@
 <?php
-/**
- * Template Name: test
- *
- */
-?>
-<?php
 
 $role = get_role('Rotary User');
 $role->add_cap('upload_files');
-require 'rotary-functions.php';
+
 wp_enqueue_style('common');
 wp_enqueue_media();
 acf_form_head();
 
 
-get_header();
+\Vendi\Shared\template_router::get_instance()->get_header();
 
 //vendi_rotary_register_plugin_js( '100-floating-preview.js' );
 vendi_rotary_register_plugin_js( '000-rotary-live-preview.js' );
 vendi_rotary_register_plugin_js( '100-floating-preview.js' );
+//vendi_rotary_register_plugin_js( '150-rotary-acf-custom-validation.js', array( 'acf-input' ));
 
 if(isset($_GET['post_id'])){
     $post_id = $_GET['post_id'];
+    $header_text = 'Edit this ad';
 }
 else{
     $post_id = 'new_post';
+    $header_text = 'Create an ad';
 }
-//test comment
 
+$user = wp_get_current_user();
+
+$admin_button = '';
+if( isset( $user->roles ) && is_array( $user->roles ) && in_array( 'administrator', $user->roles ) )
+{
+
+    $admin_button = sprintf( '<a class="steps-button" href="%1$s"> Admin Dashboard </a>', \Vendi\Shared\template_router::get_instance()->create_url('admin-dashboard') );
+}
 ?>
-
+<style>
+.acf-image-uploader.has-value .acf-icon[data-name="edit"]
+{
+    display: none;
+}
+</style>
 <div id="main-content">
     <div class="main-content-region">
-        <h1> Create an ad </h1>
+        <h1> <?php echo $header_text; ?> </h1>
         <?php /* The loop */
 
         ?>
         <?php while ( have_posts() ) : the_post(); ?>
-
-            <?php
-            //$title = $_POST['fields']['field_59d3d72a30576'];
-            ?>
 
             <div class="card">
                 <div class="card-half acf-half">
@@ -52,12 +57,12 @@ else{
                     'new_post' => array(
                         'post_type' => 'vendi-rotary-flyer',
                         'post_status'   => 'draft',
-                        'post_title' => ''//$_POST['fields']['field_59d3d72a30576']
+                        'post_title' => '',
 
                     ),
                     'uploader' => 'wp',
-                    'return' => home_url('thank-you'),
-                    'html_submit_button'    => '<input type="submit" class="acf-button button button-primary button-large" value="%s" />'
+                    'return' => \Vendi\Shared\template_router::get_instance()->create_url('ad-thank-you'),
+                    'html_submit_button'    => '<input type="submit" class="acf-button button button-primary button-large" value="%s" /> ' . $admin_button
                 ));
                 ?>
                 </div>
@@ -72,7 +77,7 @@ else{
 
                                 </div>
                             </div>
-                                <img id="rotary-image-preview" data-name="image" src="<?php echo get_stylesheet_directory_uri(); ?>/images/transparent-placeholder.png" >
+                                <img id="rotary-image-preview" data-name="image" src="<?php echo VENDI_ROTARY_WP_PLUGIN_DIR_URL; ?>/media/images/transparent-placeholder.png" >
                         </div>
                     </div>
                 </div>
@@ -84,4 +89,5 @@ else{
 </div>
 
 
-<?php get_footer(); ?>
+<?php
+\Vendi\Shared\template_router::get_instance()->get_footer();
