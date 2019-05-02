@@ -1,3 +1,5 @@
 /pdfs/
 /vendor/
 /tests/logs/
+/pdfs/
+.php_cs.cache
